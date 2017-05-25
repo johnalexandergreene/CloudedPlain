@@ -61,6 +61,19 @@ try different resolutions for the plain. Fine and coarse.
 can clouds interact?
 spawn more clouds?
 
+---------------------
+
+we use 60 frames per second
+
+-------------------
+graphical movement always occurs at 1 tick of movement at a time
+either every frame, or every 3rd frame, or whatever. Depending on speed.
+ie : object.x = foo, foo+1, foo+2 etc.
+
+IE 1 square tile at a time
+
+
+
 
 
 
