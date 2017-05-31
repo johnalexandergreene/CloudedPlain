@@ -13,15 +13,9 @@ public interface Cloud{
   boolean finished();
   
   /*
-   * manifest the next 2D slice of this Cloud
+   * manifest this cloud upon the plain
+   * refer to the plain for params like tslice
    * 
-   * params can be :
-   *   plain clock
-   *   cloud clock, the count of frames generated so far...
-   *   stuff like that
-   *   -- We do not collide or otherwise interact between clouds in other than graphical mixing. We are keeping this simple.
-   *   -- Clouds do not spawn clouds. Again, we are keeping this simple
-   *   
    * the thing this method does is this :
    *   add integer value to 0..n cells in the plain
    *     value is usually 1 (a monochrome effect) but that added value could be any integer. 
@@ -32,8 +26,4 @@ public interface Cloud{
    */
   void manifest();
   
-  
-  
-  
-
 }

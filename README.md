@@ -1,5 +1,7 @@
 Clouded Plain
 
+Framework for doing a certain kind of av composition.
+
 Clouds drifting in layers over plain
 
 Clouds are cell-manifesting agents
