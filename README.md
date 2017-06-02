@@ -1,5 +1,36 @@
 Clouded Plain
 
+IN A NUTSHELL
+It's a stage (plain) where cell-pattern generators (clouds) dance
+The stage handles cloud mixing by supping cloud-presence at each cell.
+
+We have a graphic renderer. It converts the plain into an image by using cell values as indices in a color array. simple
+
+We have a sound renderer. It converts the plain to a sound, interpreting shapes and color as pitch and volume and waveform and such.
+
+Our graphic animation rate is 60fps at the moment. We might change it later (120fps?) but probably not.
+
+Our sound sample rate is some multiple of 60 in the vicinity of 44.1khz. Something with lots of factors for each frame-sound-sample-duration. Maybe 43200 (60*720. 720=1*2*3*4*5*6)
+
+So when we render graphics we render a frame, increment time, render another frame and so on.
+
+And when we render sound we generate a 1/60th of a second sound in a sound array.
+  that would be like 
+
+----------------------
+So the subsystems are :
+
+  plain
+  cloud
+  graphic renderer
+  sound renderer
+  cloud generator
+    every tick of the clock (every frame that is. every 1/60 sec) we query the cloud generator and maybe it generates some clouds. It's a conditional thing, based upon time, present cloud population and etc. The enter the stage, do their dance, and exit.
+
+
+-----------------------
+
+
 Framework for doing a certain kind of av composition.
 
 Clouds drifting in layers over plain
@@ -73,6 +104,18 @@ either every frame, or every 3rd frame, or whatever. Depending on speed.
 ie : object.x = foo, foo+1, foo+2 etc.
 
 IE 1 square tile at a time
+
+--------------------------------
+If we use a 60 ticks per frame (ie 60 fps and tickrate are the same and soundsamplerate can be some multiple of that.)
+then we get a nice set of usable movement speeds (they are the factors of 60)
+1 (ie 1 action per tick)
+1/2 (1 action ever other tick)
+1/3 (1 action every 3 ticks)
+1/4 ...
+1/5
+1/6 
+1/12
+etc
 
 
 
