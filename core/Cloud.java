@@ -24,6 +24,6 @@ public interface Cloud{
    *     set values over a 1/60 second long increment of the sound data array
    *   we could change this value over time. Do a strobe or flicker or something 
    */
-  void manifest();
+  void manifest(int[][] slice);
   
 }

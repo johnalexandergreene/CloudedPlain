@@ -2,7 +2,7 @@ Clouded Plain
 
 IN A NUTSHELL
 It's a stage (plain) where cell-pattern generators (clouds) dance
-The stage handles cloud mixing by supping cloud-presence at each cell.
+The stage handles cloud mixing by summing cloud-presence at each cell.
 
 We have a graphic renderer. It converts the plain into an image by using cell values as indices in a color array. simple
 
@@ -10,7 +10,8 @@ We have a sound renderer. It converts the plain to a sound, interpreting shapes 
 
 Our graphic animation rate is 60fps at the moment. We might change it later (120fps?) but probably not.
 
-Our sound sample rate is some multiple of 60 in the vicinity of 44.1khz. Something with lots of factors for each frame-sound-sample-duration. Maybe 43200 (60*720. 720=1*2*3*4*5*6)
+Our sound sample rate is some multiple of 60 in the vicinity of 44.1khz. 
+Something with lots of factors for each frame-sound-sample-duration. Maybe 43200 (60*720. 720=1*2*3*4*5*6)
 
 So when we render graphics we render a frame, increment time, render another frame and so on.
 
@@ -25,7 +26,8 @@ So the subsystems are :
   graphic renderer
   sound renderer
   cloud generator
-    every tick of the clock (every frame that is. every 1/60 sec) we query the cloud generator and maybe it generates some clouds. It's a conditional thing, based upon time, present cloud population and etc. The enter the stage, do their dance, and exit.
+    every tick of the clock (every frame that is. every 1/60 sec) we query the cloud generator and maybe it generates some clouds. 
+    It's a conditional thing, based upon time, present cloud population and etc. The clouds enter the stage, do their dance, and exit.
 
 
 -----------------------

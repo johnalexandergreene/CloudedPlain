@@ -1,7 +1,5 @@
 package org.fleen.cloudedPlain.test;
 
-import java.util.Random;
-
 import org.fleen.cloudedPlain.core.Cloud;
 import org.fleen.cloudedPlain.core.Plain;
 
@@ -18,9 +16,8 @@ public class Cloud0 implements Cloud{
     return false;
   }
 
-  public void manifest(){
-    Random r=new Random();
-    int w=plain.getWidth(),h=plain.getHeight();
+  public void manifest(int[][] slice){
+    // TODO Auto-generated method stub
     
   }
 
