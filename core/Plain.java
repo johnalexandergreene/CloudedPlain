@@ -142,6 +142,7 @@ public class Plain{
   
   public RendererGraphics renderergraphics=null;
   public RendererSound renderersound=null;
+  public BufferedImage uiimage=null;
   
   public void setRendererGraphics(RendererGraphics r){
     renderergraphics=r;
