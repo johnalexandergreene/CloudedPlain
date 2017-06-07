@@ -15,15 +15,6 @@ public class ImagePanel extends JPanel{
   
   /*
    * ################################
-   * CONSTRUCTOR
-   * ################################
-   */
-  
-  ImagePanel(Plain plain){
-    this.plain=plain;}
-  
-  /*
-   * ################################
    * SAMPLER
    * ################################
    */
@@ -36,17 +27,12 @@ public class ImagePanel extends JPanel{
    * ################################
    */
   
-  private static final int PADDINGSPAN=10;
-  
   public BufferedImage image=null;
   
   public void paint(Graphics g){
-    AffineTransform pad=new AffineTransform();
-    pad.translate(PADDINGSPAN,PADDINGSPAN);
-    //
     super.paint(g);
-    if(plain==null||plain.uiimage==null)return;
+    if(image==null)return;
     Graphics2D g2=(Graphics2D)g;
-    g2.drawImage(image,pad,null);}
+    g2.drawImage(image,null,null);}
 
 }

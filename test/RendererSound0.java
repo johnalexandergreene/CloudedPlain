@@ -5,16 +5,12 @@ import org.fleen.cloudedPlain.core.RendererSound;
 
 public class RendererSound0 implements RendererSound{
 
-  @Override
+  Plain plain;
+  
   public void setPlain(Plain plain){
-    // TODO Auto-generated method stub
-    
-  }
+    this.plain=plain;}
 
-  @Override
   public int[] render(int[][] slice){
-    // TODO Auto-generated method stub
-    return null;
-  }
+    return new int[]{1,2,3};}
 
 }

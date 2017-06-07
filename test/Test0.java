@@ -9,9 +9,9 @@ import org.fleen.cloudedPlain.core.RendererListener;
 public class Test0{
   
   private static final int 
-    WIDTH=100,
-    HEIGHT=100,
-    DURATION=300;
+    WIDTH=500,
+    HEIGHT=500,
+    DURATION=3000;
   
   private static UI ui;
   
@@ -24,8 +24,8 @@ public class Test0{
       ui.repaint();}};
   
   public static final void main(String[] a){
-    Plain p=new Plain(WIDTH,HEIGHT,DURATION,new CloudCreator0(),new RendererGraphics0(),new RendererSound0());
+    Plain p=new Plain(WIDTH,HEIGHT,DURATION,new CloudCreator0(),new RendererGraphics0(),new RendererSound0(),EXPORTDIR,rendererlistener);
     ui=new UI(p);
-    p.render(EXPORTDIR,rendererlistener);}
+    p.render();}
 
 }

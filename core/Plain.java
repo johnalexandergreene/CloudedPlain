@@ -22,17 +22,24 @@ public class Plain{
   
   /*
    * ################################
-   * CONSTRUCTOR
+   * CONSTRUCTORS
    * ################################
    */
   
-  public Plain(int w,int h,int d,CloudCreator cc,RendererGraphics rg,RendererSound rs){
-    width=w;
-    height=h;
-    duration=d;
+  public Plain(){}
+  
+  public Plain(
+    int w,int h,int d,
+    CloudCreator cc,
+    RendererGraphics rg,RendererSound rs,
+    File exportdir,
+    RendererListener rendererlistener){
+    setDims(w,h,d);
     setCloudCreator(cc);
     setRendererGraphics(rg);
-    setRendererSound(rs);}
+    setRendererSound(rs);
+    setExportDir(exportdir);
+    setRendererListener(rendererlistener);}
   
   /*
    * ################################
@@ -43,6 +50,11 @@ public class Plain{
    */
   
   public int width,height,duration;
+  
+  public void setDims(int w,int h,int d){
+    width=w;
+    height=h;
+    duration =d;}
   
   /*
    * ################################
@@ -91,7 +103,7 @@ public class Plain{
    * ################################
    */
   
-  int sliceindex;
+  public int sliceindex;
   public int[][] slice;
   
   public int[][] getNextSlice(){
@@ -125,6 +137,16 @@ public class Plain{
     for(Cloud cloud:clouds)
       cloud.manifest(slice);}
   
+  /*
+   * ################################
+   * EXPORT DIR
+   * ################################
+   */
+  
+  File exportdir;
+  
+  public void setExportDir(File d){
+    exportdir=d;}
   
   /*
    * ################################
@@ -142,7 +164,7 @@ public class Plain{
   
   public RendererGraphics renderergraphics=null;
   public RendererSound renderersound=null;
-  public BufferedImage uiimage=null;
+  public RendererListener rendererlistener=null;
   
   public void setRendererGraphics(RendererGraphics r){
     renderergraphics=r;
@@ -152,19 +174,23 @@ public class Plain{
     renderersound=r;
     renderersound.setPlain(this);}
   
-  public void render(File exportdir,RendererListener listener){
+  public void setRendererListener(RendererListener l){
+    rendererlistener=l;}
+  
+  public void render(){
     initSliceIterator();
     int[][] slice=getNextSlice();
     BufferedImage sliceimage;
     int[] 
       plainsound=new int[duration*SLICESOUNDSAMPLERATE],
-      slicesound;
+      slicesound=null;
     while(slice!=null){
       sliceimage=renderergraphics.render(slice);
+      System.out.println(sliceimage);
       exportSliceImage(sliceimage);
-      slicesound=renderersound.render(slice);
-      System.arraycopy(slicesound,0,plainsound,(sliceindex-1)*SLICESOUNDSAMPLERATE,slicesound.length);
-      listener.notify(sliceimage,slicesound);
+//      slicesound=renderersound.render(slice);
+//      System.arraycopy(slicesound,0,plainsound,(sliceindex-1)*SLICESOUNDSAMPLERATE,slicesound.length);
+      rendererlistener.notify(sliceimage,slicesound);
       slice=getNextSlice();}
     //create sound file from sound array and write it to a wav or whatever
     doSound();}

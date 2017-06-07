@@ -12,7 +12,7 @@ public class UI extends JFrame{
   public UI(Plain plain){
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setBounds(0,0,plain.width,plain.height);
-    imagepanel=new ImagePanel(plain);
+    imagepanel=new ImagePanel();
     setContentPane(imagepanel);
     setVisible(true);}
 
