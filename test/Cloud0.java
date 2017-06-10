@@ -17,7 +17,7 @@ public class Cloud0 implements Cloud{
 
   public void manifest(int[][] slice){
     Random r=new Random();
-    int x,y,c=plain.width*plain.height/6;
+    int x,y,c=plain.width*plain.height/3;
     for(int i=0;i<c;i++){
       x=r.nextInt(slice.length);
       y=r.nextInt(slice[0].length);

@@ -5,17 +5,17 @@ import java.util.List;
 import java.util.Random;
 
 import org.fleen.cloudedPlain.core.Cloud;
-import org.fleen.cloudedPlain.core.CloudCreator;
+import org.fleen.cloudedPlain.core.Generator;
 import org.fleen.cloudedPlain.core.Plain;
 
-public class CloudCreator0 implements CloudCreator{
+public class Generator0 implements Generator{
 
   Plain plain;
   
   public void setPlain(Plain plain){
     this.plain=plain;}
 
-  public List<Cloud> create(){
+  public List<Cloud> generateClouds(){
     List<Cloud> clouds=new ArrayList<Cloud>();
     if(plain.sliceindex==0){
       Cloud a=new Cloud0();
@@ -23,8 +23,10 @@ public class CloudCreator0 implements CloudCreator{
       clouds.add(a);
     }else{
       Random r=new Random();
-      if(r.nextInt(10)==0){
+      if(r.nextInt(100)==0){
         Cloud a=new Cloud0();
         a.setPlain(plain);
-        clouds.add(a);}}
+        clouds.add(a);
+        }
+    }
     return clouds;}}
