@@ -9,9 +9,9 @@ import org.fleen.cloudedPlain.core.PlainProgressListener;
 public class Test0{
   
   private static final int 
-    WIDTH=500,
-    HEIGHT=500,
-    DURATION=500;
+    WIDTH=300,
+    HEIGHT=300,
+    DURATION=300;
   
   private static UI ui;
   

@@ -1,10 +1,16 @@
 package org.fleen.cloudedPlain.core;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 
 /*
  * A 3D form to be interpreted as a sequence of 2D tile-patterns 
@@ -174,7 +180,8 @@ public class Plain{
     //sound sample rate over a single slice. 
     SLICESOUNDSAMPLERATE=720,
     //
-    SOUNDSAMPLERATE=SLICERATE*SLICESOUNDSAMPLERATE;
+    SOUNDSAMPLERATE=SLICERATE*SLICESOUNDSAMPLERATE,
+    SOUNDTICKMAXVAL=65535;
   
   public RendererGraphics renderergraphics=null;
   public RendererSound renderersound=null;
@@ -209,8 +216,7 @@ public class Plain{
       slicesound=renderersound.render(slice);
       //stick the image in the image export dir, stick the slice sound in the plain sound array 
       exportSliceImage(sliceimage);
-//      appendSliceSound(slicesound);
-//      System.arraycopy(slicesound,0,plainsound,(sliceindex-1)*SLICESOUNDSAMPLERATE,slicesound.length);
+      System.arraycopy(slicesound,0,plainsound,(sliceindex-1)*SLICESOUNDSAMPLERATE,slicesound.length);
       //notify the listener
       progresslistener.notify(this,sliceimage,slicesound);
       //get the next slice
@@ -235,8 +241,28 @@ public class Plain{
   }
   
   private void exportSound(){
-    
-  }
+    //convert int array to byte array
+    //2 bytes per sound tick. so max sound tick value is 65536
+    final byte[] soundbytes = new byte[plainsound.length*2];
+    for(int i=0;i<plainsound.length;i++){
+      soundbytes[i*2]=(byte)plainsound[i];
+      soundbytes[i*2+1]=(byte)(plainsound[i]>>>8);}
+    //output the file
+    File out = new File(exportdir.getAbsolutePath()+"/plain.wav");
+    boolean bigEndian = false;
+    boolean signed = true;
+    int bits = 16;
+    int channels = 1;
+    AudioFormat format;
+    format = new AudioFormat((float)SOUNDSAMPLERATE, bits, channels, signed, bigEndian);
+    ByteArrayInputStream bais = new ByteArrayInputStream(soundbytes);
+    AudioInputStream audioInputStream;
+    audioInputStream = new AudioInputStream(bais,format,plainsound.length);
+    try{
+      AudioSystem.write(audioInputStream, AudioFileFormat.Type.WAVE, out);
+      audioInputStream.close();
+    }catch(Exception x){
+      x.printStackTrace();}}
   
   
 
