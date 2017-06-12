@@ -4,8 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -58,12 +60,27 @@ public class Plain{
    * ################################
    */
   
-  public int width,height,duration;
+  //all integers because our pixels are so dense they may as well be floats
+  //and int math is fast. and precise. and to scale. 
+  public int width,height,duration,centerx,centery;
   
   public void setDims(int w,int h,int d){
     width=w;
     height=h;
-    duration =d;}
+    duration =d;
+    centerx=w/2;
+    centery=h/2;}
+  
+  /*
+   * get all the plain shape cells in this plain
+   * for use in getting plain shapes
+   */
+  public Set<PlainShapeCell> getRawPlainShapeCells(){
+    Set<PlainShapeCell> cells=new HashSet<PlainShapeCell>();
+    for(int x=0;x<width;x++){
+      for(int y=0;y<height;y++){
+        cells.add(new PlainShapeCell(x,y,slice[x][y]));}}
+    return cells;}
   
   /*
    * ################################
