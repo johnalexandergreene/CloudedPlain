@@ -12,6 +12,9 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
+import org.fleen.cloudedPlain.core.cloud.Cloud;
+import org.fleen.cloudedPlain.core.generator.Generator;
+
 /*
  * A 3D form to be interpreted as a sequence of 2D tile-patterns 
  * to be rendered as video. 
@@ -88,7 +91,7 @@ public class Plain{
    * return all created clouds in a list
    */
   protected List<Cloud> generateClouds(){
-    List<Cloud> newclouds=generator.generateClouds();
+    List<Cloud> newclouds=generator.generate();
     clouds.addAll(newclouds);
     return newclouds;}
   

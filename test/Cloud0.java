@@ -2,8 +2,8 @@ package org.fleen.cloudedPlain.test;
 
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.Cloud;
 import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.cloud.Cloud;
 
 public class Cloud0 implements Cloud{
 

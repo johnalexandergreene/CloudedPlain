@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.Cloud;
-import org.fleen.cloudedPlain.core.Generator;
 import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.cloud.Cloud;
+import org.fleen.cloudedPlain.core.generator.Generator;
 
 public class Generator0 implements Generator{
 
@@ -15,7 +15,7 @@ public class Generator0 implements Generator{
   public void setPlain(Plain plain){
     this.plain=plain;}
 
-  public List<Cloud> generateClouds(){
+  public List<Cloud> generate(){
     List<Cloud> clouds=new ArrayList<Cloud>();
     if(plain.sliceindex==0){
       Cloud a=new Cloud0();

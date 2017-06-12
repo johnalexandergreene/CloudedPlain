@@ -27,9 +27,12 @@ public class RasterExporter{
   
   File export(final BufferedImage image,int index,File exportdir){
     final File file=getExportFile(exportdir,index);
-    new Thread(){
-      public void run(){
-        write(image,file);}}.start();
+//    new Thread(){
+//      public void run(){
+//        write(image,file);}}.start();
+    
+    write(image,file);
+    
     return file;}
   
   private File getExportFile(File exportdir,int index){
