@@ -15,12 +15,12 @@ public class Cloud0 implements Cloud{
   public boolean finished(){
     return false;}
 
-  public void manifest(int[][] slice){
+  public void manifest(){
     Random r=new Random();
     int x,y,c=plain.width*plain.height/3;
     for(int i=0;i<c;i++){
-      x=r.nextInt(slice.length);
-      y=r.nextInt(slice[0].length);
-      slice[x][y]+=1;}}
+      x=r.nextInt(plain.slice.length);
+      y=r.nextInt(plain.slice[0].length);
+      plain.slice[x][y]+=1;}}
 
 }

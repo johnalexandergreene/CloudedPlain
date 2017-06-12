@@ -121,7 +121,7 @@ public class Plain{
    */
   
   public int sliceindex;
-  public int[][] slice;
+  public int[][] slice;//the present slice
   
   public int[][] getNextSlice(){
     if(sliceindex==duration)return null;
@@ -155,7 +155,7 @@ public class Plain{
    */
   private void manifestCloudsUponSlice(){
     for(Cloud cloud:clouds)
-      cloud.manifest(slice);}
+      cloud.manifest();}
   
   /*
    * ################################

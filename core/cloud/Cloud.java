@@ -16,7 +16,7 @@ public interface Cloud{
   
   /*
    * manifest this cloud upon the plain
-   * refer to the plain for params like tslice
+   * refer to the plain for params like slice and sliceindex
    * 
    * the thing this method does is this :
    *   add integer value to 0..n cells in the plain
@@ -26,6 +26,6 @@ public interface Cloud{
    *     set values over a 1/60 second long increment of the sound data array
    *   we could change this value over time. Do a strobe or flicker or something 
    */
-  void manifest(int[][] slice);
+  void manifest();
   
 }

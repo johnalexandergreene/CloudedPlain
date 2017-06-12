@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.cloud.C_Stripe;
 import org.fleen.cloudedPlain.core.cloud.Cloud;
 import org.fleen.cloudedPlain.core.generator.Generator;
 
@@ -16,15 +17,15 @@ public class Generator0 implements Generator{
     this.plain=plain;}
 
   public List<Cloud> generate(){
+    Random r=new Random();
     List<Cloud> clouds=new ArrayList<Cloud>();
     if(plain.sliceindex==0){
-      Cloud a=new Cloud0();
+      Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
       a.setPlain(plain);
       clouds.add(a);
     }else{
-      Random r=new Random();
-      if(r.nextInt(100)==0){
-        Cloud a=new Cloud0();
+      if(r.nextInt(50)==0){
+        Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
         a.setPlain(plain);
         clouds.add(a);
         }
