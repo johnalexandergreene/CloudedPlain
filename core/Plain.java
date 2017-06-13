@@ -72,6 +72,39 @@ public class Plain{
     centery=h/2;}
   
   /*
+   * ################################
+   * MAPPING SLICE TO SHAPES
+   * map the present slice to a set of shapes
+   *   a shape is a contiguous mass of same-color cells
+   * invalidate shapes and reglean at every nextslice getting operation
+   * 
+   * we use literal cells here, so we can put them into lists and sets and such
+   * ################################
+   */
+  
+  private List<PlainShape> shapes=null;
+  
+  public List<PlainShape> getShapes(){
+    if(shapes==null)
+      gleanShapes();
+    return shapes;}
+  
+  private void gleanShapes(){
+    System.out.println("GLEANING SHAPES");
+    shapes=new ArrayList<PlainShape>();
+    Set<PlainShapeCell> unmapped=getRawPlainShapeCells();
+    PlainShapeCell shapefirst;
+    Iterator<PlainShapeCell> i;
+    PlainShape shape;
+    while(!unmapped.isEmpty()){
+      //get an arbitrary cell from unmapped 
+      i=unmapped.iterator();
+      shapefirst=i.next();
+      //create a new shape, shifting cells from unmapped to the shape
+      shape=new PlainShape(this,shapefirst,unmapped);
+      shapes.add(shape);}}
+  
+  /*
    * get all the plain shape cells in this plain
    * for use in getting plain shapes
    */
@@ -81,6 +114,11 @@ public class Plain{
       for(int y=0;y<height;y++){
         cells.add(new PlainShapeCell(x,y,slice[x][y]));}}
     return cells;}
+  
+  public PlainShapeCell getPlainShapeCell(int x,int y){
+    if(x<0||x>=width||y<0||y>=height)return null;
+    PlainShapeCell c=new PlainShapeCell(x,y,slice[x][y]);
+    return c;}
   
   /*
    * ################################
@@ -149,7 +187,8 @@ public class Plain{
     //set all the slice cells' values to 0 in prep for cloud manifestation
     zeroCells();
     //
-    manifestCloudsUponSlice();
+    manifestCloudsUponSlice();//map clouds to plain cells
+    shapes=null;//invalidate shapes so they get remapped
     sliceindex++;
     return slice;}
   

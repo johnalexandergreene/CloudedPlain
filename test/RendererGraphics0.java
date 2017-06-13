@@ -3,8 +3,10 @@ package org.fleen.cloudedPlain.test;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.PlainShape;
 import org.fleen.cloudedPlain.core.RendererGraphics;
 
 public class RendererGraphics0 implements RendererGraphics{
@@ -15,6 +17,15 @@ public class RendererGraphics0 implements RendererGraphics{
     this.plain=plain;}
 
   public BufferedImage render(int[][] slice){
+    
+    
+  //TODO
+    //test shape getter 
+    List<PlainShape> ps=plain.getShapes();
+    System.out.println("shape count = "+ps.size());
+    
+    
+    
     BufferedImage image=new BufferedImage(plain.width,plain.height,BufferedImage.TYPE_INT_RGB);
     Graphics2D g=image.createGraphics();
     g.setPaint(Color.green);

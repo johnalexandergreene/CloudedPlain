@@ -33,34 +33,38 @@ public class PlainShapeCell{
       dy=y-shape.plain.centery;
     return dx*dx+dy*dy;}
   
-  public boolean isEdge(){
-    PlainShapeCell t=new PlainShapeCell();
-    t.x=x;
-    t.y=y;
-    t.x--;
-    boolean w=shape.contains(t);
-    t.x+=2;
-    boolean e=shape.contains(t);
-    t.y++;
-    boolean ne=shape.contains(t);
-    t.x--;
-    boolean n=shape.contains(t);
-    t.x--;
-    boolean nw=shape.contains(t);
-    t.y-=2;
-    boolean sw=shape.contains(t);
-    t.x++;
-    boolean s=shape.contains(t);
-    t.x++;
-    boolean se=shape.contains(t);
-    return !(nw&&n&&ne&&e&&se&&s&&sw&&w);}
+  /*
+   * returns the 4 cells in the plain adjacent to this cell
+   * N E S W
+   * if the cell is off-plain then null
+   */
+  public PlainShapeCell[] getAdjacents(){
+    PlainShapeCell[] c=new PlainShapeCell[4];
+    c[0]=shape.plain.getPlainShapeCell(x,y+1);
+    c[1]=shape.plain.getPlainShapeCell(x+1,y);
+    c[2]=shape.plain.getPlainShapeCell(x,y-1);
+    c[3]=shape.plain.getPlainShapeCell(x-1,y);
+    return c;}
+  
+  /*
+   * is this cell on the edge of the shape?
+   * TODO should be set once
+   */
+  public boolean isShapeEdge(){
+    PlainShapeCell[] a=getAdjacents();
+    for(PlainShapeCell c:a)
+      if(c.color!=color)
+        return true;
+    return false;}
   
   public int hashCode(){
-    return x+673*y;//673 is prime
-    }
+    return x+673*y;}//673 is prime
   
   public boolean equals(Object a){
     PlainShapeCell b=(PlainShapeCell)a;
     return b.x==x&&b.y==y;}
+  
+  public String toString(){
+    return "("+x+","+y+","+color+")";}
 
 }
