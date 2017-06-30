@@ -4,6 +4,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/*
+ * TODO
+ * do this vectorwise
+ * start at 0,0
+ * grab the edge of the shape there
+ * check the edge for another nonmapped pixel
+ * do the shape that starts there
+ * etc
+ * a bunch of vector paths
+ * each path is orthogonal (nesw) paths connected by pixels
+ * 
+ * it'll be faster to define and analyze
+ * 
+ */
+
 @SuppressWarnings("serial")
 public class PlainShape extends HashSet<PlainShapeCell>{
   

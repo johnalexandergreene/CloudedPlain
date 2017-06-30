@@ -16,18 +16,42 @@ public class Generator0 implements Generator{
   public void setPlain(Plain plain){
     this.plain=plain;}
 
+//  public List<Cloud> generate(){
+//    Random r=new Random();
+//    List<Cloud> clouds=new ArrayList<Cloud>();
+//    if(plain.sliceindex==0){
+//      Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
+//      a.setPlain(plain);
+//      clouds.add(a);
+//    }else{
+//      if(r.nextInt(50)==0){
+//        Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
+//        a.setPlain(plain);
+//        clouds.add(a);
+//        }
+//    }
+//    return clouds;}
+  
   public List<Cloud> generate(){
     Random r=new Random();
     List<Cloud> clouds=new ArrayList<Cloud>();
-    if(plain.sliceindex==0){
-      Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
+    Cloud a;
+    if(plain.sliceindex%100==0){
+      a=new C_Stripe(plain,C_Stripe.HEADING_SOUTH,50,1,0,0,false,2);
       a.setPlain(plain);
-      clouds.add(a);
-    }else{
-      if(r.nextInt(50)==0){
-        Cloud a=new C_Stripe(plain,r.nextInt(4),50,1,0,0,false,1);
-        a.setPlain(plain);
-        clouds.add(a);
-        }
+      clouds.add(a);}
+    if(plain.sliceindex%22==0){
+      a=new C_Stripe(plain,C_Stripe.HEADING_SOUTH,5,1,0,0,false,1);
+      a.setPlain(plain);
+      clouds.add(a);  
+    if(plain.sliceindex%140==0){
+      a=new C_Stripe(plain,C_Stripe.HEADING_NORTH,60,1,0,0,false,3);
+      a.setPlain(plain);
+      clouds.add(a);}
+    
     }
-    return clouds;}}
+    
+    
+    return clouds;}
+  
+}
