@@ -3,6 +3,7 @@ Clouded Plain
 IN A NUTSHELL
 It's a stage (plain) where cell-pattern generators (clouds) dance
 The stage handles cloud mixing by summing cloud-presence at each cell.
+And then we render that summed value to a color or strobe
 
 We have a graphic renderer. It converts the plain into an image by using cell values as indices in a color array. simple
 

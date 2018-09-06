@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.cloud.C_Stripe;
+import org.fleen.cloudedPlain.core.cloud.Cloud_Stripe;
 import org.fleen.cloudedPlain.core.cloud.Cloud;
 import org.fleen.cloudedPlain.core.generator.Generator;
 
@@ -36,16 +36,20 @@ public class Generator0 implements Generator{
     Random r=new Random();
     List<Cloud> clouds=new ArrayList<Cloud>();
     Cloud a;
-    if(plain.sliceindex%100==0){
-      a=new C_Stripe(plain,C_Stripe.HEADING_SOUTH,50,1,0,0,false,2);
+    if(plain.sliceindex%12==0){
+      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,50,1,0,1,false,2);
       a.setPlain(plain);
       clouds.add(a);}
-    if(plain.sliceindex%22==0){
-      a=new C_Stripe(plain,C_Stripe.HEADING_SOUTH,5,1,0,0,false,1);
+    if(plain.sliceindex%36==0){
+      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,10,1,0,2,false,1);
       a.setPlain(plain);
       clouds.add(a);  
-    if(plain.sliceindex%140==0){
-      a=new C_Stripe(plain,C_Stripe.HEADING_NORTH,60,1,0,0,false,3);
+    if(plain.sliceindex%64==0){
+      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,60,1,0,4,false,3);
+      a.setPlain(plain);
+      clouds.add(a);}
+    if(plain.sliceindex%24==0){
+      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,120,4,0,8,false,3);
       a.setPlain(plain);
       clouds.add(a);}
     

@@ -1,14 +1,6 @@
 package org.fleen.cloudedPlain.test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.PlainShape;
-import org.fleen.cloudedPlain.core.PlainShapeCell;
 import org.fleen.cloudedPlain.core.RendererSound;
 
 public class RendererSound0 implements RendererSound{
@@ -18,12 +10,27 @@ public class RendererSound0 implements RendererSound{
   public void setPlain(Plain plain){
     this.plain=plain;}
 
+//  public int[] render(int[][] slice){
+//    int[] sound=new int[Plain.SLICESOUNDSAMPLERATE];
+//    Random r=new Random();
+//    for(int i=0;i<Plain.SLICESOUNDSAMPLERATE;i++)
+//      sound[i]=r.nextInt(Plain.SOUNDTICKMAXVAL);
+//    return sound;}
+  
   public int[] render(int[][] slice){
     int[] sound=new int[Plain.SLICESOUNDSAMPLERATE];
-    Random r=new Random();
+    int cellsum=getCellSum(slice);
+    System.out.println("cellsum="+cellsum);
     for(int i=0;i<Plain.SLICESOUNDSAMPLERATE;i++)
-      sound[i]=r.nextInt(Plain.SOUNDTICKMAXVAL);
+      sound[i]=cellsum+100000;
     return sound;}
+  
+  private int getCellSum(int[][] slice){
+    int s=0;
+    for(int x=0;x<plain.slice.length;x++){
+      for(int y=0;y<plain.slice[0].length;y++){
+        s+=plain.slice[x][y];}}
+    return s;}
   
 //  
 //  public int[] render(int[][] slice){

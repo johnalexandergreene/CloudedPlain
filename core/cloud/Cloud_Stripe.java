@@ -12,9 +12,9 @@ import org.fleen.cloudedPlain.core.Plain;
  * 
  * color is an index in the renderer's colorarray. generally 1. could be other values too of course
  */
-public class C_Stripe implements Cloud{
+public class Cloud_Stripe implements Cloud{
   
-  public C_Stripe(
+  public Cloud_Stripe(
     Plain plain,int heading,int thickness,int speed,int fillpattern,
     int strobepattern,boolean invertfillpattern,int color){
     this.plain=plain;
@@ -74,7 +74,9 @@ public class C_Stripe implements Cloud{
    * 
    */
   public int getColor(int x,int y){
-    return 1;}
+    return getAge()%strobepattern+1;
+//    return 1;
+    }
   
   /*
    * ################################
