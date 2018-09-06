@@ -120,6 +120,23 @@ then we get a nice set of usable movement speeds (they are the factors of 60)
 1/12
 etc
 
+# MAKE A PRODUCT
+
+One type of cloud generator will generate a LOGO
+
+So t he logo gets injected into the mix
+
+we sell it like this
+
+   client specifies palette and logo
+   
+   I present client with a dozen videos. (fuck smooth looping. Put a bracket in there or something)
+   
+   profit
+   
+
+
+
 
 
 
