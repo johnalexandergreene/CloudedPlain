@@ -2,12 +2,10 @@ package org.fleen.cloudedPlain.test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.cloud.Cloud_Stripe;
-import org.fleen.cloudedPlain.core.cloud.Cloud;
-import org.fleen.cloudedPlain.core.generator.Generator;
+import org.fleen.cloudedPlain.core.stripe.Generator;
+import org.fleen.cloudedPlain.core.stripe.Stripe;
 
 public class Generator0 implements Generator{
 
@@ -32,30 +30,93 @@ public class Generator0 implements Generator{
 //    }
 //    return clouds;}
   
-  public List<Cloud> generate(){
-    Random r=new Random();
-    List<Cloud> clouds=new ArrayList<Cloud>();
-    Cloud a;
-    if(plain.sliceindex%12==0){
-      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,50,1,0,1,false,2);
-      a.setPlain(plain);
-      clouds.add(a);}
-    if(plain.sliceindex%36==0){
-      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,10,1,0,2,false,1);
-      a.setPlain(plain);
-      clouds.add(a);  
-    if(plain.sliceindex%64==0){
-      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,60,1,0,4,false,3);
-      a.setPlain(plain);
-      clouds.add(a);}
-    if(plain.sliceindex%24==0){
-      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,120,4,0,8,false,3);
-      a.setPlain(plain);
-      clouds.add(a);}
-    
-    }
-    
-    
-    return clouds;}
+//  public List<Cloud> generate(){
+////    Random r=new Random();
+//    List<Cloud> clouds=new ArrayList<Cloud>();
+//    Cloud a;
+//    if(plain.sliceindex%12==0){
+//      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,50,1,0,1,false,2);
+//      a.setPlain(plain);
+//      clouds.add(a);}
+//    if(plain.sliceindex%36==0){
+//      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,10,1,0,2,false,1);
+//      a.setPlain(plain);
+//      clouds.add(a);  
+//    if(plain.sliceindex%64==0){
+//      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,60,1,0,4,false,3);
+//      a.setPlain(plain);
+//      clouds.add(a);}
+//    if(plain.sliceindex%24==0){
+//      a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,120,4,0,8,false,3);
+//      a.setPlain(plain);
+//      clouds.add(a);}
+//    
+//    }
+//    
+//    
+//    return clouds;}
+  
+  public List<Stripe> generate(){
+//  Random r=new Random();
+  List<Stripe> clouds=new ArrayList<Stripe>();
+  Stripe a;
+  int[] valuepattern=new int[]{1,2,2,1};
+  if(plain.sliceindex%32==0){
+    a=new Stripe(plain,Stripe.HEADING_NORTH,120,1,valuepattern);
+    a.setPlain(plain);
+    clouds.add(a);
+    a=new Stripe(plain,Stripe.HEADING_EAST,120,1,valuepattern);
+    a.setPlain(plain);
+    clouds.add(a);
+    a=new Stripe(plain,Stripe.HEADING_SOUTH,120,1,valuepattern);
+    a.setPlain(plain);
+    clouds.add(a);
+    a=new Stripe(plain,Stripe.HEADING_WEST,120,1,valuepattern);
+    a.setPlain(plain);
+    clouds.add(a);}
+//  if(plain.sliceindex%36==0){
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,10,1,0,2,false,1);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,10,1,0,2,false,1);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,10,1,0,2,false,1);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,10,1,0,2,false,1);
+//    a.setPlain(plain);
+//    clouds.add(a);}
+//  if(plain.sliceindex%64==0){
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,60,1,0,4,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,60,1,0,4,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,60,1,0,4,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,60,1,0,4,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);}
+//  if(plain.sliceindex%24==0){
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,120,4,0,8,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,120,4,0,8,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,120,4,0,8,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);
+//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,120,4,0,8,false,3);
+//    a.setPlain(plain);
+//    clouds.add(a);}
+  
+  
+  
+  
+  return clouds;}
   
 }

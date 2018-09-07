@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core.cloud;
+package org.fleen.cloudedPlain.core.stripe;
 
 import org.fleen.cloudedPlain.core.Plain;
 
@@ -12,24 +12,17 @@ import org.fleen.cloudedPlain.core.Plain;
  * 
  * color is an index in the renderer's colorarray. generally 1. could be other values too of course
  */
-public class Cloud_Stripe implements Cloud{
+public class Stripe{
   
-  public Cloud_Stripe(
-    Plain plain,int heading,int thickness,int speed,int fillpattern,
-    int strobepattern,boolean invertfillpattern,int color){
+  public Stripe(
+    Plain plain,int heading,int thickness,int speed,int[] valuepattern){
     this.plain=plain;
     this.heading=heading;
     this.thickness=thickness;
     this.speed=speed;
-    this.fillpattern=fillpattern;
-    this.strobepattern=strobepattern;
-    this.invertfillpattern=invertfillpattern;
-    this.color=color;
+    this.valuepattern=valuepattern;
     //
-    birthday=plain.sliceindex;
-    
-    
-  }
+    birthday=plain.sliceindex;}
 
   /*
    * ################################
@@ -48,6 +41,7 @@ public class Cloud_Stripe implements Cloud{
   /*
    * ################################
    * PLAIN
+   * The Plain that this stripe expresses itself upon
    * ################################
    */
   
@@ -58,25 +52,17 @@ public class Cloud_Stripe implements Cloud{
   
   /*
    * ################################
-   * COLOR
-   * an index to a color in the renderer's color array
+   * VALUE PATTERN
    * ################################
    */
 
-  public static final int COLOR_DEFAULT=0;
-  
-  public int color=COLOR_DEFAULT;
+  public int[] valuepattern;
   
   /*
-   * return the color of the cell at the specified coors, in terms of plain coors
-   * TODO
-   * for test we just return 1
-   * 
+   * This gets translated into color, strobe, sound...
    */
-  public int getColor(int x,int y){
-    return getAge()%strobepattern+1;
-//    return 1;
-    }
+  public int getValue(){
+    return valuepattern[getAge()%valuepattern.length];}
   
   /*
    * ################################
@@ -152,35 +138,8 @@ public class Cloud_Stripe implements Cloud{
   
   /*
    * ################################
-   * FILL PATTERN
-   * 
-   * TODO
-   * 
-   * for test we do solid fill
-   * 
-   * we will be using those 1-bit fill textures.
-   * we will need a scale param
-   * ################################
-   */
-  
-  public int fillpattern;
-  public boolean invertfillpattern;
-  
-  /*
-   * ################################
-   * STROBE PATTERN
-   * 
-   * TODO
-   * 
-   * for test we just do no strobe
-   * ################################
-   */
-  
-  public int strobepattern;
-  
-  /*
-   * ################################
    * FINISHED
+   * When this Cloud is finished drifting over the plain, signal to the system that it should be removed.
    * ################################
    */
   
@@ -207,6 +166,16 @@ public class Cloud_Stripe implements Cloud{
   /*
    * ################################
    * MANIFEST
+   * manifest this stripe upon the plain
+   * refer to the plain for params like slice and sliceindex
+   * 
+   * the thing this method does is this :
+   *   add integer value to 0..n cells in the plain
+   *     value is usually 1 (a monochrome effect) but that added value could be any integer. 
+   *     thus generating 1 frame in our (60 fps) video 
+   *   incrementally generate sound array
+   *     set values over a 1/60 second long increment of the sound data array
+   *   we could change this value over time. Do a strobe or flicker or something 
    * ################################
    */
   
@@ -223,11 +192,11 @@ public class Cloud_Stripe implements Cloud{
    * 
    */
   public void manifest(){
-    int color;
+    int v;
     for(int x=getXMin();x<=getXMax();x++){
       for(int y=getYMin();y<=getYMax();y++){
-        color=getColor(x,y);
+        v=getValue();
         if(x>-1&&x<plain.width&&y>-1&&y<plain.height)
-          plain.slice[x][y]+=color;}}}
+          plain.slice[x][y]+=v;}}}
 
 }

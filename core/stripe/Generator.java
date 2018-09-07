@@ -1,9 +1,8 @@
-package org.fleen.cloudedPlain.core.generator;
+package org.fleen.cloudedPlain.core.stripe;
 
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.cloud.Cloud;
 
 /*
  * a generator generates clouds
@@ -13,6 +12,6 @@ public interface Generator{
   
   void setPlain(Plain plain);
   
-  List<Cloud> generate();
+  List<Stripe> generate();
 
 }
