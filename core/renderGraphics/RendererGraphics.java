@@ -1,6 +1,8 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.renderGraphics;
 
 import java.awt.image.BufferedImage;
+
+import org.fleen.cloudedPlain.core.Plain;
 
 public interface RendererGraphics{
   

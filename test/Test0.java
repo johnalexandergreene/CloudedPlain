@@ -11,7 +11,7 @@ public class Test0{
   private static final int 
     WIDTH=300,
     HEIGHT=300,
-    DURATION=1200;
+    DURATION=600;
   
   private static UI ui;
   
@@ -19,7 +19,7 @@ public class Test0{
   
   private static PlainProgressListener rendererlistener=new PlainProgressListener(){
     public void notify(Plain plain,BufferedImage sliceimage,int[] slicesound){
-      if(plain.sliceindex%10==0)System.out.println("sliceindex="+plain.sliceindex);
+      if(plain.frameindex%10==0)System.out.println("sliceindex="+plain.frameindex);
       //TODO we should express the slice sound here too.
       ui.imagepanel.image=sliceimage;
       ui.repaint();}};

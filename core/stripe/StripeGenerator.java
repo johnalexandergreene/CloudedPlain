@@ -8,10 +8,12 @@ import org.fleen.cloudedPlain.core.Plain;
  * a generator generates clouds
  * it may employ more generators
  */
-public interface Generator{
+public interface StripeGenerator{
   
   void setPlain(Plain plain);
   
   List<Stripe> generate();
+  
+  boolean destroy();
 
 }

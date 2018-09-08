@@ -1,4 +1,6 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.renderSound;
+
+import org.fleen.cloudedPlain.core.Plain;
 
 public interface RendererSound{
   

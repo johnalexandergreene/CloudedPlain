@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.stripe.Generator;
+import org.fleen.cloudedPlain.core.stripe.StripeGenerator;
 import org.fleen.cloudedPlain.core.stripe.Stripe;
 
-public class Generator0 implements Generator{
+public class Generator0 implements StripeGenerator{
 
   Plain plain;
   
@@ -61,7 +61,7 @@ public class Generator0 implements Generator{
   List<Stripe> clouds=new ArrayList<Stripe>();
   Stripe a;
   int[] valuepattern=new int[]{1,2,2,1};
-  if(plain.sliceindex%32==0){
+  if(plain.frameindex%32==0){
     a=new Stripe(plain,Stripe.HEADING_NORTH,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);
@@ -74,49 +74,9 @@ public class Generator0 implements Generator{
     a=new Stripe(plain,Stripe.HEADING_WEST,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);}
-//  if(plain.sliceindex%36==0){
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,10,1,0,2,false,1);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,10,1,0,2,false,1);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,10,1,0,2,false,1);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,10,1,0,2,false,1);
-//    a.setPlain(plain);
-//    clouds.add(a);}
-//  if(plain.sliceindex%64==0){
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,60,1,0,4,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,60,1,0,4,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,60,1,0,4,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,60,1,0,4,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);}
-//  if(plain.sliceindex%24==0){
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_NORTH,120,4,0,8,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_EAST,120,4,0,8,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_SOUTH,120,4,0,8,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);
-//    a=new Cloud_Stripe(plain,Cloud_Stripe.HEADING_WEST,120,4,0,8,false,3);
-//    a.setPlain(plain);
-//    clouds.add(a);}
-  
-  
-  
-  
   return clouds;}
+  
+  public boolean destroy(){
+    return false;}
   
 }

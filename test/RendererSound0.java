@@ -1,7 +1,7 @@
 package org.fleen.cloudedPlain.test;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.RendererSound;
+import org.fleen.cloudedPlain.core.renderSound.RendererSound;
 
 /*
  * THE WAY WE WANT TO DO SOUND
@@ -55,12 +55,12 @@ public class RendererSound0 implements RendererSound{
 //    return sound;}
   
   public int[] render(int[][] slice){
-    int[] sound=new int[Plain.SLICESOUNDSAMPLERATE];
+    int[] sound=new int[Plain.FRAMESOUNDSAMPLERATE];
     int cellsum=getCellSum(slice);
     int a,b;
     b=cellsum*cellsum;
     if(b>1000000000)b=1000000000;
-    for(int i=0;i<Plain.SLICESOUNDSAMPLERATE;i++){
+    for(int i=0;i<Plain.FRAMESOUNDSAMPLERATE;i++){
       a=i%1000;
       if(a<500)
         sound[i]=b;
@@ -72,9 +72,9 @@ public class RendererSound0 implements RendererSound{
   
   private int getCellSum(int[][] slice){
     int s=0;
-    for(int x=0;x<plain.slice.length;x++){
-      for(int y=0;y<plain.slice[0].length;y++){
-        s+=plain.slice[x][y];}}
+    for(int x=0;x<plain.frame.length;x++){
+      for(int y=0;y<plain.frame[0].length;y++){
+        s+=plain.frame[x][y];}}
     return s;}
   
 //  

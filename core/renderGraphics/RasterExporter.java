@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.renderGraphics;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,7 +25,7 @@ public class RasterExporter{
   private static final double INCHES_IN_A_METER=39.3700787;
   private static final int DPI=300;
   
-  File export(final BufferedImage image,int index,File exportdir){
+  public File export(final BufferedImage image,int index,File exportdir){
     final File file=getExportFile(exportdir,index);
 //    new Thread(){
 //      public void run(){

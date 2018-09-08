@@ -6,12 +6,9 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
-import java.awt.image.WritableRaster;
-import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.PlainShape;
-import org.fleen.cloudedPlain.core.RendererGraphics;
+import org.fleen.cloudedPlain.core.renderGraphics.RendererGraphics;
 
 public class RendererGraphics0 implements RendererGraphics{
 

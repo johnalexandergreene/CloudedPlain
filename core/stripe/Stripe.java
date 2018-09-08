@@ -22,7 +22,7 @@ public class Stripe{
     this.speed=speed;
     this.valuepattern=valuepattern;
     //
-    birthday=plain.sliceindex;}
+    birthday=plain.frameindex;}
 
   /*
    * ################################
@@ -36,7 +36,7 @@ public class Stripe{
   public int birthday;
   
   public int getAge(){
-    return plain.sliceindex-birthday;}
+    return plain.frameindex-birthday;}
   
   /*
    * ################################
@@ -197,6 +197,6 @@ public class Stripe{
       for(int y=getYMin();y<=getYMax();y++){
         v=getValue();
         if(x>-1&&x<plain.width&&y>-1&&y<plain.height)
-          plain.slice[x][y]+=v;}}}
+          plain.frame[x][y]+=v;}}}
 
 }
