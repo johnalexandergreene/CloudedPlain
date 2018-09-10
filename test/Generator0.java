@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.stripe.StripeGenerator;
-import org.fleen.cloudedPlain.core.stripe.Stripe;
+import org.fleen.cloudedPlain.core.rectangles.Stripe;
+import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
 
 public class Generator0 implements StripeGenerator{
 

@@ -1,16 +1,31 @@
-package org.fleen.cloudedPlain.core.stripe;
+package org.fleen.cloudedPlain.core.rectangles;
 
 import org.fleen.cloudedPlain.core.Plain;
 
 /*
- * a stripe shaped cloud
  * a rectangle that spans edge to edge. 
  * A stripe that sweeps the surface of the plain once, from an edge to the opposite edge
- * it can have a pattern
- * it can strobe 
  * it generally gets created, sweeps the plain, then gets discarded
  * 
  * color is an index in the renderer's colorarray. generally 1. could be other values too of course
+ * 
+ * STRIPE VALUE
+ * 
+ * the plain has a palette. An array. color=index
+ * 
+ * a cell is covered by 1..n stripes
+ * 
+ * each stripe has a value pattern. A strobe of values. We can translate these into color and sound
+ * specified by a list of integers. ex : 1,2,2,1, or 1,2 or 4,1,2,2,1,4
+ * or even just 1 value, if the value is constant
+ * 
+ * at each tick of the plain's clock we specify the value for a stripe
+ * that value is gotten from the stripe's valuepattern array
+ * the value = valuepattern[tick%valuepatternlength] 
+ * 
+ * when we render a cell we get all of the stripes that cover the cell and sum their values at that tick
+ * thus we get the summed value at that cell
+ * then we can use that value to get a color (from the plain palette) 
  */
 public class Stripe{
   

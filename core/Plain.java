@@ -12,11 +12,11 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
+import org.fleen.cloudedPlain.core.rectangles.Stripe;
 import org.fleen.cloudedPlain.core.renderGraphics.RasterExporter;
 import org.fleen.cloudedPlain.core.renderGraphics.RendererGraphics;
 import org.fleen.cloudedPlain.core.renderSound.RendererSound;
-import org.fleen.cloudedPlain.core.stripe.StripeGenerator;
-import org.fleen.cloudedPlain.core.stripe.Stripe;
+import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
 
 /*
  * A 3D form to be interpreted as a sequence of 2D tile-patterns 

@@ -15,23 +15,21 @@ import org.fleen.cloudedPlain.core.renderSound.RendererSound;
  * these variables can all corrospond to sound-generation parameters
  * we might add a little random too, to get a nicer chorus
  * 
- * STRIPE VALUE
+ * GETTING RECTANGLES
+ * starting at the topleft pixel, scan all pixels, left to right, top to bottom
+ * a bunch of adjacent pixels of the same color makes a line
+ * a bunch of adjacent lines of the same color makes a rectangle
+ * ugh. this might be weird.
  * 
- * the plain has a palette. An array. color=index
+ * OR
+ * Given a bunch of lines (for all stripes, the lines that define the 2 moving edges of the stripe-rectangle)
+ * ugh
  * 
- * a cell is covered by 1..n stripes
- * 
- * each stripe has a value pattern. A strobe of values. We can translate these into color and sound
- * specified by a list of integers. ex : 1,2,2,1, or 1,2 or 4,1,2,2,1,4
- * or even just 1 value, if the value is constant
- * 
- * at each tick of the plain's clock we specify the value for a stripe
- * that value is gotten from the stripe's valuepattern array
- * the value = valuepattern[tick%valuepatternlength] 
- * 
- * when we render a cell we get all of the stripes that cover the cell and sum their values at that tick
- * thus we get the summed value at that cell
- * then we can use that value to get a color (from the plain palette) 
+ * GETTING SOUND
+ * a rectangle's sound is derived from its location, height, width, gangliness, area, color... stuff like that
+ * constant rectangles make constant sounds
+ * changing rectangles make changing sounds
+ * etc.
  * 
  * 
  * 
