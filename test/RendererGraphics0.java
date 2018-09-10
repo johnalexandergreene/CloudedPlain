@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.renderGraphics.RendererGraphics;
+import org.fleen.cloudedPlain.core.renderVideo.RendererGraphics;
 
 public class RendererGraphics0 implements RendererGraphics{
 

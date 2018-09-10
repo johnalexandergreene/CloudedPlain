@@ -1,7 +1,7 @@
 package org.fleen.cloudedPlain.test;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.renderSound.RendererSound;
+import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
 
 /*
  * THE WAY WE WANT TO DO SOUND

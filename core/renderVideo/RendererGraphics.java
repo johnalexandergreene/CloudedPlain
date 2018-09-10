@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core.renderGraphics;
+package org.fleen.cloudedPlain.core.renderVideo;
 
 import java.awt.image.BufferedImage;
 

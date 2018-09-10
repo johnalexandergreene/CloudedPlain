@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.renderSound.RendererSound;
+import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
 
 /*
  * THE WAY WE WANT TO DO SOUND

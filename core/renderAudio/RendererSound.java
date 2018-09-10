@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core.renderSound;
+package org.fleen.cloudedPlain.core.renderAudio;
 
 import org.fleen.cloudedPlain.core.Plain;
 

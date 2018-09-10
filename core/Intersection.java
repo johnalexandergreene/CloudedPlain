@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core.rectangles;
+package org.fleen.cloudedPlain.core;
 
 import java.util.ArrayList;
 import java.util.List;

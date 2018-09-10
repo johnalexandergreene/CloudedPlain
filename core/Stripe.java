@@ -1,6 +1,4 @@
-package org.fleen.cloudedPlain.core.rectangles;
-
-import org.fleen.cloudedPlain.core.Plain;
+package org.fleen.cloudedPlain.core;
 
 /*
  * a rectangle that spans edge to edge. 

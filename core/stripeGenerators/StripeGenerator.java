@@ -3,7 +3,7 @@ package org.fleen.cloudedPlain.core.stripeGenerators;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.rectangles.Stripe;
+import org.fleen.cloudedPlain.core.Stripe;
 
 /*
  * a generator generates stripes
