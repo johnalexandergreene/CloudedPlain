@@ -3,7 +3,7 @@ package org.fleen.cloudedPlain.core;
 /*
  * a rectangle that spans edge to edge. 
  * A stripe that sweeps the surface of the plain once, from an edge to the opposite edge
- * it generally gets created, sweeps the plain, then gets discarded
+ * it is created, sweeps the plain, then destroyed
  * 
  * color is an index in the renderer's colorarray. generally 1. could be other values too of course
  * 
@@ -25,17 +25,33 @@ package org.fleen.cloudedPlain.core;
  * thus we get the summed value at that cell
  * then we can use that value to get a color (from the plain palette) 
  */
-public class Stripe{
+public class Stripe_Sweeper extends CPStripe{
   
-  public Stripe(
-    Plain plain,int heading,int thickness,int speed,int[] valuepattern){
+  public Stripe_Sweeper(Plain plain,int heading,int thickness,int speed,int[] valuepattern){
     this.plain=plain;
     this.heading=heading;
     this.thickness=thickness;
     this.speed=speed;
     this.valuepattern=valuepattern;
-    //
     birthday=plain.frameindex;}
+  
+  /*
+   * ################################
+   * IMPLEMENTATION OF CPRectangle
+   * ################################
+   */
+  
+  public int getCoorX(){
+    return getXMin();}
+
+  public int getCoorY(){
+    return getYMin();}
+
+  public int getWidth(){
+    return getXMax()-getXMin();}
+
+  public int getHeight(){
+    return getYMax()-getYMin();}
 
   /*
    * ################################
@@ -79,14 +95,21 @@ public class Stripe{
   
   /*
    * ################################
-   * GEOMETRY, HEADING, THICKNESS, LOCATION, MOVEMENT, SPEED
+   * GEOMETRY AND MOVEMENT
    * ################################
    */
+  
   public static final int
     HEADING_NORTH=0,//starts just off south edge, moves north till exiting plain via north edge
     HEADING_EAST=1,//starts at west edge, goes east
     HEADING_SOUTH=2,
     HEADING_WEST=3;
+  
+  public int getOrientation(){
+    if(heading==HEADING_NORTH||heading==HEADING_SOUTH)
+      return ORIENTATION_HORIZONTAL;
+    else
+      return ORIENTATION_VERTICAL;}
   
   /*
    * TODO
@@ -149,6 +172,8 @@ public class Stripe{
       ymax=plain.height;}
     return ymax;}
   
+  
+  
   /*
    * ################################
    * FINISHED
@@ -164,7 +189,7 @@ public class Stripe{
    * TODO
    *  
    */
-  public boolean finished(){
+  public boolean destroyMe(){
     boolean finished=false;
     if(heading==HEADING_NORTH){
       finished=getSWCorner()[1]>plain.height;
@@ -202,6 +227,20 @@ public class Stripe{
    *   
    *   TEST
    *   just a fill
+   *   
+   *   TODO
+   *   
+   *  +++++++++++++++++++++++++++++++++++++++
+   *  +++++++++++++++++++++++++++++++++++++++
+   *   
+   *   we are not gonna do it this way
+   *   
+   *   instead, plain will have a getchunks method
+   *   each chunk is a rectangle and a list of covering stripes
+   *   
+   *   so we sum the stripe values in a chunk to get color and/or sound
+   *   
+   *   render the chunk rectangle (instead of each pixel) and get the color from chunk value
    * 
    */
   public void manifest(){
@@ -211,5 +250,5 @@ public class Stripe{
         v=getValue();
         if(x>-1&&x<plain.width&&y>-1&&y<plain.height)
           plain.frame[x][y]+=v;}}}
-
+  
 }

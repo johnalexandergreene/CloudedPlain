@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.Stripe;
+import org.fleen.cloudedPlain.core.Stripe_Sweeper;
 import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
 
 public class Generator0 implements StripeGenerator{
@@ -56,22 +56,22 @@ public class Generator0 implements StripeGenerator{
 //    
 //    return clouds;}
   
-  public List<Stripe> generate(){
+  public List<Stripe_Sweeper> generate(){
 //  Random r=new Random();
-  List<Stripe> clouds=new ArrayList<Stripe>();
-  Stripe a;
+  List<Stripe_Sweeper> clouds=new ArrayList<Stripe_Sweeper>();
+  Stripe_Sweeper a;
   int[] valuepattern=new int[]{1,2,2,1};
   if(plain.frameindex%32==0){
-    a=new Stripe(plain,Stripe.HEADING_NORTH,120,1,valuepattern);
+    a=new Stripe_Sweeper(plain,Stripe_Sweeper.HEADING_NORTH,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);
-    a=new Stripe(plain,Stripe.HEADING_EAST,120,1,valuepattern);
+    a=new Stripe_Sweeper(plain,Stripe_Sweeper.HEADING_EAST,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);
-    a=new Stripe(plain,Stripe.HEADING_SOUTH,120,1,valuepattern);
+    a=new Stripe_Sweeper(plain,Stripe_Sweeper.HEADING_SOUTH,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);
-    a=new Stripe(plain,Stripe.HEADING_WEST,120,1,valuepattern);
+    a=new Stripe_Sweeper(plain,Stripe_Sweeper.HEADING_WEST,120,1,valuepattern);
     a.setPlain(plain);
     clouds.add(a);}
   return clouds;}
