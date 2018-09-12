@@ -18,6 +18,12 @@ public abstract class CPStripe implements CPRectangle{
   
   public abstract int getOrientation();
   
+  public boolean isHorizontal(){
+    return getOrientation()==ORIENTATION_HORIZONTAL;}
+  
+  public boolean isVertical(){
+    return getOrientation()==ORIENTATION_VERTICAL;}
+  
   
   /*
    * ################################

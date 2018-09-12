@@ -290,42 +290,68 @@ public class Plain implements CPRectangle{
    * Given this system of plain and stripes
    * get all of the chunks formed via their intersections
    * 
+   * A NEW IDEA
+   * first intersect all of the vertical stripes (with each other and a plain-shaped chunk)
+   * then intersect all the horizontal (with each other and a plain-shaped chunk) 
+   * this gives us 2 skeins of nonoverlapping chunks
+   * now intersect the two in some kind of orderly way
+   * that should do it.
+   * 
+   * 
    */
   
   public List<Chunk> getChunks(){
+    //sort the stripes into vertical and horizontal groups
+    List<CPStripe> 
+      vstripes=new ArrayList<CPStripe>(),
+      hstripes=new ArrayList<CPStripe>();
+    for(CPStripe stripe:stripes){
+      if(stripe.isHorizontal())
+        hstripes.add(stripe);
+      else
+        vstripes.add(stripe);}
+    //intersect each group, resolve overlaps, get chunks
     List<Chunk> 
-      chunkstotality=new ArrayList<Chunk>(),
-      chunkstoadd=new ArrayList<Chunk>(),
-      chunkstoremove=new ArrayList<Chunk>();
-    //init stripe iterator
-    Iterator<CPStripe> stripeiterator=stripes.iterator();
-    Stripe_Sweeper stripe;
-    //init chunks totality with a plain-shaped chunk that has no parent stripes
-    chunkstotality.add(new Chunk(this));
-    
-    //intersect with plain
-    chunkstotality.addAll(stripe.getIntersection(this));
-    //this gives us at least 1 chunk
-    //get next stripe and so on, 
-    //intersect stripes with chunk, then chunks
-    List<Chunk> newintersections=new ArrayList<Chunk>();
-    while(stripeiterator.hasNext()){
-      stripe=stripeiterator.next();
-      //intersect the stripe with each chunk
-      //if intersection occurs then put the newly create intersection class objects in the intersectionstoadd list 
-      // and put the old intersections that were involved in the intersection with the stripe into intersectionstoremove list
-      chunkstoadd.clear();
-      chunkstoremove.clear();
-      for(Chunk chunk:chunkstotality){
-        newintersections=stripe.getIntersection(chunk);
-        if(!newintersections.isEmpty()){
-          chunkstoadd.addAll(newintersections);
-          chunkstoremove.add(chunk);}}
-      //adjust the list
-      chunkstotality.removeAll(chunkstoremove);
-      chunkstotality.addAll(chunkstoadd);
-    }//keep doing this until we run out of stripes
-    //return intersections
-    return chunkstotality;}
+      vchunks=getVerticalChunks(hstripes),
+      hchunks=getHorizontalChunks(vstripes),
+      //intersect our 2 chunk groups
+      finalchunks=getChunks(vchunks,hchunks);
+    return finalchunks;}
+  
+//  public List<Chunk> getChunks(){
+//    List<Chunk> 
+//      chunkstotality=new ArrayList<Chunk>(),
+//      chunkstoadd=new ArrayList<Chunk>(),
+//      chunkstoremove=new ArrayList<Chunk>();
+//    //init stripe iterator
+//    Iterator<CPStripe> stripeiterator=stripes.iterator();
+//    Stripe_Sweeper stripe;
+//    //init chunks totality with a plain-shaped chunk that has no parent stripes
+//    chunkstotality.add(new Chunk(this));
+//    
+//    //intersect with plain
+//    chunkstotality.addAll(stripe.getIntersection(this));
+//    //this gives us at least 1 chunk
+//    //get next stripe and so on, 
+//    //intersect stripes with chunk, then chunks
+//    List<Chunk> newintersections=new ArrayList<Chunk>();
+//    while(stripeiterator.hasNext()){
+//      stripe=stripeiterator.next();
+//      //intersect the stripe with each chunk
+//      //if intersection occurs then put the newly create intersection class objects in the intersectionstoadd list 
+//      // and put the old intersections that were involved in the intersection with the stripe into intersectionstoremove list
+//      chunkstoadd.clear();
+//      chunkstoremove.clear();
+//      for(Chunk chunk:chunkstotality){
+//        newintersections=stripe.getIntersection(chunk);
+//        if(!newintersections.isEmpty()){
+//          chunkstoadd.addAll(newintersections);
+//          chunkstoremove.add(chunk);}}
+//      //adjust the list
+//      chunkstotality.removeAll(chunkstoremove);
+//      chunkstotality.addAll(chunkstoadd);
+//    }//keep doing this until we run out of stripes
+//    //return intersections
+//    return chunkstotality;}
 
 }
