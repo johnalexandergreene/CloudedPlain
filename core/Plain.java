@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
@@ -318,40 +321,114 @@ public class Plain implements CPRectangle{
       finalchunks=getChunks(vchunks,hchunks);
     return finalchunks;}
   
-//  public List<Chunk> getChunks(){
-//    List<Chunk> 
-//      chunkstotality=new ArrayList<Chunk>(),
-//      chunkstoadd=new ArrayList<Chunk>(),
-//      chunkstoremove=new ArrayList<Chunk>();
-//    //init stripe iterator
-//    Iterator<CPStripe> stripeiterator=stripes.iterator();
-//    Stripe_Sweeper stripe;
-//    //init chunks totality with a plain-shaped chunk that has no parent stripes
-//    chunkstotality.add(new Chunk(this));
-//    
-//    //intersect with plain
-//    chunkstotality.addAll(stripe.getIntersection(this));
-//    //this gives us at least 1 chunk
-//    //get next stripe and so on, 
-//    //intersect stripes with chunk, then chunks
-//    List<Chunk> newintersections=new ArrayList<Chunk>();
-//    while(stripeiterator.hasNext()){
-//      stripe=stripeiterator.next();
-//      //intersect the stripe with each chunk
-//      //if intersection occurs then put the newly create intersection class objects in the intersectionstoadd list 
-//      // and put the old intersections that were involved in the intersection with the stripe into intersectionstoremove list
-//      chunkstoadd.clear();
-//      chunkstoremove.clear();
-//      for(Chunk chunk:chunkstotality){
-//        newintersections=stripe.getIntersection(chunk);
-//        if(!newintersections.isEmpty()){
-//          chunkstoadd.addAll(newintersections);
-//          chunkstoremove.add(chunk);}}
-//      //adjust the list
-//      chunkstotality.removeAll(chunkstoremove);
-//      chunkstotality.addAll(chunkstoadd);
-//    }//keep doing this until we run out of stripes
-//    //return intersections
-//    return chunkstotality;}
+  /*
+   * convert the list of vertical stripes and the plain-rectangle into a sequence of chunk terminuses (VChunkTerminus class object)
+   * each VChunkTerminus 
+   *   has an X coordinate, describing its location on the horizontal span of the plain
+   *   holds a list of all the stripes that stop or start there 
+   * 
+   *  
+   */
+  List<Chunk> getVerticalChunks(List<CPStripe> vstripes){
+    List<VChunkTerminus> terminusses=getOrderedTermunsesses(vstripes);
+    List<Chunk> chunks=convertTerminussesToVerticalChunks(terminusses);
+    return chunks;}
+  
+  /*
+   * address the sequence of terminusses
+   * at each terminus except for the last, create a chunk
+   * 
+   */
+  private List<Chunk> convertTerminussesToVerticalChunks(List<VChunkTerminus> terminusses){
+    
+  }
+  
+  /*
+   * convert the list of vertical stripes to an ordered list of vertical chunk terminusses
+   * for each stripe
+   *   get a terminus
+   *   first check the termsbyx map.
+   *   if it isn't there then create one and stick it in the map
+   * now er have our terminusesses, unordered
+   * sort them by xcoors
+   * that's it
+   */
+  List<VChunkTerminus> getOrderedTermunsesses(List<CPStripe> vstripes){
+    Map<Integer,VChunkTerminus> termsbyx=new HashMap<Integer,VChunkTerminus>();
+    VChunkTerminus t;
+    int xmin,xmax;
+    for(CPStripe s:vstripes){
+      //do terminus for east edge of stripe
+      xmin=s.getXMin();
+      t=termsbyx.get(xmin);
+      if(t==null){
+        t=new VChunkTerminus(this,xmin);
+        termsbyx.put(xmin,t);}
+      t.stripeeastedge.add(s);
+      //do terminus for west edge of stripe
+      xmax=s.getXMax();
+      t=termsbyx.get(xmax);
+      if(t==null){
+        t=new VChunkTerminus(this,xmax);
+        termsbyx.put(xmax,t);}
+      t.stripewestedge.add(s);}
+    //sort the terminusses
+    List<VChunkTerminus> ordered=new ArrayList<VChunkTerminus>(termsbyx.values());
+    Collections.sort(ordered);
+    //
+    return ordered;}
+  
+  
+  class VChunkTerminus implements Comparable<VChunkTerminus>{
+    
+    Plain plain;
+    int xcoor;
+    
+    List<CPStripe>
+      //all stripes in the list have their west edge here
+      stripewestedge=new ArrayList<CPStripe>(),
+      //all stripes in the list have their east edge here
+      stripeeastedge=new ArrayList<CPStripe>();
+    
+    VChunkTerminus(Plain plain,int xcoor){
+      this.plain=plain;
+      this.xcoor=xcoor;}
+    
+    boolean isPlainWestEdge(){
+      return xcoor==0;}
+    
+    boolean isPlainEastEdge(){
+      return xcoor==plain.getWidth()-1;}
+
+    public int compareTo(VChunkTerminus a){
+      if(xcoor==a.xcoor){
+        throw new IllegalArgumentException("2 VChunkTerminus can't have the same xcoor : "+xcoor);
+      }else if(xcoor>a.xcoor){
+        return 1;
+      }else{
+        return 0;}}
+    
+    
+    
+    
+  }
+
+
+  
+  /*
+   * A little geometry
+   */
+  
+  public int getXMin(){
+    return 0;}
+
+  public int getXMax(){
+    return getWidth()-1;}
+
+  public int getYMin(){
+    return 0;}
+
+  public int getYMax(){
+    return getHeight()-1;}
 
 }

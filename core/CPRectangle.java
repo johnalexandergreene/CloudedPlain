@@ -5,15 +5,29 @@ public interface CPRectangle{
   /*
    * northwest corner point x
    */
-  public abstract int getCoorX();
+  int getCoorX();
   
   /*
    * northwest corner point y
    */
-  public abstract int getCoorY();
+  int getCoorY();
   
-  public abstract int getWidth();
+  int getWidth();
   
-  public abstract int getHeight();
+  int getHeight();
+  
+  /*
+   * for our convenience
+   */
+  
+  int getXMin();
+  
+  int getXMax();
+  
+  int getYMin();
+  
+  int getYMax();
+  
+  
 
 }
