@@ -8,15 +8,15 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.Chunk;
-import org.fleen.cloudedPlain.core.CloudedPlain;
-import org.fleen.cloudedPlain.core.renderVideo.RendererGraphics;
+import org.fleen.cloudedPlain.core.stripeSystem.Chunk;
+import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
+import org.fleen.cloudedPlain.core.video.VideoRenderer;
 
-public class RendererGraphics0 implements RendererGraphics{
+public class RendererGraphics0 implements VideoRenderer{
 
-  CloudedPlain plain;
+  StripeSystem plain;
   
-  public void setPlain(CloudedPlain plain){
+  public void setPlain(StripeSystem plain){
     this.plain=plain;}
 
 //  public BufferedImage render(int[][] slice){

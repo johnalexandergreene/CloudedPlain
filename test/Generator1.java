@@ -3,16 +3,16 @@ package org.fleen.cloudedPlain.test;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.CloudedPlain;
-import org.fleen.cloudedPlain.core.Stripe_Loiterer;
-import org.fleen.cloudedPlain.core.geom.Stripe;
-import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
+import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
+import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Loiterer;
 
 public class Generator1 implements StripeGenerator{
 
-  CloudedPlain plain;
+  StripeSystem plain;
   
-  public void setPlain(CloudedPlain plain){
+  public void setStage(StripeSystem plain){
     this.plain=plain;}
   
   boolean generated=false;

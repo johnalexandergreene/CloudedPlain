@@ -17,12 +17,13 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-import org.fleen.cloudedPlain.core.geom.CPRectangle;
-import org.fleen.cloudedPlain.core.geom.Stripe;
-import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
-import org.fleen.cloudedPlain.core.renderVideo.RasterExporter;
-import org.fleen.cloudedPlain.core.renderVideo.RendererGraphics;
-import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
+import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeSystem.Chunk;
+import org.fleen.cloudedPlain.core.stripeSystem.SSRectangle;
+import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
+import org.fleen.cloudedPlain.core.video.VideoExporter;
+import org.fleen.cloudedPlain.core.video.VideoRenderer;
 
 /*
  * a system of 
@@ -41,7 +42,7 @@ import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
  * we also provide various analysis methods for the system, for example getting the intersection squares
  * 
  */
-public class CloudedPlain2 implements CPRectangle{
+public class CloudedPlain2 implements SSRectangle{
   
   /*
    * ################################
@@ -54,9 +55,9 @@ public class CloudedPlain2 implements CPRectangle{
   public CloudedPlain2(
     int w,int h,int d,
     StripeGenerator cc,
-    RendererGraphics rg,RendererSound rs,
+    VideoRenderer rg,AudioRenderer rs,
     File exportdir,
-    RenderingProgressListener rendererlistener){
+    ProgressListener rendererlistener){
     setDims(w,h,d);
     setGenerator(cc);
     setRendererGraphics(rg);
@@ -120,7 +121,7 @@ public class CloudedPlain2 implements CPRectangle{
   
   public void setGenerator(StripeGenerator g){
     generator=g;
-    g.setPlain(this);}
+    g.setStage(this);}
   
   /*
    * for each stripe generator, conditionally generate 0..n stripes
@@ -202,21 +203,21 @@ public class CloudedPlain2 implements CPRectangle{
     SOUNDSAMPLERATE=SLICERATE*FRAMESOUNDSAMPLERATE,
     SOUNDTICKMAXVAL=65535;
   
-  public RendererGraphics renderergraphics=null;
-  public RendererSound renderersound=null;
-  public RenderingProgressListener progresslistener=null;
+  public VideoRenderer renderergraphics=null;
+  public AudioRenderer renderersound=null;
+  public ProgressListener progresslistener=null;
   //the sound data for the plain. A sound of duration equal to plain duration
   public int[] plainsound;
   
-  public void setRendererGraphics(RendererGraphics r){
+  public void setRendererGraphics(VideoRenderer r){
     renderergraphics=r;
-    renderergraphics.setPlain(this);}
+    renderergraphics.setStage(this);}
   
-  public void setRendererSound(RendererSound r){
+  public void setRendererSound(AudioRenderer r){
     renderersound=r;
-    renderersound.setPlain(this);}
+    renderersound.setStage(this);}
   
-  public void setRendererListener(RenderingProgressListener l){
+  public void setRendererListener(ProgressListener l){
     progresslistener=l;}
   
   public void render(){
@@ -247,7 +248,7 @@ public class CloudedPlain2 implements CPRectangle{
    * ################################
    */
   
-  RasterExporter rasterexporter=new RasterExporter();
+  VideoExporter rasterexporter=new VideoExporter();
   
   private void exportSound(){
     //convert int array to byte array

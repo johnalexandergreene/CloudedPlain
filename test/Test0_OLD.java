@@ -6,7 +6,7 @@ import java.io.File;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
-public class Test0{
+public class Test0_OLD{
   
   private static final int 
     WIDTH=400,
@@ -26,15 +26,9 @@ public class Test0{
   
   public static final void main(String[] a){
     System.out.println("test 0 start");
-    StripeSystem p=new StripeSystem(WIDTH,HEIGHT,new Generator1());
-    for(int i=0;i<DURATION;i++){
-      if(p.frameindex%10==0)System.out.println("sliceindex="+p.frameindex);
-      //render image
-      //export image
-      //render sound piece
-      //update ui
-    }
-    //exportSound 
+    StripeSystem p=new StripeSystem(WIDTH,HEIGHT,DURATION,new Generator1(),new RendererGraphics0(),new RendererSound0(),EXPORTDIR,listener);
+    ui=new UI(p);
+    p.render();
     System.out.println("test 0 end");}
 
 }

@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.wavgen;
+package org.fleen.cloudedPlain.wavgenSAMPLE;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -8,7 +8,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-public class GenWavTest {
+public class GenWavTest_ORIG {
   
     public static void main(String[] args) throws  IOException {
 
@@ -28,25 +28,16 @@ public class GenWavTest {
 //        buffer[sample] = (float) (amplitude * Math.sin(twoPiF * time));
     }
     final byte[] byteBuffer = new byte[buffer.length * 2];
-    int bufferIndex = 0,val=0,b;
+    int bufferIndex = 0;
     for (int i = 0; i < byteBuffer.length; i++) {
-      if(i%1000>500){
-        val=32767;
-      }else{
-//        val=(i/(i%1000+1))*100;
-        val=(int)(i*1000*Math.sin(i));
-      }
-      
-//      final int x = (int) (buffer[bufferIndex++] * 32767.0);
+      final int x = (int) (buffer[bufferIndex++] * 32767.0);
       
       
       
       
-      
-      
-      byteBuffer[i] = (byte) val;
+      byteBuffer[i] = (byte) x;
       i++;
-      byteBuffer[i] = (byte) (val >>> 8);
+      byteBuffer[i] = (byte) (x >>> 8);
     }
     File out = new File("/home/john/Desktop/generated_wav/test000.wav");
     boolean bigEndian = false;

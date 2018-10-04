@@ -1,16 +1,14 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.geom.Plain;
-import org.fleen.cloudedPlain.core.geom.Stripe;
-import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
 
 /*
  * a system of 
- *   1 plain rectangle
+ *   1 stage rectangle
  *   0..n stripe rectangles
  *   0..n stripe generators
  *   a time parameter (an integer. A frame index.)
@@ -18,14 +16,14 @@ import org.fleen.cloudedPlain.core.stripeGenerators.StripeGenerator;
  * We increment the time (t) from 0 to whatever
  * 
  * t is a parameter for the stripes' definition, governing their location, value, etc
- * stripes generally hang out for a while, maybe sweeping across the plain, maybe just standing there or whatever, then get destroyed.
+ * stripes generally hang out for a while, maybe sweeping across the stage, maybe just standing there or whatever, then get destroyed.
  * 
  * t also governs the behavior of our stripe generators. Telling them to create a stripe or another generator or kill themselves or something
  * 
  * we also provide various analysis methods for the system, for example getting the intersection squares
  * 
  */
-public class CloudedPlain{
+public class StripeSystem{
   
   /*
    * ################################
@@ -33,8 +31,8 @@ public class CloudedPlain{
    * ################################
    */
   
-  public CloudedPlain(int w,int h,StripeGenerator g){
-    initPlain(w,h);
+  public StripeSystem(int w,int h,StripeGenerator g){
+    initStage(w,h);
     generator=g;}
  
   /*
@@ -43,10 +41,10 @@ public class CloudedPlain{
    * ################################
    */
   
-  Plain plain;
+  Stage stage;
   
-  public void initPlain(int w,int h){
-    plain=new Plain(w,h);}
+  public void initStage(int w,int h){
+    stage=new Stage(w,h);}
   
   /*
    * ################################
@@ -62,7 +60,7 @@ public class CloudedPlain{
   
   /*
    * ################################
-   * GENERATORS
+   * STRIPE GENERATOR
    * ################################
    */
   
@@ -75,7 +73,7 @@ public class CloudedPlain{
   
   public void setGenerator(StripeGenerator g){
     generator=g;
-    g.setPlain(this);}
+    g.setStage(this);}
   
   /*
    * ################################

@@ -1,9 +1,6 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
 import java.util.List;
-
-import org.fleen.cloudedPlain.core.geom.CPRectangle;
-import org.fleen.cloudedPlain.core.geom.Stripe;
 
 /*
  * The product of an intersection between 2 rectangles
@@ -12,7 +9,7 @@ import org.fleen.cloudedPlain.core.geom.Stripe;
  * we perform 2 kinds of intersections 
  * stripe-plain and stripe-chunk.
  */
-public class Chunk implements CPRectangle{
+public class Chunk implements SSRectangle{
   
   Chunk(int x,int y,int w,int h){
     this.x=x;

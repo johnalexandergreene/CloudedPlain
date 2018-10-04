@@ -1,6 +1,4 @@
-package org.fleen.cloudedPlain.core;
-
-import org.fleen.cloudedPlain.core.geom.Stripe;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
 /*
  * stays where its put till the timer runs out
@@ -8,7 +6,7 @@ import org.fleen.cloudedPlain.core.geom.Stripe;
  */
 public class Stripe_Loiterer extends Stripe{
   
-  public Stripe_Loiterer(CloudedPlain plain){
+  public Stripe_Loiterer(StripeSystem plain){
     super(plain);}
 
   public int getCoorX(){
@@ -21,7 +19,7 @@ public class Stripe_Loiterer extends Stripe{
     return 150;}
 
   public int getHeight(){
-    return plain.getHeight();}
+    return stripesystem.getHeight();}
 
   public int getOrientation(){
     return ORIENTATION_VERTICAL;}

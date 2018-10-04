@@ -3,8 +3,8 @@ package org.fleen.cloudedPlain.test.renderSound1;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.CloudedPlain;
-import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
+import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 /*
  * THE WAY WE WANT TO DO SOUND
@@ -41,11 +41,11 @@ import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
  * 
  */
 
-public class RendererSound1 implements RendererSound{
+public class RendererSound1 implements AudioRenderer{
 
-  CloudedPlain plain;
+  StripeSystem plain;
   
-  public void setPlain(CloudedPlain plain){
+  public void setStripeSystem(StripeSystem plain){
     this.plain=plain;}
 
 //  public int[] render(int[][] slice){
@@ -56,9 +56,9 @@ public class RendererSound1 implements RendererSound{
 //    return sound;}
   
   public int[] render(int[][] frame){
-    int[] sound=new int[CloudedPlain.FRAMESOUNDSAMPLERATE];
+    int[] sound=new int[StripeSystem.FRAMESOUNDSAMPLERATE];
     List<CellRectangle> cr=getCellRectangles(frame);
-    for(int i=0;i<CloudedPlain.FRAMESOUNDSAMPLERATE;i++)
+    for(int i=0;i<StripeSystem.FRAMESOUNDSAMPLERATE;i++)
       sound[i]=getSound(cr,i);
     return sound;}
   

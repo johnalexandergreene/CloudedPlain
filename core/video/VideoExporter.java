@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core.renderVideo;
+package org.fleen.cloudedPlain.core.video;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -12,7 +12,7 @@ import javax.imageio.stream.ImageOutputStream;
 
 import com.sun.imageio.plugins.png.PNGMetadata;
 
-public class RasterExporter{
+public class VideoExporter{
   
   /*
    * ################################

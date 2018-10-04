@@ -1,7 +1,7 @@
 package org.fleen.cloudedPlain.test;
 
-import org.fleen.cloudedPlain.core.CloudedPlain;
-import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
+import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 /*
  * THE WAY WE WANT TO DO SOUND
@@ -38,11 +38,11 @@ import org.fleen.cloudedPlain.core.renderAudio.RendererSound;
  * 
  */
 
-public class RendererSound0 implements RendererSound{
+public class RendererSound0 implements AudioRenderer{
 
-  CloudedPlain plain;
+  StripeSystem plain;
   
-  public void setPlain(CloudedPlain plain){
+  public void setStripeSystem(StripeSystem plain){
     this.plain=plain;}
 
 //  public int[] render(int[][] slice){
@@ -53,12 +53,12 @@ public class RendererSound0 implements RendererSound{
 //    return sound;}
   
   public int[] render(int[][] slice){
-    int[] sound=new int[CloudedPlain.FRAMESOUNDSAMPLERATE];
+    int[] sound=new int[StripeSystem.FRAMESOUNDSAMPLERATE];
     int cellsum=getCellSum(slice);
     int a,b;
     b=cellsum*cellsum;
     if(b>1000000000)b=1000000000;
-    for(int i=0;i<CloudedPlain.FRAMESOUNDSAMPLERATE;i++){
+    for(int i=0;i<StripeSystem.FRAMESOUNDSAMPLERATE;i++){
       a=i%1000;
       if(a<500)
         sound[i]=b;

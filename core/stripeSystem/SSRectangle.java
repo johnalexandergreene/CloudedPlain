@@ -1,6 +1,6 @@
-package org.fleen.cloudedPlain.core.geom;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
-public interface CPRectangle{
+public interface SSRectangle{
   
   /*
    * northwest corner point x

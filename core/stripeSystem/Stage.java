@@ -1,6 +1,9 @@
-package org.fleen.cloudedPlain.core.geom;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
-public class Plain implements CPRectangle{
+/*
+ * the rectangle viewport where stripes dance
+ */
+public class Stage implements SSRectangle{
   
   /*
    * ################################
@@ -8,7 +11,7 @@ public class Plain implements CPRectangle{
    * ################################
    */
   
-  public Plain(int w,int h){
+  public Stage(int w,int h){
     width=w;
     height=h;}
   

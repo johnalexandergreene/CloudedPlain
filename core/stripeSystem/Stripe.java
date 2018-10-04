@@ -1,24 +1,28 @@
-package org.fleen.cloudedPlain.core.geom;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
-import org.fleen.cloudedPlain.core.CloudedPlain;
-
-public abstract class Stripe implements CPRectangle{
+public abstract class Stripe implements SSRectangle{
   
-  public Stripe(CloudedPlain plain){
-    this.plain=plain;
+  /*
+   * ################################
+   * CONSTRUCTOR
+   * ################################
+   */
+  
+  public Stripe(StripeSystem stripesystem){
+    this.stripesystem=stripesystem;
     initBirthday();}
   
   /*
    * ################################
-   * PLAIN
-   * The Plain that this stripe expresses itself upon
+   * STRIPE SYSTEM
+   * The system of which this stripe is a part
    * ################################
    */
   
-  public CloudedPlain plain;
+  public StripeSystem stripesystem;
   
-  public void setPlain(CloudedPlain plain){
-    this.plain=plain;}
+  public void setPlain(StripeSystem s){
+    stripesystem=s;}
   
   /*
    * ################################
@@ -32,10 +36,10 @@ public abstract class Stripe implements CPRectangle{
   public int birthday;
   
   void initBirthday(){
-    birthday=plain.frameindex;}
+    birthday=stripesystem.frameindex;}
   
   public int getAge(){
-    return plain.frameindex-birthday;}
+    return stripesystem.frameindex-birthday;}
   
   /*
    * ################################

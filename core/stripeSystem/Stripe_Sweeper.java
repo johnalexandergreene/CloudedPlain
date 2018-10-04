@@ -1,6 +1,4 @@
-package org.fleen.cloudedPlain.core;
-
-import org.fleen.cloudedPlain.core.geom.Stripe;
+package org.fleen.cloudedPlain.core.stripeSystem;
 
 /*
  * a rectangle that spans edge to edge. 
@@ -29,7 +27,7 @@ import org.fleen.cloudedPlain.core.geom.Stripe;
  */
 public class Stripe_Sweeper extends Stripe{
   
-  public Stripe_Sweeper(CloudedPlain plain,int heading,int thickness,int speed,int[] valuepattern){
+  public Stripe_Sweeper(StripeSystem plain,int heading,int thickness,int speed,int[] valuepattern){
     super(plain);
     this.heading=heading;
     this.thickness=thickness;
@@ -118,10 +116,10 @@ public class Stripe_Sweeper extends Stripe{
     }else if(heading==HEADING_SOUTH){
       xy=new int[]{
         0,
-        plain.height-(speed*getAge())};
+        stripesystem.height-(speed*getAge())};
     }else if(heading==HEADING_WEST){
       xy=new int[]{
-          plain.width-(speed*getAge()),
+          stripesystem.width-(speed*getAge()),
           0};}
     return xy;}
   
@@ -131,7 +129,7 @@ public class Stripe_Sweeper extends Stripe{
   public int getXMax(){
     int xmax=-1;
     if(heading==HEADING_NORTH||heading==HEADING_SOUTH){
-      xmax=plain.width;
+      xmax=stripesystem.width;
     }else if(heading==HEADING_EAST||heading==HEADING_WEST){
       xmax=getSWCorner()[0]+thickness;}
     return xmax;}
@@ -144,7 +142,7 @@ public class Stripe_Sweeper extends Stripe{
     if(heading==HEADING_NORTH||heading==HEADING_SOUTH){
       ymax=getSWCorner()[1]+thickness;
     }else if(heading==HEADING_EAST||heading==HEADING_WEST){
-      ymax=plain.height;}
+      ymax=stripesystem.height;}
     return ymax;}
   
   
@@ -167,9 +165,9 @@ public class Stripe_Sweeper extends Stripe{
   public boolean destroyMe(){
     boolean finished=false;
     if(heading==HEADING_NORTH){
-      finished=getSWCorner()[1]>plain.height;
+      finished=getSWCorner()[1]>stripesystem.height;
     }else if(heading==HEADING_EAST){
-      finished=getSWCorner()[0]>plain.width;
+      finished=getSWCorner()[0]>stripesystem.width;
     }else if(heading==HEADING_SOUTH){
       finished=getSWCorner()[1]<(-thickness);
     }else if(heading==HEADING_WEST){
@@ -223,7 +221,7 @@ public class Stripe_Sweeper extends Stripe{
     for(int x=getXMin();x<=getXMax();x++){
       for(int y=getYMin();y<=getYMax();y++){
         v=getValue();
-        if(x>-1&&x<plain.width&&y>-1&&y<plain.height)
-          plain.frame[x][y]+=v;}}}
+        if(x>-1&&x<stripesystem.width&&y>-1&&y<stripesystem.height)
+          stripesystem.frame[x][y]+=v;}}}
   
 }
