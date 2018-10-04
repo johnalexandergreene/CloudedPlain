@@ -6,25 +6,33 @@ package org.fleen.cloudedPlain.core.stripeSystem;
  */
 public class Stripe_Loiterer extends Stripe{
   
-  public Stripe_Loiterer(StripeSystem stripesystem){
-    super(stripesystem);}
+  /*
+   * ################################
+   * CONSTRUCTOR
+   * ################################
+   */
+  
+  public Stripe_Loiterer(
+    StripeSystem stripesystem,int orientation,int[] valuestrobe,
+    int thickness,int location,int lifespan){
+    super(stripesystem,orientation,thickness,location,valuestrobe);
+    this.lifespan=lifespan;}
+  
+  /*
+   * ################################
+   * LIFESPAN
+   * ################################
+   */
+  
+  public int lifespan;
 
-  public int getCoorX(){
-    return 100;}
-
-  public int getCoorY(){
-    return 0;}
-
-  public int getWidth(){
-    return 150;}
-
-  public int getHeight(){
-    return stripesystem.stage.getHeight();}
-
-  public int getOrientation(){
-    return ORIENTATION_VERTICAL;}
-
+  /*
+   * ################################
+   * DESTROY
+   * ################################
+   */
+  
   public boolean destroyMe(){
-    return false;}
+    return getAge()>lifespan;}
 
 }

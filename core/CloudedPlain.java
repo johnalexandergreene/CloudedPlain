@@ -62,7 +62,10 @@ public class CloudedPlain{
   public void run(){
     System.out.println("CloudedPlain.run start");
     for(int i=0;i<duration;i++){
-      if(stripesystem.frameindex%10==0)System.out.println("frameindex="+stripesystem.frameindex);
+      //
+      try{Thread.sleep(100);}catch(Exception x){}
+      //
+      if(stripesystem.time%10==0)System.out.println("frameindex="+stripesystem.time);
       renderVideoFrame();
       exportVideoFrame();
       renderAudioFrame();
@@ -119,7 +122,7 @@ public class CloudedPlain{
   
   void exportVideoFrame(){
     if(videoexporter!=null)
-      videoexporter.export(videoframe,stripesystem.frameindex,workingdirectory);}
+      videoexporter.export(videoframe,stripesystem.time,workingdirectory);}
   
   /*
    * ################################

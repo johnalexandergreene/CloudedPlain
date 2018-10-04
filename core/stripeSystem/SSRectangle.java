@@ -28,6 +28,4 @@ public interface SSRectangle{
   
   int getYMax();
   
-  
-
 }

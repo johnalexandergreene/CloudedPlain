@@ -4,13 +4,20 @@ public abstract class Stripe implements SSRectangle{
   
   /*
    * ################################
-   * CONSTRUCTOR
+   * CONSTRUCTORS
    * ################################
    */
   
-  public Stripe(StripeSystem stripesystem){
+  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int location){
     this.stripesystem=stripesystem;
+    this.orientation=orientation;
+    this.thickness=thickness;
+    this.location=location;
     initBirthday();}
+  
+  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int location,int[] valuestrobe){
+    this(stripesystem,orientation,thickness,location);
+    setValueStrobe(valuestrobe);}
   
   /*
    * ################################
@@ -36,15 +43,14 @@ public abstract class Stripe implements SSRectangle{
   public int birthday;
   
   void initBirthday(){
-    birthday=stripesystem.frameindex;}
+    birthday=stripesystem.time;}
   
   public int getAge(){
-    return stripesystem.frameindex-birthday;}
+    return stripesystem.time-birthday;}
   
   /*
    * ################################
-   * ORIENTATION
-   * A stripe is either horizontal or vertical
+   * GEOMETRY
    * ################################
    */
   
@@ -52,19 +58,16 @@ public abstract class Stripe implements SSRectangle{
     ORIENTATION_HORIZONTAL=0,
     ORIENTATION_VERTICAL=1;
   
-  public abstract int getOrientation();
+  int orientation,thickness,location;
+  
+  public int getOrientation(){
+    return orientation;}
   
   public boolean isHorizontal(){
     return getOrientation()==ORIENTATION_HORIZONTAL;}
   
   public boolean isVertical(){
     return getOrientation()==ORIENTATION_VERTICAL;}
-  
-  /*
-   * ################################
-   * SOME GEOMETRY
-   * ################################
-   */
   
   public int getXMin(){
     return getCoorX();}
@@ -77,6 +80,46 @@ public abstract class Stripe implements SSRectangle{
   
   public int getYMax(){
     return getCoorY()+getHeight()-1;}
+  
+  public int getCoorX(){
+    if(isHorizontal())
+      return 0;
+    else
+      return location;}
+
+  public int getCoorY(){
+    if(isHorizontal())
+      return location;
+    else
+      return 0;}
+
+  public int getWidth(){
+    if(isHorizontal())
+      return stripesystem.stage.getWidth();
+    else
+      return thickness;}
+
+  public int getHeight(){
+    if(isHorizontal())
+      return thickness;
+    else
+      return stripesystem.stage.getHeight();}
+  
+  /*
+   * ################################
+   * VALUE STROBE PATTERN
+   * A stripe has an array of 1..n integer values
+   * Mod the time (frame index) value against the length of that array and you get a repeating pattern through time. A strobe.
+   * this pattern can refer to a color or a sound or both
+   * we sum overlapping rectangle values at a pixel to get the color of that pixel (the index of a color in a palette)
+   * we glean a system of uniformly-coloed rectangles, and examine their location and proportions, to calculate sound 
+   * ################################
+   */
+  
+  public int[] valuestrobe=new int[]{1};//note that default. a constant value of +1
+  
+  public void setValueStrobe(int[] s){
+    valuestrobe=s;}
   
   /*
    * ################################

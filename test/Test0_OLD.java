@@ -20,7 +20,7 @@ public class Test0_OLD{
   
   private static ProgressListener listener=new ProgressListener(){
     public void notify(StripeSystem plain,BufferedImage frameimage,int[] framesound){
-      if(plain.frameindex%10==0)System.out.println("sliceindex="+plain.frameindex);
+      if(plain.time%10==0)System.out.println("sliceindex="+plain.time);
       //TODO we should express the slice sound here too.
       ui.imagepanel.image=frameimage;
       ui.repaint();}};

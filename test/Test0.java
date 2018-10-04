@@ -9,7 +9,7 @@ public class Test0{
   private static final int 
     WIDTH=400,
     HEIGHT=400,
-    DURATION=100;
+    DURATION=1000;
   
   private static UI ui;
   

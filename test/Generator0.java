@@ -20,7 +20,7 @@ public class Generator0 implements StripeGenerator{
   List<Stripe> stripes=new ArrayList<Stripe>();
   Stripe_Sweeper a;
   int[] valuepattern=new int[]{1,2,2,1};
-  if(plain.frameindex%32==0){
+  if(plain.time%32==0){
     a=new Stripe_Sweeper(plain,Stripe_Sweeper.HEADING_NORTH,120,1,valuepattern);
     a.setPlain(plain);
     stripes.add(a);

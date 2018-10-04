@@ -78,18 +78,19 @@ public class StripeSystem{
   
   /*
    * ################################
-   * FRAME
+   * TIME
+   * aka frame index
    * 60 frames per second
    * each frame encompasses 1/60th of a second
    * ################################
    */
   
-  public int frameindex;
+  public int time;
   
   public void incrementFrame(){
     generateStripes();
     destroyStripes();
-    frameindex++;}
+    time++;}
   
   /*
    * for each stripe generator, conditionally generate 0..n stripes
