@@ -4,6 +4,6 @@ import java.awt.image.BufferedImage;
 
 public interface RenderingProgressListener{
   
-  void notify(Plain plain,BufferedImage sliceimage,int[] slicesound);
+  void notify(CloudedPlain plain,BufferedImage sliceimage,int[] slicesound);
 
 }

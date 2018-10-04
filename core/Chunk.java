@@ -1,7 +1,9 @@
 package org.fleen.cloudedPlain.core;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import org.fleen.cloudedPlain.core.geom.CPRectangle;
+import org.fleen.cloudedPlain.core.geom.Stripe;
 
 /*
  * The product of an intersection between 2 rectangles
@@ -32,7 +34,20 @@ public class Chunk implements CPRectangle{
   public int getHeight(){
     return h;}
   
-  public List<Stripe_Sweeper> parents=new ArrayList<Stripe_Sweeper>();
+  public List<Stripe> coveringstripes;
+
+  public int getXMin(){
+    return getCoorX();}
+
+  public int getXMax(){
+    return getCoorX()+getWidth()-1;}
+
+  public int getYMin(){
+    return getCoorY();}
+
+  public int getYMax(){
+    return getCoorY()+getHeight()-1;}
+  
   
   
 

@@ -1,13 +1,45 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.geom;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.fleen.cloudedPlain.core.CloudedPlain;
 
-public abstract class CPStripe implements CPRectangle{
+public abstract class Stripe implements CPRectangle{
+  
+  public Stripe(CloudedPlain plain){
+    this.plain=plain;
+    initBirthday();}
   
   /*
    * ################################
-   * TYPE
+   * PLAIN
+   * The Plain that this stripe expresses itself upon
+   * ################################
+   */
+  
+  public CloudedPlain plain;
+  
+  public void setPlain(CloudedPlain plain){
+    this.plain=plain;}
+  
+  /*
+   * ################################
+   * BIRTHDAY
+   * the frame index when this object was created
+   * from this we derive age
+   * with speed we derive location
+   * ################################
+   */
+  
+  public int birthday;
+  
+  void initBirthday(){
+    birthday=plain.frameindex;}
+  
+  public int getAge(){
+    return plain.frameindex-birthday;}
+  
+  /*
+   * ################################
+   * ORIENTATION
    * A stripe is either horizontal or vertical
    * ################################
    */

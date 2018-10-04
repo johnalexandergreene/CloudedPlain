@@ -1,10 +1,10 @@
 package org.fleen.cloudedPlain.core.renderAudio;
 
-import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.CloudedPlain;
 
 public interface RendererSound{
   
-  void setPlain(Plain plain);
+  void setPlain(CloudedPlain plain);
   
   /*
    * a 1 slice piece of the plain sound

@@ -2,8 +2,8 @@ package org.fleen.cloudedPlain.core.stripeGenerators;
 
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.Plain;
-import org.fleen.cloudedPlain.core.Stripe_Sweeper;
+import org.fleen.cloudedPlain.core.CloudedPlain;
+import org.fleen.cloudedPlain.core.geom.Stripe;
 
 /*
  * a generator generates stripes
@@ -11,9 +11,9 @@ import org.fleen.cloudedPlain.core.Stripe_Sweeper;
  */
 public interface StripeGenerator{
   
-  void setPlain(Plain plain);
+  void setPlain(CloudedPlain plain);
   
-  List<Stripe_Sweeper> generate();
+  List<Stripe> generate();
   
   boolean destroy();
 

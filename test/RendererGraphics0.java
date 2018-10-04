@@ -6,41 +6,39 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
+import java.util.Random;
 
-import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.Chunk;
+import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.renderVideo.RendererGraphics;
 
 public class RendererGraphics0 implements RendererGraphics{
 
-  Plain plain;
+  CloudedPlain plain;
   
-  public void setPlain(Plain plain){
+  public void setPlain(CloudedPlain plain){
     this.plain=plain;}
 
+//  public BufferedImage render(int[][] slice){
+//    BufferedImage image=new BufferedImage(plain.width,plain.height,BufferedImage.TYPE_INT_RGB);
+//    Graphics2D g=image.createGraphics();
+//    g.setPaint(Color.green);
+//    g.fillRect(0,0,plain.width,plain.height);
+//    for(int x=0;x<plain.width;x++)
+//      for(int y=0;y<plain.height;y++)
+//        image.setRGB(x,y,getRGB(slice[x][y]));
+//    return image;}
+  
   public BufferedImage render(int[][] slice){
-    
-    
-  //TODO
-    //test shape getter 
-//    List<PlainShape> ps=plain.getShapes();
-//    System.out.println("shape count = "+ps.size());
-    
-    
-    
     BufferedImage image=new BufferedImage(plain.width,plain.height,BufferedImage.TYPE_INT_RGB);
-//    WritableRaster raster = image.getRaster();
-    
     Graphics2D g=image.createGraphics();
     g.setPaint(Color.green);
     g.fillRect(0,0,plain.width,plain.height);
-    for(int x=0;x<plain.width;x++)
-      for(int y=0;y<plain.height;y++)
-        image.setRGB(x,y,getRGB(slice[x][y]));
-    
-    
-    
-    
-    
+    Random r=new Random();
+    for(Chunk chunk:plain.getChunks()){
+      g.setPaint(P_PORCO_ROSSO[r.nextInt(P_PORCO_ROSSO.length)]);
+      g.fillRect(chunk.getCoorX(),chunk.getCoorY(),chunk.getWidth(),chunk.getHeight());
+    }
     return image;}
   
   public Image getImageFromArray(int[] pixels, int width, int height) {

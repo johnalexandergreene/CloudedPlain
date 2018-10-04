@@ -1,5 +1,7 @@
 package org.fleen.cloudedPlain.core;
 
+import org.fleen.cloudedPlain.core.geom.Stripe;
+
 /*
  * a rectangle that spans edge to edge. 
  * A stripe that sweeps the surface of the plain once, from an edge to the opposite edge
@@ -25,15 +27,14 @@ package org.fleen.cloudedPlain.core;
  * thus we get the summed value at that cell
  * then we can use that value to get a color (from the plain palette) 
  */
-public class Stripe_Sweeper extends CPStripe{
+public class Stripe_Sweeper extends Stripe{
   
-  public Stripe_Sweeper(Plain plain,int heading,int thickness,int speed,int[] valuepattern){
-    this.plain=plain;
+  public Stripe_Sweeper(CloudedPlain plain,int heading,int thickness,int speed,int[] valuepattern){
+    super(plain);
     this.heading=heading;
     this.thickness=thickness;
     this.speed=speed;
-    this.valuepattern=valuepattern;
-    birthday=plain.frameindex;}
+    this.valuepattern=valuepattern;}
   
   /*
    * ################################
@@ -52,32 +53,6 @@ public class Stripe_Sweeper extends CPStripe{
 
   public int getHeight(){
     return getYMax()-getYMin();}
-
-  /*
-   * ################################
-   * BIRTHDAY
-   * the slice index when this object was created
-   * from this we derive age
-   * with speed we derive location
-   * ################################
-   */
-  
-  public int birthday;
-  
-  public int getAge(){
-    return plain.frameindex-birthday;}
-  
-  /*
-   * ################################
-   * PLAIN
-   * The Plain that this stripe expresses itself upon
-   * ################################
-   */
-  
-  public Plain plain;
-  
-  public void setPlain(Plain plain){
-    this.plain=plain;}
   
   /*
    * ################################

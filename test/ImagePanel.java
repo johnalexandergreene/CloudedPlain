@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import org.fleen.cloudedPlain.core.Plain;
+import org.fleen.cloudedPlain.core.CloudedPlain;
 
 public class ImagePanel extends JPanel{
 
@@ -19,7 +19,7 @@ public class ImagePanel extends JPanel{
    * ################################
    */
   
-  Plain plain;
+  CloudedPlain plain;
   
   /*
    * ################################

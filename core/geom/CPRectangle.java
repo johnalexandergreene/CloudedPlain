@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.core;
+package org.fleen.cloudedPlain.core.geom;
 
 public interface CPRectangle{
   
