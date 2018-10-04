@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import org.fleen.cloudedPlain.core.ProgressListener;
+import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer0;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 public class Test0_OLD{
@@ -26,7 +27,7 @@ public class Test0_OLD{
   
   public static final void main(String[] a){
     System.out.println("test 0 start");
-    StripeSystem p=new StripeSystem(WIDTH,HEIGHT,DURATION,new Generator1(),new RendererGraphics0(),new RendererSound0(),EXPORTDIR,listener);
+    StripeSystem p=new StripeSystem(WIDTH,HEIGHT,DURATION,new Generator1(),new VideoRenderer0(),new RendererSound0(),EXPORTDIR,listener);
     ui=new UI(p);
     p.render();
     System.out.println("test 0 end");}

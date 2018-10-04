@@ -10,17 +10,23 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Loiterer;
 
 public class Generator1 implements StripeGenerator{
 
-  StripeSystem plain;
+  /*
+   * ################################
+   * STRIPE SYSTEM
+   * ################################
+   */
   
-  public void setStage(StripeSystem plain){
-    this.plain=plain;}
+  StripeSystem stripesystem;
+  
+  public void setStripeSystem(StripeSystem stripesystem){
+    this.stripesystem=stripesystem;}
   
   boolean generated=false;
   
   public List<Stripe> generate(){
     List<Stripe> a=new ArrayList<Stripe>();
     if(!generated){
-      a.add(new Stripe_Loiterer(plain));
+      a.add(new Stripe_Loiterer(stripesystem));
       generated=true;
     }
   return a;}

@@ -6,8 +6,8 @@ package org.fleen.cloudedPlain.core.stripeSystem;
  */
 public class Stripe_Loiterer extends Stripe{
   
-  public Stripe_Loiterer(StripeSystem plain){
-    super(plain);}
+  public Stripe_Loiterer(StripeSystem stripesystem){
+    super(stripesystem);}
 
   public int getCoorX(){
     return 100;}
@@ -19,7 +19,7 @@ public class Stripe_Loiterer extends Stripe{
     return 150;}
 
   public int getHeight(){
-    return stripesystem.getHeight();}
+    return stripesystem.stage.getHeight();}
 
   public int getOrientation(){
     return ORIENTATION_VERTICAL;}

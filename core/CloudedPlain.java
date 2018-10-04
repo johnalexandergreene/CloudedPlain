@@ -32,13 +32,13 @@ public class CloudedPlain{
    */
   
   public CloudedPlain(
-    int width,int height,int depth,
+    int width,int height,int duration,
     StripeGenerator stripegenerator,
     String workingdirectory,
     VideoRenderer videorenderer,VideoExporter0 videoexporter,
     AudioRenderer audiorenderer,AudioExporter audioexporter,
     ProgressListener progresslistener){
-    initStripeSystemAndGeometry(width,height,depth,stripegenerator);
+    initStripeSystemAndGeometry(width,height,duration,stripegenerator);
     initWorkingDirectory(workingdirectory);
     this.videorenderer=videorenderer;
     this.videoexporter=videoexporter;
@@ -60,17 +60,16 @@ public class CloudedPlain{
    */
   
   public void run(){
-    System.out.println("CloudedPlain run start");
-    for(int i=0;i<depth;i++){
+    System.out.println("CloudedPlain.run start");
+    for(int i=0;i<duration;i++){
       if(stripesystem.frameindex%10==0)System.out.println("frameindex="+stripesystem.frameindex);
       renderVideoFrame();
       exportVideoFrame();
       renderAudioFrame();
       notifyProgressListener();
       stripesystem.incrementFrame();}
-    System.out.println("export audio");
     exportAudio();
-    System.out.println("CloudedPlain run end");}
+    System.out.println("CloudedPlain.run end");}
   
   /*
    * ################################
@@ -78,12 +77,12 @@ public class CloudedPlain{
    * ################################
    */
   
-  StripeSystem stripesystem;
-  int depth;
+  public StripeSystem stripesystem;
+  public int duration;
   
   void initStripeSystemAndGeometry(int w,int h,int d,StripeGenerator g){
     stripesystem=new StripeSystem(w,h,g);
-    depth=d;}
+    duration=d;}
   
   /*
    * ################################
@@ -104,10 +103,11 @@ public class CloudedPlain{
    */
   
   VideoRenderer videorenderer;
-  BufferedImage videoframe;
+  public BufferedImage videoframe=null;
   
   void renderVideoFrame(){
-    videoframe=videorenderer.renderFrame(stripesystem);}
+    if(videorenderer!=null)
+      videoframe=videorenderer.renderFrame(stripesystem);}
   
   /*
    * ################################
@@ -118,7 +118,8 @@ public class CloudedPlain{
   VideoExporter videoexporter;
   
   void exportVideoFrame(){
-    videoexporter.export(videoframe,stripesystem.frameindex,workingdirectory);}
+    if(videoexporter!=null)
+      videoexporter.export(videoframe,stripesystem.frameindex,workingdirectory);}
   
   /*
    * ################################
@@ -130,8 +131,9 @@ public class CloudedPlain{
   List<int[]> audioframes=new ArrayList<int[]>();
   
   void renderAudioFrame(){
-    int[] a=audiorenderer.renderFrame(stripesystem);
-    audioframes.add(a);}
+    if(audiorenderer!=null){
+      int[] a=audiorenderer.renderFrame(stripesystem);
+      audioframes.add(a);}}
   
   /*
    * ################################
@@ -142,7 +144,9 @@ public class CloudedPlain{
   AudioExporter audioexporter;
   
   void exportAudio(){
-    audioexporter.exportAudio(audioframes,workingdirectory);}
+    if(audioexporter!=null){
+      System.out.println("export audio");
+      audioexporter.exportAudio(audioframes,workingdirectory);}}
   
   /*
    * ################################

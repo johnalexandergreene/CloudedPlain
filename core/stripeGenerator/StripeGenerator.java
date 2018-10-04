@@ -11,7 +11,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
  */
 public interface StripeGenerator{
   
-  void setStage(StripeSystem cloudedplain);
+  void setStripeSystem(StripeSystem cloudedplain);
   
   List<Stripe> generate();
   

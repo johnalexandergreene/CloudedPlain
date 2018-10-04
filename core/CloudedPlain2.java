@@ -121,7 +121,7 @@ public class CloudedPlain2 implements SSRectangle{
   
   public void setGenerator(StripeGenerator g){
     generator=g;
-    g.setStage(this);}
+    g.setStripeSystem(this);}
   
   /*
    * for each stripe generator, conditionally generate 0..n stripes
@@ -215,11 +215,11 @@ public class CloudedPlain2 implements SSRectangle{
   
   public void setRendererGraphics(VideoRenderer r){
     renderergraphics=r;
-    renderergraphics.setStage(this);}
+    renderergraphics.setStripeSystem(this);}
   
   public void setRendererSound(AudioRenderer r){
     renderersound=r;
-    renderersound.setStage(this);}
+    renderersound.setStripeSystem(this);}
   
   public void setRendererListener(ProgressListener l){
     progresslistener=l;}

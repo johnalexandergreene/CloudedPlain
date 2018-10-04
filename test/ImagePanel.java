@@ -3,11 +3,10 @@ package org.fleen.cloudedPlain.test;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
-import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
+import org.fleen.cloudedPlain.core.CloudedPlain;
 
 public class ImagePanel extends JPanel{
 
@@ -15,11 +14,20 @@ public class ImagePanel extends JPanel{
   
   /*
    * ################################
-   * SAMPLER
+   * CONSTRUCTOR
    * ################################
    */
   
-  StripeSystem plain;
+  ImagePanel(CloudedPlain cloudedplain){
+    this.cloudedplain=cloudedplain;}
+  
+  /*
+   * ################################
+   * CLOUDED PLAIN
+   * ################################
+   */
+  
+  CloudedPlain cloudedplain;
   
   /*
    * ################################
@@ -27,12 +35,12 @@ public class ImagePanel extends JPanel{
    * ################################
    */
   
-  public BufferedImage image=null;
+  static final AffineTransform OFFSETALITTLE=AffineTransform.getTranslateInstance(50,50);
   
   public void paint(Graphics g){
     super.paint(g);
-    if(image==null)return;
+    if(cloudedplain.videoframe==null)return;
     Graphics2D g2=(Graphics2D)g;
-    g2.drawImage(image,null,null);}
+    g2.drawImage(cloudedplain.videoframe,OFFSETALITTLE,null);}
 
 }

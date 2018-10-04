@@ -12,7 +12,7 @@ public class Generator0 implements StripeGenerator{
 
   StripeSystem plain;
   
-  public void setStage(StripeSystem plain){
+  public void setStripeSystem(StripeSystem plain){
     this.plain=plain;}
   
   public List<Stripe> generate(){

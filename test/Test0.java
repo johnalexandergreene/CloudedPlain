@@ -1,10 +1,8 @@
 package org.fleen.cloudedPlain.test;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-
+import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
-import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
+import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer0;
 
 public class Test0{
   
@@ -15,26 +13,23 @@ public class Test0{
   
   private static UI ui;
   
-  private static final File EXPORTDIR=new File("/home/john/Desktop/cpexport"); 
+  private static final String WORKINGDIR="/home/john/Desktop/cpexport"; 
   
   private static ProgressListener listener=new ProgressListener(){
-    public void notify(StripeSystem plain,BufferedImage frameimage,int[] framesound){
-      if(plain.frameindex%10==0)System.out.println("sliceindex="+plain.frameindex);
-      //TODO we should express the slice sound here too.
-      ui.imagepanel.image=frameimage;
+    public void notify(CloudedPlain cloudedplain){
       ui.repaint();}};
   
   public static final void main(String[] a){
     System.out.println("test 0 start");
-    StripeSystem p=new StripeSystem(WIDTH,HEIGHT,new Generator1());
-    for(int i=0;i<DURATION;i++){
-      if(p.frameindex%10==0)System.out.println("sliceindex="+p.frameindex);
-      //render image
-      //export image
-      //render sound piece
-      //update ui
-    }
-    //exportSound 
+    CloudedPlain cp=new CloudedPlain(
+      WIDTH,HEIGHT,DURATION,
+      new Generator1(),
+      WORKINGDIR,
+      new VideoRenderer0(),null,
+      null,null,
+      listener);
+    ui=new UI(cp);
+    cp.run();
     System.out.println("test 0 end");}
 
 }

@@ -33,7 +33,8 @@ public class StripeSystem{
   
   public StripeSystem(int w,int h,StripeGenerator g){
     initStage(w,h);
-    generator=g;}
+    generator=g;
+    g.setStripeSystem(this);}
  
   /*
    * ################################
@@ -41,7 +42,7 @@ public class StripeSystem{
    * ################################
    */
   
-  Stage stage;
+  public Stage stage;
   
   public void initStage(int w,int h){
     stage=new Stage(w,h);}
@@ -73,7 +74,7 @@ public class StripeSystem{
   
   public void setGenerator(StripeGenerator g){
     generator=g;
-    g.setStage(this);}
+    g.setStripeSystem(this);}
   
   /*
    * ################################
