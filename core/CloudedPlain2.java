@@ -17,13 +17,13 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer;
+import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer;
 import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
 import org.fleen.cloudedPlain.core.stripeSystem.Chunk;
 import org.fleen.cloudedPlain.core.stripeSystem.SSRectangle;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
-import org.fleen.cloudedPlain.core.video.VideoExporter;
-import org.fleen.cloudedPlain.core.video.VideoRenderer;
 
 /*
  * a system of 
@@ -192,7 +192,11 @@ public class CloudedPlain2 implements SSRectangle{
    */
   
   /*
-   * 43200=60*720. 720=1*2*3*4*5*6
+   * 720=1*2*3*4*5*6
+   * 720 has lots of factors, that's why I chose it
+   * we do 60 frames per second
+   * 60*720=43200
+   * So 43200 is our per-second sample rate
    */
   public static final int
     //slices per second. aka video frame rate
@@ -248,7 +252,7 @@ public class CloudedPlain2 implements SSRectangle{
    * ################################
    */
   
-  VideoExporter rasterexporter=new VideoExporter();
+  VideoExporter0 rasterexporter=new VideoExporter0();
   
   private void exportSound(){
     //convert int array to byte array

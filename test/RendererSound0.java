@@ -1,6 +1,6 @@
 package org.fleen.cloudedPlain.test;
 
-import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 /*

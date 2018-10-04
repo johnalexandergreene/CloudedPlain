@@ -8,9 +8,9 @@ import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.util.Random;
 
+import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer;
 import org.fleen.cloudedPlain.core.stripeSystem.Chunk;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
-import org.fleen.cloudedPlain.core.video.VideoRenderer;
 
 public class RendererGraphics0 implements VideoRenderer{
 

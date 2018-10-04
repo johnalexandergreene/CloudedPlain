@@ -3,7 +3,7 @@ package org.fleen.cloudedPlain.test.renderSound1;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.audio.AudioRenderer;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 /*
