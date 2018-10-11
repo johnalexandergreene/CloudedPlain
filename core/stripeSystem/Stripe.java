@@ -8,15 +8,14 @@ public abstract class Stripe implements SSRectangle{
    * ################################
    */
   
-  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int location){
+  public Stripe(StripeSystem stripesystem,int orientation,int thickness){
     this.stripesystem=stripesystem;
     this.orientation=orientation;
     this.thickness=thickness;
-    this.location=location;
     initBirthday();}
   
-  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int location,int[] valuestrobe){
-    this(stripesystem,orientation,thickness,location);
+  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int[] valuestrobe){
+    this(stripesystem,orientation,thickness);
     setValueStrobe(valuestrobe);}
   
   /*
@@ -58,7 +57,14 @@ public abstract class Stripe implements SSRectangle{
     ORIENTATION_HORIZONTAL=0,
     ORIENTATION_VERTICAL=1;
   
-  int orientation,thickness,location;
+  int orientation,thickness;
+  
+  /*
+   * 
+   * if it's horizontal then it's the ymin
+   * vertical, xmin
+   */
+  public abstract int getLocation();
   
   public int getOrientation(){
     return orientation;}
@@ -85,11 +91,11 @@ public abstract class Stripe implements SSRectangle{
     if(isHorizontal())
       return 0;
     else
-      return location;}
+      return getLocation();}
 
   public int getCoorY(){
     if(isHorizontal())
-      return location;
+      return getLocation();
     else
       return 0;}
 
@@ -120,6 +126,9 @@ public abstract class Stripe implements SSRectangle{
   
   public void setValueStrobe(int[] s){
     valuestrobe=s;}
+  
+  public int getValue(){
+    return valuestrobe[stripesystem.time%valuestrobe.length];}
   
   /*
    * ################################

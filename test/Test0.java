@@ -3,6 +3,7 @@ package org.fleen.cloudedPlain.test;
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer0;
+import org.fleen.cloudedPlain.core.stripeGenerator.Generator2;
 
 public class Test0{
   
@@ -23,7 +24,7 @@ public class Test0{
     System.out.println("test 0 start");
     CloudedPlain cp=new CloudedPlain(
       WIDTH,HEIGHT,DURATION,
-      new Generator1(),
+      new Generator2(),
       WORKINGDIR,
       new VideoRenderer0(),null,
       null,null,

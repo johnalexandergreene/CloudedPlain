@@ -13,10 +13,21 @@ public class Stripe_Loiterer extends Stripe{
    */
   
   public Stripe_Loiterer(
-    StripeSystem stripesystem,int orientation,int[] valuestrobe,
-    int thickness,int location,int lifespan){
-    super(stripesystem,orientation,thickness,location,valuestrobe);
+    StripeSystem stripesystem,int orientation,int thickness,int[] valuestrobe,int location,int lifespan){
+    super(stripesystem,orientation,thickness,valuestrobe);
+    this.location=location;
     this.lifespan=lifespan;}
+  
+  /*
+   * ################################
+   * GEOMETRY
+   * ################################
+   */
+  
+  int location;
+  
+  public int getLocation(){
+    return location;}
   
   /*
    * ################################

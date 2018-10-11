@@ -5,6 +5,7 @@ import java.io.File;
 
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer0;
+import org.fleen.cloudedPlain.core.stripeGenerator.Generator1;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 public class Test0_OLD{

@@ -40,11 +40,14 @@ public class VideoRenderer0 implements VideoRenderer{
   Random random=new Random();
   
   Color getColor(Stripe stripe){
-    Color c=colorbystripe.get(stripe);
-    if(c==null){
-      c=getRandomColor();
-      colorbystripe.put(stripe,c);}
-    return c;}
+    Color c=COLORS[stripe.getValue()%COLORS.length];
+    return c;
+//    Color c=colorbystripe.get(stripe);
+//    if(c==null){
+//      c=getRandomColor();
+//      colorbystripe.put(stripe,c);}
+//    return c;
+    }
   
   Color getRandomColor(){
     return COLORS[random.nextInt(COLORS.length)];}

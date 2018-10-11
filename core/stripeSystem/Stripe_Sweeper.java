@@ -1,227 +1,79 @@
 package org.fleen.cloudedPlain.core.stripeSystem;
 
 /*
- * a rectangle that spans edge to edge. 
  * A stripe that sweeps the surface of the plain once, from an edge to the opposite edge
  * it is created, sweeps the plain, then destroyed
  * 
- * color is an index in the renderer's colorarray. generally 1. could be other values too of course
- * 
- * STRIPE VALUE
- * 
- * the plain has a palette. An array. color=index
- * 
- * a cell is covered by 1..n stripes
- * 
- * each stripe has a value pattern. A strobe of values. We can translate these into color and sound
- * specified by a list of integers. ex : 1,2,2,1, or 1,2 or 4,1,2,2,1,4
- * or even just 1 value, if the value is constant
- * 
- * at each tick of the plain's clock we specify the value for a stripe
- * that value is gotten from the stripe's valuepattern array
- * the value = valuepattern[tick%valuepatternlength] 
- * 
- * when we render a cell we get all of the stripes that cover the cell and sum their values at that tick
- * thus we get the summed value at that cell
- * then we can use that value to get a color (from the plain palette) 
+ * at init the new stripe is created off stage
+ * its location changes according to time, traversing age*speed
+ * when the stripe is off stage it stops moving and signals for destruction 
  */
+
 public class Stripe_Sweeper extends Stripe{
   
-  public Stripe_Sweeper(StripeSystem plain,int heading,int thickness,int speed,int[] valuepattern){
-    super(plain);
+  public Stripe_Sweeper(
+    StripeSystem stripesystem,int orientation,
+    int thickness,int[] valuestrobe,
+    int heading,int speed){
+    super(stripesystem,orientation,thickness,valuestrobe);
     this.heading=heading;
-    this.thickness=thickness;
-    this.speed=speed;
-    this.valuepattern=valuepattern;}
+    this.speed=speed;}
   
   /*
    * ################################
-   * IMPLEMENTATION OF CPRectangle
+   * GEOMETRY
    * ################################
    */
-  
-  public int getCoorX(){
-    return getXMin();}
-
-  public int getCoorY(){
-    return getYMin();}
-
-  public int getWidth(){
-    return getXMax()-getXMin();}
-
-  public int getHeight(){
-    return getYMax()-getYMin();}
   
   /*
-   * ################################
-   * VALUE PATTERN
-   * ################################
+   * a horizontal stripe 
+   *   with positive heading starts at the south edge and moves north
+   *   with negative heading starts at the north edge and moves south
+   * a vertical stripe
+   *   with positive heading starts at the west edge and moves east
+   *   with negative heading starts at the east edge and moves west
    */
-
-  public int[] valuepattern;
-  
-  /*
-   * This gets translated into color, strobe, sound...
-   */
-  public int getValue(){
-    return valuepattern[getAge()%valuepattern.length];}
-  
-  /*
-   * ################################
-   * GEOMETRY AND MOVEMENT
-   * ################################
-   */
-  
   public static final int
-    HEADING_NORTH=0,//starts just off south edge, moves north till exiting plain via north edge
-    HEADING_EAST=1,//starts at west edge, goes east
-    HEADING_SOUTH=2,
-    HEADING_WEST=3;
+    HEADING_POSITIVE=0,
+    HEADING_NEGATIVE=1;
   
-  public int getOrientation(){
-    if(heading==HEADING_NORTH||heading==HEADING_SOUTH)
-      return ORIENTATION_HORIZONTAL;
-    else
-      return ORIENTATION_VERTICAL;}
+  public int speed,heading;
   
-  /*
-   * TODO
-   * it's gonna be either 1 pixel movement = 1 slice (aka 1 frame. should we just change the name?)
-   *   ie : speed=1
-   * or slower, a fraction of that
-   *   1/2, 1/3... 1/6
-   * or faster, a multiple of that
-   *   2,3,4,5...
-   *   
-   * we will do it with a collection of proper speed settings. each associated with a speed function
-   * or something like that
-   */
-  public int speed;
-  
-  public int 
-    thickness,
-    heading=-1;
-  
-  //x and y of the southwest corner point of the stripe rectangle
-  public int[] getSWCorner(){
-    int[] xy=null;
-    if(heading==HEADING_NORTH){
-      xy=new int[]{
-        0,
-        speed*getAge()-thickness};
-    }else if(heading==HEADING_EAST){
-      xy=new int[]{
-        speed*getAge()-thickness,
-        0};
-    }else if(heading==HEADING_SOUTH){
-      xy=new int[]{
-        0,
-        stripesystem.height-(speed*getAge())};
-    }else if(heading==HEADING_WEST){
-      xy=new int[]{
-          stripesystem.width-(speed*getAge()),
-          0};}
-    return xy;}
-  
-  public int getXMin(){
-    return getSWCorner()[0];}
-  
-  public int getXMax(){
-    int xmax=-1;
-    if(heading==HEADING_NORTH||heading==HEADING_SOUTH){
-      xmax=stripesystem.width;
-    }else if(heading==HEADING_EAST||heading==HEADING_WEST){
-      xmax=getSWCorner()[0]+thickness;}
-    return xmax;}
-  
-  public int getYMin(){
-    return getSWCorner()[1];}
-  
-  public int getYMax(){
-    int ymax=-1;
-    if(heading==HEADING_NORTH||heading==HEADING_SOUTH){
-      ymax=getSWCorner()[1]+thickness;
-    }else if(heading==HEADING_EAST||heading==HEADING_WEST){
-      ymax=stripesystem.height;}
-    return ymax;}
-  
-  
+  public int getLocation(){
+    int location;
+    if(orientation==ORIENTATION_HORIZONTAL){
+      if(heading==HEADING_POSITIVE){//southerly
+        location=getAge()*speed-thickness;
+      }else{//HEADING_NEGATIVE//northerly
+        location=stripesystem.stage.getHeight()-getAge()*speed;}
+    }else{//ORIENTATION_VERTICAL
+      if(heading==HEADING_POSITIVE){//easterly
+        location=getAge()*speed-thickness;
+      }else{//HEADING_NEGATIVE//westerly
+        location=stripesystem.stage.getWidth()-getAge()*speed;}}
+    return location;}
   
   /*
    * ################################
-   * FINISHED
-   * When this Cloud is finished drifting over the plain, signal to the system that it should be removed.
+   * DESTROY
    * ################################
    */
   
   /*
-   * The method here flags true when the moving stripe passes off the edge of the plain
-   * If the stripe is unmoving then it is never discarded. 
-   * Maybe this method could be subbed to have finished happen on some other condition, like maybe a timer 
-   * 
-   * TODO
-   *  
+   * when the stripe has moved entirely off the stage
    */
   public boolean destroyMe(){
-    boolean finished=false;
-    if(heading==HEADING_NORTH){
-      finished=getSWCorner()[1]>stripesystem.height;
-    }else if(heading==HEADING_EAST){
-      finished=getSWCorner()[0]>stripesystem.width;
-    }else if(heading==HEADING_SOUTH){
-      finished=getSWCorner()[1]<(-thickness);
-    }else if(heading==HEADING_WEST){
-      finished=getSWCorner()[0]<(-thickness);}
-    return finished;}
+    boolean destroyme=false;
+    if(orientation==ORIENTATION_HORIZONTAL){
+      if(heading==HEADING_POSITIVE){//southerly
+        destroyme=getLocation()>stripesystem.stage.getHeight();
+      }else{//HEADING_NEGATIVE//northerly
+        destroyme=getLocation()<-thickness;}
+    }else{//ORIENTATION_VERTICAL
+      if(heading==HEADING_POSITIVE){//easterly
+        destroyme=getLocation()>stripesystem.stage.getWidth();
+      }else{//HEADING_NEGATIVE//westerly
+        destroyme=getLocation()<-thickness;}}
+    return destroyme;}
 
-  /*
-   * ################################
-   * MANIFEST
-   * manifest this stripe upon the plain
-   * refer to the plain for params like slice and sliceindex
-   * 
-   * the thing this method does is this :
-   *   add integer value to 0..n cells in the plain
-   *     value is usually 1 (a monochrome effect) but that added value could be any integer. 
-   *     thus generating 1 frame in our (60 fps) video 
-   *   incrementally generate sound array
-   *     set values over a 1/60 second long increment of the sound data array
-   *   we could change this value over time. Do a strobe or flicker or something 
-   * ################################
-   */
-  
-  /*
-   * a filled rectangle spanning the plain either vertically or horizontally 
-   * 
-   * scan rectangle area with a nested loop
-   * for each cell
-   *   get the value for that cell
-   *   what about fill, strobe, invertfillpattern TODO
-   *   
-   *   TEST
-   *   just a fill
-   *   
-   *   TODO
-   *   
-   *  +++++++++++++++++++++++++++++++++++++++
-   *  +++++++++++++++++++++++++++++++++++++++
-   *   
-   *   we are not gonna do it this way
-   *   
-   *   instead, plain will have a getchunks method
-   *   each chunk is a rectangle and a list of covering stripes
-   *   
-   *   so we sum the stripe values in a chunk to get color and/or sound
-   *   
-   *   render the chunk rectangle (instead of each pixel) and get the color from chunk value
-   * 
-   */
-  public void manifest(){
-    int v;
-    for(int x=getXMin();x<=getXMax();x++){
-      for(int y=getYMin();y<=getYMax();y++){
-        v=getValue();
-        if(x>-1&&x<stripesystem.width&&y>-1&&y<stripesystem.height)
-          stripesystem.frame[x][y]+=v;}}}
-  
 }
