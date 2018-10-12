@@ -60,7 +60,6 @@ public abstract class Stripe implements SSRectangle{
   int orientation,thickness;
   
   /*
-   * 
    * if it's horizontal then it's the ymin
    * vertical, xmin
    */
