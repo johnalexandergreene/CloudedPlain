@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 
 /*
  * a system of 
@@ -113,5 +114,14 @@ public class StripeSystem{
         i.remove();
         d++;}}
     System.out.println("destroyed : "+d);}
+  
+  /*
+   * ################################
+   * CHUNKS
+   * ################################
+   */
+  
+  public Chunks getChunks(){
+    return new Chunks(this);}
   
 }

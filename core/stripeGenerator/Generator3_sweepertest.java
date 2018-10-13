@@ -36,6 +36,10 @@ public class Generator3_sweepertest implements StripeGenerator{
       int speed=1;
       Stripe s=new Stripe_Sweeper(stripesystem,orientation,thickness,valuestrobe,heading,speed);
       a.add(s);
+     
+      Stripe s0=new Stripe_Sweeper(stripesystem,orientation,thickness,valuestrobe,1,speed);
+      a.add(s0);
+      
       created=true;}
   return a;}
   

@@ -8,7 +8,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 /*
  * for mapping a system of parallel but possibly overlapping stripe-rectangles
  */
-class StripeEdge implements Comparable<StripeEdge>{
+class Edge implements Comparable<Edge>{
   
   /*
    * ################################
@@ -16,7 +16,7 @@ class StripeEdge implements Comparable<StripeEdge>{
    * ################################
    */
   
-  StripeEdge(int coor){
+  Edge(int coor){
     this.coor=coor;}
   
   /*
@@ -43,7 +43,7 @@ class StripeEdge implements Comparable<StripeEdge>{
   /*
    * for sorting
    */
-  public int compareTo(StripeEdge a){
+  public int compareTo(Edge a){
     if(coor==a.coor){
       throw new IllegalArgumentException("2 StripeEdge objects can't have the same coor : "+coor);
     }else if(coor>a.coor){

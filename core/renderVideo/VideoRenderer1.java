@@ -9,6 +9,7 @@ import java.util.Random;
 
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
+import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 
 /*
  * test chunks
@@ -26,6 +27,10 @@ public class VideoRenderer1 implements VideoRenderer{
       new Color(0,0,255,64)};
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
+    
+    Chunks c=stripesystem.getChunks();
+    System.out.println("chunkscount="+c.size());
+    
     int w=stripesystem.stage.getWidth(),h=stripesystem.stage.getHeight();
     BufferedImage image=new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
     Graphics2D g=image.createGraphics();

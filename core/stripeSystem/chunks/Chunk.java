@@ -1,5 +1,7 @@
 package org.fleen.cloudedPlain.core.stripeSystem.chunks;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.stripeSystem.SSRectangle;
@@ -62,5 +64,8 @@ public class Chunk implements SSRectangle{
    */
   
   public List<Stripe> stripes;
+  
+  void setStripes(Collection<Stripe> s){
+    stripes=new ArrayList<Stripe>(s);}
   
 }

@@ -3,8 +3,10 @@ package org.fleen.cloudedPlain.core.stripeSystem.chunks;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
@@ -28,7 +30,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 @SuppressWarnings("serial")
 public class Chunks extends ArrayList<Chunk>{
   
-  Chunks(StripeSystem ss){
+  public Chunks(StripeSystem ss){
     //sort stripes
     List<Stripe> 
       vstripes=new ArrayList<Stripe>(),
@@ -38,15 +40,23 @@ public class Chunks extends ArrayList<Chunk>{
     //that is, where each stripe begins and ends. 
     //sometimes there's no stripe. sometimes they overlap. sometimes a whole bunch overlap.
     //so we map that
-    List<StripeEdge> 
-      vse=getStripeEdges(vstripes),
-      hse=getStripeEdges(hstripes);
+    List<Edge> 
+      vse=getVStripeEdges(ss,vstripes),
+      hse=getHStripeEdges(ss,hstripes);
     //derive vertical and horizontal chunks
-    List<Chunk> 
-      vchunks=getVChunks(vse),
-      hchunks=getHChunks(hse);
-    //intersect our 2 stripe-chunk sets to get our final chunks
-    doIntersectionChunks(vchunks,hchunks);}
+    
+    //TEST
+    List<Chunk> vchunks=getVChunks(ss,vse);
+    addAll(vchunks);
+    
+    
+//    List<Chunk> 
+//      vchunks=getVChunks(ss,vse),
+//      hchunks=getHChunks(ss,hse);
+//    //intersect our 2 stripe-chunk sets to get our final chunks
+//    doIntersectionChunks(vchunks,hchunks);
+    
+  }
   
   private void getSortedStripes(StripeSystem ss,List<Stripe> vstripes,List<Stripe> hstripes){
     for(Stripe stripe:ss.stripes){
@@ -61,27 +71,65 @@ public class Chunks extends ArrayList<Chunk>{
    * ################################
    */
   
-  private List<StripeEdge> getStripeEdges(List<Stripe> stripes){
-    Map<Integer,StripeEdge> edgesbycoor=new HashMap<Integer,StripeEdge>();
+  private List<Edge> getVStripeEdges(StripeSystem ss,List<Stripe> stripes){
+    Map<Integer,Edge> edgesbycoor=new HashMap<Integer,Edge>();
     int back,front;
-    StripeEdge backedge,frontedge;
+    Edge backedge,frontedge;
+    //do the edges for the edges of the stripesystem.stage
+    edgesbycoor.put(0,new Edge(0));
+    int stagexmax=ss.stage.getXMax();
+    edgesbycoor.put(stagexmax,new Edge(stagexmax));
+    //do the edges for the stripes
     for(Stripe stripe:stripes){
       //do the back edge
       back=stripe.getXMin();
-      backedge=edgesbycoor.get(back);
-      if(backedge==null){
-        backedge=new StripeEdge(back);
-        edgesbycoor.put(back,backedge);}
-      backedge.backedges.add(stripe);
+      if(back>=0&&back<=stagexmax){
+        backedge=edgesbycoor.get(back);
+        if(backedge==null){
+          backedge=new Edge(back);
+          edgesbycoor.put(back,backedge);}
+        backedge.backedges.add(stripe);}
       //do the front edge
       front=stripe.getXMax();
-      frontedge=edgesbycoor.get(front);
-      if(frontedge==null){
-        frontedge=new StripeEdge(front);
-        edgesbycoor.put(front,frontedge);}
-      frontedge.frontedges.add(stripe);}
+      if(front>=0&&front<=stagexmax){
+        frontedge=edgesbycoor.get(front);
+        if(frontedge==null){
+          frontedge=new Edge(front);
+          edgesbycoor.put(front,frontedge);}
+      frontedge.frontedges.add(stripe);}}
     //get it into a list and sort
-    List<StripeEdge> edges=new ArrayList<StripeEdge>(edgesbycoor.values());
+    List<Edge> edges=new ArrayList<Edge>(edgesbycoor.values());
+    Collections.sort(edges);
+    //
+    return edges;}
+  private List<Edge> getHStripeEdges(StripeSystem ss,List<Stripe> stripes){
+    Map<Integer,Edge> edgesbycoor=new HashMap<Integer,Edge>();
+    int back,front;
+    Edge backedge,frontedge;
+    //do the edges for the edges of the stripesystem.stage
+    edgesbycoor.put(0,new Edge(0));
+    int stageymax=ss.stage.getYMax();
+    edgesbycoor.put(stageymax,new Edge(stageymax));
+    //do the edges for the stripes
+    for(Stripe stripe:stripes){
+      //do the back edge
+      back=stripe.getXMin();
+      if(back>=0&&back<=stageymax){
+        backedge=edgesbycoor.get(back);
+        if(backedge==null){
+          backedge=new Edge(back);
+          edgesbycoor.put(back,backedge);}
+        backedge.backedges.add(stripe);}
+      //do the front edge
+      front=stripe.getXMax();
+      if(front>=0&&front<=stageymax){
+        frontedge=edgesbycoor.get(front);
+        if(frontedge==null){
+          frontedge=new Edge(front);
+          edgesbycoor.put(front,frontedge);}
+      frontedge.frontedges.add(stripe);}}
+    //get it into a list and sort
+    List<Edge> edges=new ArrayList<Edge>(edgesbycoor.values());
     Collections.sort(edges);
     //
     return edges;}
@@ -92,15 +140,29 @@ public class Chunks extends ArrayList<Chunk>{
    * ################################
    */
   
-  private List<Chunk> getVChunks(List<StripeEdge> vse){
+  /*
+   * create a new chunk for each adjacent pair of edges
+   * keep a list of which stripes we are presently covered by
+   *   at each edge
+   *     add all the backedge stripes
+   *     remove all the front edge stripes
+   *   the stripes in the list are the chunk's stripes
+   */
+  private List<Chunk> getVChunks(StripeSystem ss,List<Edge> vse){
+    int ssheight=ss.stage.getHeight();
     List<Chunk> vchunks=new ArrayList<Chunk>();
-    StripeEdge e0,e1;
+    Set<Stripe> covered=new HashSet<Stripe>();
+    Edge e0,e1;
+    Chunk chunk;
     for(int i=0;i<vse.size()-1;i++){
       e0=vse.get(i);
       e1=vse.get(i+1);
-      
-    }
-  }
+      covered.addAll(e0.backedges);
+      chunk=new Chunk(e0.coor,0,e1.coor-e0.coor+1,ssheight);
+      chunk.setStripes(covered);
+      vchunks.add(chunk);
+      covered.removeAll(e0.frontedges);}
+    return vchunks;}
   
   /*
    * ################################
@@ -108,7 +170,7 @@ public class Chunks extends ArrayList<Chunk>{
    * ################################
    */
   
-  private List<Chunk> getHChunks(List<StripeEdge> hse){
+  private List<Chunk> getHChunks(StripeSystem ss,List<Edge> hse){
     
   }
     
