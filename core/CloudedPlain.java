@@ -63,7 +63,7 @@ public class CloudedPlain{
     System.out.println("CloudedPlain.run start");
     for(int i=0;i<duration;i++){
       //
-      try{Thread.sleep(100);}catch(Exception x){}
+      try{Thread.sleep(10);}catch(Exception x){}
       //
       if(stripesystem.time%10==0)System.out.println("frameindex="+stripesystem.time);
       renderVideoFrame();

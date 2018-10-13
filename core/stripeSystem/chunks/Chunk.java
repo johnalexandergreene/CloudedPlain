@@ -45,16 +45,16 @@ public class Chunk implements SSRectangle{
     return h;}
 
   public int getXMin(){
-    return getCoorX();}
+    return x;}
 
   public int getXMax(){
-    return getCoorX()+getWidth()-1;}
+    return x+w-1;}
 
   public int getYMin(){
-    return getCoorY();}
+    return y;}
 
   public int getYMax(){
-    return getCoorY()+getHeight()-1;}
+    return y+h-1;}
   
   /*
    * ################################

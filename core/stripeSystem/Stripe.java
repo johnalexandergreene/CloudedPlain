@@ -8,14 +8,14 @@ public abstract class Stripe implements SSRectangle{
    * ################################
    */
   
-  public Stripe(StripeSystem stripesystem,int orientation,int thickness){
-    this.stripesystem=stripesystem;
+  public Stripe(StripeSystem ss,int orientation,int thickness){
+    stripesystem=ss;
     this.orientation=orientation;
     this.thickness=thickness;
     initBirthday();}
   
-  public Stripe(StripeSystem stripesystem,int orientation,int thickness,int[] valuestrobe){
-    this(stripesystem,orientation,thickness);
+  public Stripe(StripeSystem ss,int orientation,int thickness,int[] valuestrobe){
+    this(ss,orientation,thickness);
     setValueStrobe(valuestrobe);}
   
   /*

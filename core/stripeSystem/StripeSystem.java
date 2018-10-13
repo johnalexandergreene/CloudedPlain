@@ -113,7 +113,7 @@ public class StripeSystem{
       if(c.destroyMe()){
         i.remove();
         d++;}}
-    System.out.println("destroyed : "+d);}
+    if(d>0)System.out.println("destroyed : "+d);}
   
   /*
    * ################################

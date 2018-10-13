@@ -39,14 +39,13 @@ class Edge implements Comparable<Edge>{
   List<Stripe> 
     frontedges=new ArrayList<Stripe>(),
     backedges=new ArrayList<Stripe>();
-  
-  /*
-   * for sorting
-   */
-  public int compareTo(Edge a){
-    if(coor==a.coor){
-      throw new IllegalArgumentException("2 StripeEdge objects can't have the same coor : "+coor);
-    }else if(coor>a.coor){
+
+  public int compareTo(Edge a0){
+    if(coor==a0.coor){
+      throw new IllegalArgumentException("edges have equal coor : "+a0.coor);
+    }else if(coor>a0.coor){
       return 1;
     }else{
-      return 0;}}}
+      return -1;}}
+  
+}

@@ -4,13 +4,13 @@ import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
-import org.fleen.cloudedPlain.core.stripeGenerator.Generator3_sweepertest;
+import org.fleen.cloudedPlain.core.stripeGenerator.Generator3_test;
 
 public class Test0{
   
   private static final int 
-    WIDTH=400,
-    HEIGHT=400,
+    WIDTH=500,
+    HEIGHT=500,
     DURATION=1000;
   
   private static UI ui;
@@ -25,7 +25,7 @@ public class Test0{
     System.out.println("test 0 start");
     CloudedPlain cp=new CloudedPlain(
       WIDTH,HEIGHT,DURATION,
-      new Generator3_sweepertest(),
+      new Generator3_test(),
       WORKINGDIR,
       new VideoRenderer1(),new VideoExporter0(),
       null,null,
