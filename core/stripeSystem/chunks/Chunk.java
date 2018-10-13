@@ -68,4 +68,9 @@ public class Chunk implements SSRectangle{
   void setStripes(Collection<Stripe> s){
     stripes=new ArrayList<Stripe>(s);}
   
+  void setStripes(Collection<Stripe> s0,Collection<Stripe> s1){
+    stripes=new ArrayList<Stripe>(s0.size()+s1.size());
+    stripes.addAll(s0);
+    stripes.addAll(s1);}
+  
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,15 +47,8 @@ public class Chunks extends ArrayList<Chunk>{
     List<Chunk> 
       vchunks=getVChunks(ss,ve),
       hchunks=getHChunks(ss,he);
-    
-    //TEST
-//    addAll(vchunks);
-    addAll(hchunks);
-    
-//    //intersect our 2 stripe-chunk sets to get our final chunks
-//    doIntersectionChunks(vchunks,hchunks);
-    
-  }
+    //intersect our 2 stripe-chunk sets to get our final chunks
+    doIntersectionChunks(vchunks,hchunks);}
   
   private void getSortedStripes(StripeSystem ss,List<Stripe> vstripes,List<Stripe> hstripes){
     for(Stripe stripe:ss.stripes){
@@ -64,6 +56,32 @@ public class Chunks extends ArrayList<Chunk>{
         hstripes.add(stripe);
       else
         vstripes.add(stripe);}}
+  
+  /*
+   * given vertical and horizontal stripe chunks
+   * for each vchunk
+   *   for each hchunk
+   *     get the intersection rectangle
+   *     
+   * The intersection rectangle is simple
+   * 
+   *   use the xmin and xmax of the vchunk
+   *   use the ymin and ymax of the hchunk
+   *   sum the stripes
+   *   add it to this list
+   */
+  private void doIntersectionChunks(List<Chunk> vchunks,List<Chunk> hchunks){
+    int x,y,w,h;
+    Chunk ichunk;
+    for(Chunk vchunk:vchunks){
+      for(Chunk hchunk:hchunks){
+        x=vchunk.getXMin();
+        y=hchunk.getYMin();
+        w=vchunk.getWidth();
+        h=hchunk.getHeight();
+        ichunk=new Chunk(x,y,w,h);
+        ichunk.setStripes(vchunk.stripes,hchunk.stripes);
+        add(ichunk);}}}
   
   /*
    * ################################
