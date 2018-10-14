@@ -50,7 +50,7 @@ public class Generator3_test implements StripeGenerator{
   public List<Stripe> generate(){
     List<Stripe> a=new ArrayList<Stripe>();
     if(!created){
-      int[] valuestrobe=new int[]{1,7};
+      int[] valuestrobe=new int[]{1,2,3,2};
       Stripe s=new Stripe_Sweeper(stripesystem,0,120,valuestrobe,0,1);
       a.add(s);
       s=new Stripe_Sweeper(stripesystem,0,120,valuestrobe,1,1);

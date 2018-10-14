@@ -44,43 +44,16 @@ public class VideoRenderer1 implements VideoRenderer{
     Graphics2D g=image.createGraphics();
     g.setPaint(Color.gray);
     g.fillRect(0,0,w,h);
-    
     Chunks chunks=stripesystem.getChunks();
     for(Chunk chunk:chunks){
       g.setPaint(getColor(chunk));
-      g.fillRect(chunk.getCoorX(),chunk.getCoorY(),chunk.getWidth(),chunk.getHeight());
-    }
-    
-    
-//    for(Stripe stripe:stripesystem.stripes){
-//      g.setPaint(getColor(stripe));
-//      g.fillRect(stripe.getCoorX(),stripe.getCoorY(),stripe.getWidth(),stripe.getHeight());}
-    
-    
-    
-    
+      g.fillRect(chunk.getCoorX(),chunk.getCoorY(),chunk.getWidth(),chunk.getHeight());}
     return image;}
-  
-  Map<Stripe,Color> colorbystripe=new HashMap<Stripe,Color>();
-  Random random=new Random();
   
   Color getColor(Chunk chunk){
     int a=0;
     for(Stripe stripe:chunk.stripes)
       a+=stripe.getValue();
     return COLORS[a%COLORS.length];}
-  
-  Color getColor(Stripe stripe){
-    Color c=COLORS[stripe.getValue()%COLORS.length];
-    return c;
-//    Color c=colorbystripe.get(stripe);
-//    if(c==null){
-//      c=getRandomColor();
-//      colorbystripe.put(stripe,c);}
-//    return c;
-    }
-  
-  Color getRandomColor(){
-    return COLORS[random.nextInt(COLORS.length)];}
 
 }

@@ -207,6 +207,8 @@ assemble in openshot
 
 export to 720p med quality mp4 264
 
+TODO insert audio via ffmpeg
+
 
 
 
