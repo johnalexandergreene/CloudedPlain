@@ -1,27 +1,19 @@
 package org.fleen.cloudedPlain.core.renderAudio;
 
+import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 public interface AudioRenderer{
   
-  /*
-   * 720=1*2*3*4*5*6
-   * 720 has lots of factors, that's why I chose it
-   * we do 60 frames per second
-   * 60*720=43200
-   * So 43200 is our per-second sample rate
-   */
-  public static final int
-    //slices per second. aka video frame rate
-    SLICERATE=60,
-    //sound sample rate over a single slice. 
-    FRAMESOUNDSAMPLERATE=720,
-    //
-    SOUNDSAMPLERATE=SLICERATE*FRAMESOUNDSAMPLERATE,
-    SOUNDTICKMAXVAL=65535;
+  void setCloudedPlain(CloudedPlain cp);
+  
+  CloudedPlain getCloudedPlain();
   
   /*
-   * render the stripesystem to a 1/60th second segment of the sound array and return it.
+   * render the stripesystem to a 1/60th second frame of the sound array and return it.
+   * those values are 2 byte. we're gonna convert them into a byte array at export.
+   * that's max=65536, signed.
+   * so  -65536 to 65536 ?
    */
   int[] renderFrame(StripeSystem ss);
 

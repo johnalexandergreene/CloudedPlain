@@ -1,11 +1,14 @@
 package org.fleen.cloudedPlain.core.renderAudio;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunk;
 
-public class AudioRenderer0 implements AudioRenderer{
+public class AudioRenderer1 implements AudioRenderer{
 
   /*
    * ################################
@@ -27,27 +30,34 @@ public class AudioRenderer0 implements AudioRenderer{
    * ################################
    */
   
+  /*
+   * get sound for each chunk, weighted by distance from center or something
+   */
   public int[] renderFrame(StripeSystem ss){
+    List<Chunk> chunks=getCloudedPlain().stripesystem.getChunks();
+    int chunkcount=chunks.size();
+    List<int[]> chunksounds=new ArrayList<int[]>(chunks.size());
+    for(Chunk chunk:chunks)
+      chunksounds.add(getSound(chunk));
+    int[] average=new int[getCloudedPlain().getAudioSampleRatePerFrame()];
+    int b;
+    for(int i=0;i<getCloudedPlain().getAudioSampleRatePerFrame();i++){
+      b=0;
+      for(int[] c:chunksounds)
+        b+=c[i];
+      average[i]=b/chunkcount;}
+    return average;}
+  
+  public int[] getSound(Chunk chunk){
     int audiosamplerateperframe=getCloudedPlain().getAudioSampleRatePerFrame();
     int[] sound=new int[audiosamplerateperframe];
-    int cellsum=getCellSum(ss);
-    int a,b;
-    b=cellsum*cellsum;
-    if(b>1000000000)b=1000000000;
+    double a,b;
+    int z=getSoundVal(chunk);
     for(int i=0;i<audiosamplerateperframe;i++){
-      a=i%1000;
-      if(a<500)
-        sound[i]=b;
-      else
-        sound[i]=0;
-    }
+      a=(((double)i%z)/z)*2.0*Math.PI;
+      b=a*65000;
+      sound[i]=(int)b;}
     return sound;}
-  
-  private int getCellSum(StripeSystem ss){
-    int s=0;
-    for(Chunk c:ss.getChunks()){
-      s+=getSoundVal(c);}
-    return s;}
   
   private int getSoundVal(Chunk c){
     int i=0;

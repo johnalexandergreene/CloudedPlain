@@ -56,6 +56,9 @@ public class Chunk implements SSRectangle{
   public int getYMax(){
     return y+h-1;}
   
+  public int getArea(){
+    return getWidth()*getHeight();}
+  
   /*
    * ################################
    * COVERING STRIPES

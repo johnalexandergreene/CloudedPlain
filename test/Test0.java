@@ -2,7 +2,9 @@ package org.fleen.cloudedPlain.test;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
+import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer1;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator4;
 
@@ -11,7 +13,7 @@ public class Test0{
   private static final int 
     WIDTH=512,
     HEIGHT=512,
-    DURATION=2000;
+    DURATION=400;
   
   private static UI ui;
   
@@ -33,7 +35,7 @@ public class Test0{
       new Generator4(),
       WORKINGDIR,
       new VideoRenderer1(),new VideoExporter0(),
-      null,null,
+      new AudioRenderer1(),new AudioExporter0(),
       listener);
     ui=new UI(cp);
     cp.run();

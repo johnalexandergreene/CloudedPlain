@@ -43,9 +43,41 @@ public class CloudedPlain{
     this.videorenderer=videorenderer;
     this.videoexporter=videoexporter;
     this.audiorenderer=audiorenderer;
+    audiorenderer.setCloudedPlain(this);
     this.audioexporter=audioexporter;
+    audioexporter.setCloudedPlain(this);
     this.progresslistener=progresslistener;
     audioframes.clear();}//init that list
+  
+  /*
+   * ################################
+   * GLOBAL METRICS
+   * ################################
+   */
+  
+  /*
+   * 720=1*2*3*4*5*6
+   * thus 720 has lots of factors, which is why we chose it
+   * we do 60 frames per second
+   * 60*720=43200
+   * So 43200 is our per-second sample rate
+   */
+  static final int
+    //video and audio frame rate
+    FRAMERATE=60,
+    //sound sample rate over a single 1/60th of a second frame. 
+    AUDIOSAMPLERATEPERFRAME=720,
+    //sound sample rate over a whole second
+    AUDIOSAMPLERATEPERSECOND=FRAMERATE*AUDIOSAMPLERATEPERFRAME;//43200
+  
+  public int getFrameRate(){
+    return FRAMERATE;}
+  
+  public int getAudioSampleRatePerFrame(){
+    return AUDIOSAMPLERATEPERFRAME;}
+  
+  public int getAudioSampleRatePerSecond(){
+    return AUDIOSAMPLERATEPERSECOND;}
   
   /*
    * ################################
@@ -149,7 +181,13 @@ public class CloudedPlain{
   void exportAudio(){
     if(audioexporter!=null){
       System.out.println("export audio");
-      audioexporter.exportAudio(audioframes,workingdirectory);}}
+      //assemble the sound array
+      int framelength=getAudioSampleRatePerFrame();
+      int[] audio=new int[audioframes.size()*framelength];
+      for(int i=0;i<audioframes.size();i++)
+        System.arraycopy(audioframes.get(i),0,audio,i*framelength,framelength);
+      //export it
+      audioexporter.exportAudio(audio,workingdirectory);}}
   
   /*
    * ################################
