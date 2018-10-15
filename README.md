@@ -202,12 +202,20 @@ convert frames to video via
 
 ffmpeg -r 60 -f image2 -s 1920x1080 -i %05d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p test.mp4
 
+############## MKV IS BETTER #################
+ffmpeg -r 60 -f image2 -s 1920x1080 -i %05d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p video.mkv
+##############################################
+
 
 assemble in openshot
 
 export to 720p med quality mp4 264
 
 TODO insert audio via ffmpeg
+
+??
+
+ffmpeg -i video.mp4 -i audio.wav -c copy audiovideo.mkv
 
 
 

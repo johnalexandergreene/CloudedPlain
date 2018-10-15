@@ -30,22 +30,22 @@ public class Generator4 implements StripeGenerator{
     if(stripesystem.time%64==0){
       for(int ori=0;ori<2;ori++){
         for(int hea=0;hea<2;hea++){
-          s=new Stripe_Sweeper(stripesystem,ori,32,new int[]{2,2,1},hea,1);
+          s=new Stripe_Sweeper(stripesystem,ori,64,new int[]{1,2},hea,1);
           a.add(s);}}}
     if((stripesystem.time+32)%64==0){
       for(int ori=0;ori<2;ori++){
         for(int hea=0;hea<2;hea++){
-          s=new Stripe_Sweeper(stripesystem,ori,32,new int[]{1,2,3},hea,1);
+          s=new Stripe_Sweeper(stripesystem,ori,64,new int[]{3,3,4},hea,1);
           a.add(s);}}}
-    if(stripesystem.time%128==0){
+    if(stripesystem.time%96==0){
       for(int ori=0;ori<2;ori++){
         for(int hea=0;hea<2;hea++){
-          s=new Stripe_Sweeper(stripesystem,ori,64,new int[]{3,3,4,4},hea,1);
+          s=new Stripe_Sweeper(stripesystem,ori,128,new int[]{3,3,4,4},hea,1);
           a.add(s);}}}
-    if(stripesystem.time%64==0){
+    if(stripesystem.time%32==0){
       for(int ori=0;ori<2;ori++){
         for(int hea=0;hea<2;hea++){
-          s=new Stripe_Sweeper(stripesystem,ori,128,new int[]{1,3,3},hea,1);
+          s=new Stripe_Sweeper(stripesystem,ori,64,new int[]{4,3,2},hea,1);
           a.add(s);}}}
   return a;}
   

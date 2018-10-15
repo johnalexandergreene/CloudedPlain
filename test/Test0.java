@@ -13,7 +13,7 @@ public class Test0{
   private static final int 
     WIDTH=512,
     HEIGHT=512,
-    DURATION=400;
+    DURATION=2000;
   
   private static UI ui;
   
