@@ -6,14 +6,14 @@ import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer1;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
-import org.fleen.cloudedPlain.core.stripeGenerator.Generator4;
+import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
 
 public class Test0{
   
   private static final int 
     WIDTH=512,
     HEIGHT=512,
-    DURATION=2000;
+    DURATION=3000;
   
   private static UI ui;
   
@@ -32,7 +32,7 @@ public class Test0{
     System.out.println("test 0 start");
     CloudedPlain cp=new CloudedPlain(
       WIDTH,HEIGHT,DURATION,
-      new Generator4(),
+      new Generator5_soundtest(),
       WORKINGDIR,
       new VideoRenderer1(),new VideoExporter0(),
       new AudioRenderer1(),new AudioExporter0(),

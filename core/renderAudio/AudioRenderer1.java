@@ -52,9 +52,9 @@ public class AudioRenderer1 implements AudioRenderer{
     int audiosamplerateperframe=getCloudedPlain().getAudioSampleRatePerFrame();
     int[] sound=new int[audiosamplerateperframe];
     double a,b;
-    int z=getSoundVal(chunk);
+    int z=getSoundVal(chunk)/500;
     for(int i=0;i<audiosamplerateperframe;i++){
-      a=(((double)i%z)/z)*2.0*Math.PI;
+      a=Math.sin(((double)i)/((double)z));
       b=a*65000;
       sound[i]=(int)b;}
     return sound;}
@@ -66,30 +66,12 @@ public class AudioRenderer1 implements AudioRenderer{
     i*=c.getArea();
     return i;}
   
-//  
-//  public int[] render(int[][] slice){
-//    int[] sound=new int[Plain.SLICESOUNDSAMPLERATE];
-//    for(PlainShape shape:plain.getShapes())
-//      doSound(sound,shape);
-//    return sound;}
-//  
-//  
-//  private static final int[] COLORTONEWAVELENGTH={
-//    20,40,60,80,100,120,140    
-//  };
-//  
-//  private void doSound(int[] sound,PlainShape shape){
-//    int interval=COLORTONEWAVELENGTH[shape.color]+(shape.size()/20);
-//    for(int i=0;i<Plain.SLICESOUNDSAMPLERATE;i++)
-//      if(i%interval<30)
-//        incrementSound(sound,i);}
-//  
-//  
-//  private void incrementSound(int[] sound,int i){
-//    int a=sound[i]+800;
-//    if(a>Plain.SOUNDTICKMAXVAL)
-//      a=Plain.SOUNDTICKMAXVAL;
-//    sound[i]=a;}
+
+  private static final int[] COLORTONEWAVELENGTH={
+    20,40,60,80,100,120,140    
+  };
+  
+
     
     
     
