@@ -39,7 +39,7 @@ public class Generator5_soundtest implements StripeGenerator{
       int 
         ori=random.nextInt(2),
         hea=random.nextInt(2),
-        thickness=random.nextInt(8)*12,
+        thickness=random.nextInt(8)*16,
         speed=random.nextInt(2)+1;
       int[] vs;
       int b=random.nextInt(3);
