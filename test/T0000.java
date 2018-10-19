@@ -8,12 +8,12 @@ import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer2;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
 
-public class T_720p{
+public class T0000{
   
   private static final int 
-    WIDTH=1280,
-    HEIGHT=720,
-    DURATION=3600;
+    WIDTH=512,
+    HEIGHT=512,
+    DURATION=3000;
   
   private static UI ui;
   
