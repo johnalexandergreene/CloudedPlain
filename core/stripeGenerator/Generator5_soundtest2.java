@@ -11,7 +11,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
 /*
  * an orderly 4way system
  */
-public class Generator5_soundtest implements StripeGenerator{
+public class Generator5_soundtest2 implements StripeGenerator{
 
   /*
    * ################################
@@ -33,13 +33,13 @@ public class Generator5_soundtest implements StripeGenerator{
     if(stripesystem.stripes.size()<2){
       probability=0.5;
     }else if(stripesystem.stripes.size()>5)
-      probability=0.004;
+      probability=0.003;
     
     if(random.nextDouble()<probability){
       int 
         ori=random.nextInt(2),
         hea=random.nextInt(2),
-        thickness=random.nextInt(8)*16,
+        thickness=random.nextInt(600)+30,
         speed=random.nextInt(2)+1;
       int[] vs;
       int b=random.nextInt(3);
