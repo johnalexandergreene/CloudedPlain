@@ -53,7 +53,7 @@ public class AudioRenderer3 implements AudioRenderer{
     int[] sound=new int[audiosamplerateperframe];
     double a,b;
     double f=getFreq(chunk);
-    System.out.println("freq="+f);
+//    System.out.println("freq="+f);
     if(f==0)return sound;
     int wavelength=(int)(audiosamplerateperframe/f);
     for(int i=0;i<audiosamplerateperframe;i++){

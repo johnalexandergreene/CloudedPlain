@@ -6,7 +6,7 @@ import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer3;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
-import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
+import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest2_squaretest;
 
 public class T0002_squaresweeper{
   
@@ -32,7 +32,7 @@ public class T0002_squaresweeper{
     System.out.println("test 0 start");
     CloudedPlain cp=new CloudedPlain(
       WIDTH,HEIGHT,DURATION,
-      new Generator5_soundtest(),
+      new Generator5_soundtest2_squaretest(),
       WORKINGDIR,
       new VideoRenderer1(),new VideoExporter0(),
       new AudioRenderer3(),new AudioExporter0(),

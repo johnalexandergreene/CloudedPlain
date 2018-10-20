@@ -2,6 +2,7 @@ package org.fleen.cloudedPlain.core.renderVideo;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +45,11 @@ public class VideoRenderer1 implements VideoRenderer{
     int w=stripesystem.stage.getWidth(),h=stripesystem.stage.getHeight();
     BufferedImage image=new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
     Graphics2D g=image.createGraphics();
+    
+//    AffineTransform t=AffineTransform.getScaleInstance(1,-1);
+//    t.translate(0,h);
+//    g.setTransform(t);
+    
     g.setPaint(Color.gray);
     g.fillRect(0,0,w,h);
     Chunks chunks=stripesystem.getChunks();

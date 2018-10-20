@@ -200,7 +200,7 @@ make frames and sound
 
 convert frames to video
 ############## MKV IS BETTER #################
-ffmpeg -r 60 -f image2 -s 1920x1080 -i %05d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p video.mkv
+ffmpeg -r 60 -f image2 -s 1280x720 -i %05d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p video.mkv
 ##############################################
 
 connect audio to video

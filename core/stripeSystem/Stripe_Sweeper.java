@@ -42,9 +42,9 @@ public class Stripe_Sweeper extends Stripe{
   public int getLocation(){
     int location;
     if(orientation==ORIENTATION_HORIZONTAL){
-      if(heading==HEADING_POSITIVE){//southerly
-        location=getAge()*speed-thickness;
-      }else{//HEADING_NEGATIVE//northerly
+      if(heading==HEADING_POSITIVE){//northerly
+        location=getAge()*speed;
+      }else{//HEADING_NEGATIVE//southerly
         location=stripesystem.stage.getHeight()-getAge()*speed;}
     }else{//ORIENTATION_VERTICAL
       if(heading==HEADING_POSITIVE){//easterly
@@ -65,9 +65,9 @@ public class Stripe_Sweeper extends Stripe{
   public boolean destroyMe(){
     boolean destroyme=false;
     if(orientation==ORIENTATION_HORIZONTAL){
-      if(heading==HEADING_POSITIVE){//southerly
-        destroyme=getLocation()>stripesystem.stage.getHeight();
-      }else{//HEADING_NEGATIVE//northerly
+      if(heading==HEADING_POSITIVE){//northerly
+        destroyme=getLocation()>stripesystem.stage.getHeight()+thickness;
+      }else{//HEADING_NEGATIVE//southerly
         destroyme=getLocation()<-thickness;}
     }else{//ORIENTATION_VERTICAL
       if(heading==HEADING_POSITIVE){//easterly
