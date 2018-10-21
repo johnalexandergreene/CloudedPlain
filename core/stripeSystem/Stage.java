@@ -46,5 +46,8 @@ public class Stage implements SSRectangle{
 
   public int getYMax(){
     return getHeight()-1;}
+  
+  public int getArea(){
+    return getHeight()*getWidth();}
 
 }

@@ -4,7 +4,7 @@ import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
-import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer3;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer4_reduced_amplitude_to_cure_tearing;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest2_squaretest2;
 
@@ -35,7 +35,7 @@ public class T0002_squaresweeper{
       new Generator5_soundtest2_squaretest2(),
       WORKINGDIR,
       new VideoRenderer1(),new VideoExporter0(),
-      new AudioRenderer3(),new AudioExporter0(),
+      new AudioRenderer4_reduced_amplitude_to_cure_tearing(),new AudioExporter0(),
       listener);
     ui=new UI(cp);
     cp.run();

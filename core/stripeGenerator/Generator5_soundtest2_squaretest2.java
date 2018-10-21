@@ -29,25 +29,25 @@ public class Generator5_soundtest2_squaretest2 implements StripeGenerator{
   public List<Stripe> generate(){
     List<Stripe> a=new ArrayList<Stripe>();
     int
-      thickness=50,
+      thickness=64,
       speed=1;
-    if(stripesystem.time%100==0){
+    if(stripesystem.time%128==0){
       int[] valuestrobe=new int[]{1,2,2,1};
       a.add(getSpecial(0,0,valuestrobe,thickness,speed));
       a.add(getSpecial(0,1,valuestrobe,thickness,speed));
       a.add(getSpecial(1,0,valuestrobe,thickness,speed));
       a.add(getSpecial(1,1,valuestrobe,thickness,speed));
-    }else if(stripesystem.time%100==50){
-      int[] valuestrobe=new int[]{4,1,1,4};
+    }else if(stripesystem.time%128==64){
+      int[] valuestrobe=new int[]{3,1,1,1};
       a.add(getSpecial(0,0,valuestrobe,thickness,speed));
       a.add(getSpecial(0,1,valuestrobe,thickness,speed));
       a.add(getSpecial(1,0,valuestrobe,thickness,speed));
       a.add(getSpecial(1,1,valuestrobe,thickness,speed));}
     
-    if(stripesystem.time%77==0){
-      thickness=18;
+    if(stripesystem.time%64==0){
+      thickness=32;
       speed=2;
-      int[] valuestrobe=new int[]{1,2,3};
+      int[] valuestrobe=new int[]{4,4,4,5,5,5};
       a.add(getSpecial(0,0,valuestrobe,thickness,speed));
       a.add(getSpecial(0,1,valuestrobe,thickness,speed));
       a.add(getSpecial(1,0,valuestrobe,thickness,speed));

@@ -29,14 +29,22 @@ public class VideoRenderer1 implements VideoRenderer{
 //      new Color(0,0,255,64)};
   
   //crass rainbow
+//  static final Color[] COLORS={
+//      new Color(255,0,0),
+//      new Color(255,128,0),
+//      new Color(128,255,0),
+//      new Color(0,255,0),
+//      new Color(0,255,128),
+//      new Color(0,128,255),
+//      new Color(0,0,255)};
+  
+  //red orange yellow white
   static final Color[] COLORS={
+      new Color(255,255,255),
       new Color(255,0,0),
-      new Color(255,128,0),
-      new Color(128,255,0),
-      new Color(0,255,0),
-      new Color(0,255,128),
-      new Color(0,128,255),
-      new Color(0,0,255)};
+      new Color(255,177,0),
+      new Color(255,230,0)};
+  
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
     
