@@ -1,13 +1,10 @@
-package org.fleen.cloudedPlain.core.renderVideo;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
 
+import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunk;
@@ -16,19 +13,9 @@ import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 /*
  * test chunks
  */
-public class VideoRenderer1 implements VideoRenderer{
+public class VideoRenderer0 implements VideoRenderer{
 
 //  //crass rainbow
-//  static final Color[] COLORS={
-//      new Color(255,0,0,64),
-//      new Color(255,128,0,64),
-//      new Color(128,255,0,64),
-//      new Color(0,255,0,64),
-//      new Color(0,255,128,64),
-//      new Color(0,128,255,64),
-//      new Color(0,0,255,64)};
-  
-  //crass rainbow
 //  static final Color[] COLORS={
 //      new Color(255,0,0),
 //      new Color(255,128,0),
@@ -38,20 +25,26 @@ public class VideoRenderer1 implements VideoRenderer{
 //      new Color(0,128,255),
 //      new Color(0,0,255)};
   
-  //red orange yellow white
+  //crass rainbow
   static final Color[] COLORS={
-      new Color(255,255,255),
-      new Color(255,0,0),
-      new Color(255,177,0),
-      new Color(255,230,0)};
-  
+    new Color(255,255,255),
+    new Color(255,0,0),
+    new Color(255,128,0),
+    new Color(255,255,0),
+    new Color(128,255,0),
+    new Color(0,255,0),
+    new Color(0,255,128),
+    new Color(0,255,255),
+    new Color(0,128,255),
+    new Color(0,0,255)};
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
     
     int w=stripesystem.stage.getWidth(),h=stripesystem.stage.getHeight();
-    BufferedImage image=new BufferedImage(w,h,BufferedImage.TYPE_INT_ARGB);
+    BufferedImage image=new BufferedImage(w,h,BufferedImage.TYPE_INT_RGB);
     Graphics2D g=image.createGraphics();
     
+//flip it?
 //    AffineTransform t=AffineTransform.getScaleInstance(1,-1);
 //    t.translate(0,h);
 //    g.setTransform(t);

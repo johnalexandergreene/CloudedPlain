@@ -1,19 +1,18 @@
-package org.fleen.cloudedPlain.test;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0000_foo;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
-import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer2;
-import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
+import org.fleen.cloudedPlain.videoCreationSystems.UI;
 
-public class T0000{
+public class VCS{
   
   private static final int 
     WIDTH=512,
     HEIGHT=512,
-    DURATION=3000;
+    DURATION=300;
   
   private static UI ui;
   

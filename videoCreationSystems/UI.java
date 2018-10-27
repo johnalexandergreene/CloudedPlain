@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.test;
+package org.fleen.cloudedPlain.videoCreationSystems;
 
 import javax.swing.JFrame;
 

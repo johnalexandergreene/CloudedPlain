@@ -43,7 +43,7 @@ public class Stripe_Sweeper extends Stripe{
     int location;
     if(orientation==ORIENTATION_HORIZONTAL){
       if(heading==HEADING_POSITIVE){//northerly
-        location=getAge()*speed;
+        location=getAge()*speed-thickness;
       }else{//HEADING_NEGATIVE//southerly
         location=stripesystem.stage.getHeight()-getAge()*speed;}
     }else{//ORIENTATION_VERTICAL

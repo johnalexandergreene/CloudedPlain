@@ -1,14 +1,15 @@
-package org.fleen.cloudedPlain.core.renderAudio;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
+import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunk;
 
-public class AudioRenderer2 implements AudioRenderer{
+public class AudioRenderer0 implements AudioRenderer{
 
   /*
    * ################################
@@ -52,32 +53,26 @@ public class AudioRenderer2 implements AudioRenderer{
     int audiosamplerateperframe=getCloudedPlain().getAudioSampleRatePerFrame();
     int[] sound=new int[audiosamplerateperframe];
     double a,b;
-    int f=getFreq(chunk);
-    System.out.println("freq="+f);
+    double f=getFreq(chunk);
+//    System.out.println("freq="+f);
     if(f==0)return sound;
-    int pilength=audiosamplerateperframe/(2*f);
+    int wavelength=(int)(audiosamplerateperframe/f);
     for(int i=0;i<audiosamplerateperframe;i++){
-      a=Math.sin(((double)i)/((double)pilength));
+      a=Math.sin(((double)i)/((double)wavelength));
       b=a*65000;
       sound[i]=(int)b;}
     return sound;}
   
-  private int getFreq(Chunk c){
-    int i=0;
+  static double FREQFACTOR=0.03;
+  
+  private double getFreq(Chunk c){
+    double i=0;
     for(Stripe s:c.stripes)
       i+=s.getValue();
     i*=c.getArea();
-    return (int)(i*0.1);}
+    return i*FREQFACTOR;}
   
-
-  private static final int[] COLORTONEWAVELENGTH={
-    20,40,60,80,100,120,140    
-  };
   
-
-    
-    
-    
+  
  
-
 }

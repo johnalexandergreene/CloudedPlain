@@ -1,14 +1,15 @@
-package org.fleen.cloudedPlain.test;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0002_squaresweeper;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer4_reduced_amplitude_to_cure_tearing;
-import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest2_squaretest2;
+import org.fleen.cloudedPlain.videoCreationSystems.UI;
+import org.fleen.cloudedPlain.videoCreationSystems.vcs0000_foo.VideoRenderer1;
 
-public class T0002_squaresweeper{
+public class VCS{
   
   private static final int 
     WIDTH=1280,

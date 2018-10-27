@@ -1,14 +1,12 @@
-package org.fleen.cloudedPlain.test;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
 import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
-import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer3;
-import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer1;
-import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
+import org.fleen.cloudedPlain.videoCreationSystems.UI;
 
-public class T0001_720p{
+public class VCS{
   
   private static final int 
     WIDTH=1280,
@@ -23,22 +21,17 @@ public class T0001_720p{
     public void notify(CloudedPlain cloudedplain){
       ui.repaint();}};
   
-  /*
-   * new VideoExporter0()
-   * 
-   * 
-   */
   public static final void main(String[] a){
-    System.out.println("test 0 start");
+    System.out.println("vcs start");
     CloudedPlain cp=new CloudedPlain(
       WIDTH,HEIGHT,DURATION,
-      new Generator5_soundtest(),
+      new StripeGenerator0(),
       WORKINGDIR,
-      new VideoRenderer1(),new VideoExporter0(),
-      new AudioRenderer3(),new AudioExporter0(),
+      new VideoRenderer0(),new VideoExporter0(),
+      new AudioRenderer1(),new AudioExporter0(),
       listener);
     ui=new UI(cp);
     cp.run();
-    System.out.println("test 0 end");}
+    System.out.println("vcs end");}
 
 }
