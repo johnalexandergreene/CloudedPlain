@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0003_wanderer_justground_lushfatty;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;
@@ -12,6 +12,9 @@ public class VCS{
     WIDTH=1280,
     HEIGHT=720,
     DURATION=3600;
+  
+  //3600=1 min
+  //72000 = 20 min
   
   private static UI ui;
   

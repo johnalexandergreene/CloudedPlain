@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0003_wanderer_justground_lushfatty;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -27,7 +27,6 @@ public class VideoRenderer0 implements VideoRenderer{
   
   //crass rainbow
   static final Color[] COLORS={
-    new Color(255,255,255),
     new Color(255,0,0),
     new Color(255,128,0),
     new Color(255,255,0),
@@ -36,7 +35,11 @@ public class VideoRenderer0 implements VideoRenderer{
     new Color(0,255,128),
     new Color(0,255,255),
     new Color(0,128,255),
-    new Color(0,0,255)};
+    new Color(0,0,255),
+    new Color(128,0,255),
+    new Color(255,0,255),
+    new Color(255,0,128),
+    };
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
     

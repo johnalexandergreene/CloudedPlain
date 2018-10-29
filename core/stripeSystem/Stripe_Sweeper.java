@@ -54,6 +54,21 @@ public class Stripe_Sweeper extends Stripe{
     return location;}
   
   /*
+   * visible init is where the back edge of stripe is at the corresponding back edge of the stage
+   */
+  public boolean isAtVisibleInit(){
+    if(orientation==ORIENTATION_HORIZONTAL){
+      if(heading==HEADING_POSITIVE){//northerly
+        return getLocation()==thickness;
+      }else{//HEADING_NEGATIVE//southerly
+        return getLocation()==stripesystem.stage.getHeight()-thickness;}
+    }else{//ORIENTATION_VERTICAL
+      if(heading==HEADING_POSITIVE){//easterly
+        return getLocation()==thickness;
+      }else{//HEADING_NEGATIVE//westerly
+        return getLocation()==stripesystem.stage.getWidth()-thickness;}}}
+  
+  /*
    * ################################
    * DESTROY
    * ################################

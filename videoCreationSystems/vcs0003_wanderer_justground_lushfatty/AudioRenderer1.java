@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0001_wandering_stripes;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0003_wanderer_justground_lushfatty;
 
 import java.util.ArrayList;
 import java.util.List;
