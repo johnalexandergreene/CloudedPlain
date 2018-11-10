@@ -32,6 +32,12 @@ public class StripeGenerator0 implements StripeGenerator{
   public void setStripeSystem(StripeSystem stripesystem){
     this.stripesystem=stripesystem;}
   
+  /*
+   * ################################
+   * GENERATE
+   * ################################
+   */
+  
   static int[][] VALUESTROBE={
     {1},
     {2},
@@ -43,68 +49,45 @@ public class StripeGenerator0 implements StripeGenerator{
       
   Random random=new Random();
   
-  /*
-   * ################################
-   * GENERATE
-   * ################################
-   */
-  
   public List<Stripe> generate(){
-    
-//    List<Stripe> g=conditionallyCreateGround();
-    List<Stripe> w=conditionallyCreateWanderer();
-    List<Stripe> stripes=new ArrayList<Stripe>();
-//    stripes.addAll(g);
+    //update wanderers count
+    wanderers.retainAll(stripesystem.stripes);
+    wandererscount=wanderers.size();
+    //
+    List<Stripe> 
+      stripes=new ArrayList<Stripe>(),
+      g=conditionallyCreateGround(),
+      w=conditionallyCreateWanderer();
+    stripes.addAll(g);
     stripes.addAll(w);
-    return stripes;
-  }
-  
+    return stripes;}
   
   /*
    * ################################
-   * GROUNDERS
+   * GROUND
    * ################################
    */
   
-  static final int[] GROUNDER_THICKNESS={
-    512,
-    768,
-    1024};
+  static final int 
+    THICKNESS_GROUND_MIN=128,
+    THICKNESS_GROUND_MAX=512;
   
-  //the most recently created background stripe
-  Stripe_Sweeper hp=null,hn=null,vp=null,vn=null;
+  int nextstripetime=-1;
   
   /*
    * the ground covers the stage completely
    * for each orientation and heading (h+, h-, v+, v-)
    *   when the prior ground stripe arrives at fully-within-stage (ex : for h+ that when location==0) create a new stripe
+   *   
+   * when the time hits boxstripe birthday+thickness then we create another stripe
    */
   List<Stripe> conditionallyCreateGround(){
     List<Stripe> a=new ArrayList<Stripe>();
-    //h+
-    if(hp==null||hp.isAtVisibleInit()){
-      hp=createPartiallyConstrainedSweeper(Stripe.ORIENTATION_HORIZONTAL,Stripe_Sweeper.HEADING_POSITIVE);
-      a.add(hp);}
-    //h-
-    if(hn==null||hn.isAtVisibleInit()){
-      hn=createPartiallyConstrainedSweeper(Stripe.ORIENTATION_HORIZONTAL,Stripe_Sweeper.HEADING_NEGATIVE);
-      a.add(hn);}
-    //v+
-    if(vp==null||vp.isAtVisibleInit()){
-      vp=createPartiallyConstrainedSweeper(Stripe.ORIENTATION_VERTICAL,Stripe_Sweeper.HEADING_POSITIVE);
-      a.add(vp);}
-    //v-
-    if(vn==null||vn.isAtVisibleInit()){
-      vn=createPartiallyConstrainedSweeper(Stripe.ORIENTATION_VERTICAL,Stripe_Sweeper.HEADING_NEGATIVE);
-      a.add(vn);}
-    //
+    if(nextstripetime==-1||nextstripetime==stripesystem.time){
+      int thickness=(int)(random.nextDouble()*(THICKNESS_GROUND_MAX-THICKNESS_GROUND_MIN)+THICKNESS_GROUND_MIN);
+      nextstripetime=stripesystem.time+thickness;
+      a.addAll(createBox(thickness,1));}
     return a;}
-  
-  private Stripe_Sweeper createPartiallyConstrainedSweeper(int orientation,int heading){
-    int thickness=GROUNDER_THICKNESS[random.nextInt(GROUNDER_THICKNESS.length)];
-    int[] valuestrobe=VALUESTROBE[random.nextInt(VALUESTROBE.length)];
-    Stripe_Sweeper s=new Stripe_Sweeper(stripesystem,orientation,thickness,valuestrobe,heading,1);
-    return s;}
   
   /*
    * ################################
@@ -112,22 +95,47 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
-  /*
-   * if the stripe count is low, medium or high
-   */
+  List<Stripe> wanderers=new ArrayList<Stripe>();
+  int wandererscount=0;
+  
+  static int 
+    WANDERERSCOUNT_LOW=9,
+    WANDERERSCOUNT_HIGH=25;
+  
   static double 
-    PROBABILITY_AT_LOW_COUNT=0.05,
-    PROBABILITY_AT_MED_COUNT=0.08,
-    PROBABILITY_AT_HIGH_COUNT=0.08;
+    PROBABILITY_AT_LOW_COUNT=0.7,
+    PROBABILITY_AT_MED_COUNT=0.04,
+    PROBABILITY_AT_HIGH_COUNT=0.003;
+  
+  static final double 
+    THICKNESS_WANDERER_MAX=100,
+    THICKNESS_WANDERER_MIN=30;
+  
+  int[] SPEED={
+    2,
+    3,
+    4
+  };
   
   List<Stripe> conditionallyCreateWanderer(){
     List<Stripe> a=new ArrayList<Stripe>();
-    if(random.nextDouble()<0.01)
-      a.addAll(getBox(64,1));
-    
-    
-    return a;
-  }
+    double p,c=stripesystem.stripes.size();
+    if(c<WANDERERSCOUNT_LOW){
+      p=PROBABILITY_AT_LOW_COUNT;
+    }else if(c<=WANDERERSCOUNT_LOW&&c>WANDERERSCOUNT_HIGH){
+      p=PROBABILITY_AT_MED_COUNT;
+    }else{
+      p=PROBABILITY_AT_HIGH_COUNT;}
+    //
+    if(random.nextDouble()<0.01){
+      int
+        thickness=(int)(random.nextDouble()*(THICKNESS_WANDERER_MAX-THICKNESS_WANDERER_MIN)+THICKNESS_WANDERER_MIN),
+        speed=SPEED[random.nextInt(SPEED.length)];
+      a.addAll(createBox(thickness,speed));}
+    //
+    wanderers.addAll(a);
+    //
+    return a;}
   
   /*
    * ################################
@@ -135,16 +143,16 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
-  public List<Stripe> getBox(int thickness,int speed){
+  public List<Stripe> createBox(int thickness,int speed){
     List<Stripe> a=new ArrayList<Stripe>();
     int[] valuestrobe=VALUESTROBE[random.nextInt(VALUESTROBE.length)];
-    a.add(getBox(0,0,valuestrobe,thickness,speed));
-    a.add(getBox(0,1,valuestrobe,thickness,speed));
-    a.add(getBox(1,0,valuestrobe,thickness,speed));
-    a.add(getBox(1,1,valuestrobe,thickness,speed));
+    a.add(createBoxStripe(0,0,valuestrobe,thickness,speed));
+    a.add(createBoxStripe(0,1,valuestrobe,thickness,speed));
+    a.add(createBoxStripe(1,0,valuestrobe,thickness,speed));
+    a.add(createBoxStripe(1,1,valuestrobe,thickness,speed));
   return a;}
   
-  private Stripe_Box getBox(int ori,int hea,int[] valuestrobe,int thickness,int speed){
+  private Stripe_Box createBoxStripe(int ori,int hea,int[] valuestrobe,int thickness,int speed){
     //get init location
     int 
       initlocation,

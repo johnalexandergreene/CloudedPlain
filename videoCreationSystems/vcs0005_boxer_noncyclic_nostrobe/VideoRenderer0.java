@@ -10,9 +10,6 @@ import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunk;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 
-/*
- * test chunks
- */
 public class VideoRenderer0 implements VideoRenderer{
 
   public static final Color[] P_TOY_STORY_ADJUSTED2=new Color[]{
@@ -38,7 +35,7 @@ public class VideoRenderer0 implements VideoRenderer{
       new Color(90,14,0),
       new Color(189,53,31)};
     
-  static final Color[] COLORS=P_PORCO_ROSSO;
+  static final Color[] COLORS=P_TOY_STORY_ADJUSTED2;
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
     

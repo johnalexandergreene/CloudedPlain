@@ -14,7 +14,7 @@ public class VCS{
   private static final int 
     WIDTH=1280,
     HEIGHT=720,
-    DURATION=3600;
+    DURATION=25860;
   
   private static UI ui;
   
