@@ -18,6 +18,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Box;
  *   wanderer
  * The ground stripes fill up the whole ground
  * The wanderers wander over the ground
+ * 
  */
 public class StripeGenerator0 implements StripeGenerator{
 
@@ -50,10 +51,6 @@ public class StripeGenerator0 implements StripeGenerator{
   Random random=new Random();
   
   public List<Stripe> generate(){
-    //update wanderers count
-    wanderers.retainAll(stripesystem.stripes);
-    wandererscount=wanderers.size();
-    //
     List<Stripe> 
       stripes=new ArrayList<Stripe>(),
       g=conditionallyCreateGround(),
@@ -95,17 +92,16 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
-  List<Stripe> wanderers=new ArrayList<Stripe>();
-  int wandererscount=0;
+  int priorwanderertime;
   
   static int 
-    WANDERERSCOUNT_LOW=9,
-    WANDERERSCOUNT_HIGH=25;
+    STRIPECOUNT_LOW=8,
+    STRIPECOUNT_HIGH=18;
   
   static double 
-    PROBABILITY_AT_LOW_COUNT=0.7,
-    PROBABILITY_AT_MED_COUNT=0.04,
-    PROBABILITY_AT_HIGH_COUNT=0.003;
+    PROBABILITY_AT_LOW_COUNT=0.8,
+    PROBABILITY_AT_MED_COUNT=0.008,
+    PROBABILITY_AT_HIGH_COUNT=0.0003;
   
   static final double 
     THICKNESS_WANDERER_MAX=100,
@@ -120,20 +116,19 @@ public class StripeGenerator0 implements StripeGenerator{
   List<Stripe> conditionallyCreateWanderer(){
     List<Stripe> a=new ArrayList<Stripe>();
     double p,c=stripesystem.stripes.size();
-    if(c<WANDERERSCOUNT_LOW){
+    if(c<=STRIPECOUNT_LOW){
       p=PROBABILITY_AT_LOW_COUNT;
-    }else if(c<=WANDERERSCOUNT_LOW&&c>WANDERERSCOUNT_HIGH){
+    }else if(c>STRIPECOUNT_LOW&&c<=STRIPECOUNT_HIGH){
       p=PROBABILITY_AT_MED_COUNT;
     }else{
       p=PROBABILITY_AT_HIGH_COUNT;}
     //
-    if(random.nextDouble()<0.01){
+    if(random.nextDouble()<p&&(stripesystem.time-priorwanderertime)>THICKNESS_WANDERER_MAX*2){
+      priorwanderertime=stripesystem.time;
       int
         thickness=(int)(random.nextDouble()*(THICKNESS_WANDERER_MAX-THICKNESS_WANDERER_MIN)+THICKNESS_WANDERER_MIN),
         speed=SPEED[random.nextInt(SPEED.length)];
       a.addAll(createBox(thickness,speed));}
-    //
-    wanderers.addAll(a);
     //
     return a;}
   
