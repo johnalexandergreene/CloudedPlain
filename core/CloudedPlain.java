@@ -43,9 +43,9 @@ public class CloudedPlain{
     this.videorenderer=videorenderer;
     this.videoexporter=videoexporter;
     this.audiorenderer=audiorenderer;
-    audiorenderer.setCloudedPlain(this);
+    if(audiorenderer!=null)audiorenderer.setCloudedPlain(this);
     this.audioexporter=audioexporter;
-    audioexporter.setCloudedPlain(this);
+    if(audioexporter!=null)audioexporter.setCloudedPlain(this);
     this.progresslistener=progresslistener;
     audioframes.clear();}//init that list
   

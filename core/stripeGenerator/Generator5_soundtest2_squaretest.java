@@ -6,7 +6,7 @@ import java.util.Random;
 
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
-import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper_Special;
+import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Box;
 
 /*
  * an orderly 4way system
@@ -46,7 +46,7 @@ public class Generator5_soundtest2_squaretest implements StripeGenerator{
     }
   return a;}
   
-  private Stripe_Sweeper_Special getSpecial(int ori,int hea,int[] valuestrobe,int thickness,int speed){
+  private Stripe_Box getSpecial(int ori,int hea,int[] valuestrobe,int thickness,int speed){
     //get init location
     int 
       initlocation,
@@ -78,7 +78,7 @@ public class Generator5_soundtest2_squaretest implements StripeGenerator{
         }else{//westerly
           initlocation=squarexmax;}}}
   //
-    Stripe_Sweeper_Special s=new Stripe_Sweeper_Special(stripesystem,ori,thickness,valuestrobe,hea,speed,initlocation);
+    Stripe_Box s=new Stripe_Box(stripesystem,ori,thickness,valuestrobe,hea,speed,initlocation);
     return s;
   }
   

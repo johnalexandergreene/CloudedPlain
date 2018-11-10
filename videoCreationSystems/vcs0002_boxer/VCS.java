@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0002_squaresweeper;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0002_boxer;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.ProgressListener;

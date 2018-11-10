@@ -7,9 +7,9 @@ package org.fleen.cloudedPlain.core.stripeSystem;
  * It's useful for squaresweeper wher we gotta make sure that the 4 stripes are mirrored, despite the dimensions of the stage. 
  */
 
-public class Stripe_Sweeper_Special extends Stripe_Sweeper{
+public class Stripe_Box extends Stripe_Sweeper{
   
-  public Stripe_Sweeper_Special(
+  public Stripe_Box(
     StripeSystem stripesystem,int orientation,
     int thickness,int[] valuestrobe,
     int heading,int speed,int initlocation){
