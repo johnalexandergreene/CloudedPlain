@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0005_boxer_noncyclic_nostrobe;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0006_boxer_noncyclic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,14 +38,29 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
-  static int[][] VALUESTROBE={
-    {1},
-    {2},
-    {3},
-    {4},
-    {5},
-    {6},
-    {7}};
+//  static int[][] VALUESTROBE={
+//    {1},
+//    {2},
+//    {3},
+//    {4},
+//    {5},
+//    {6},
+//    {7}};
+  
+  static final int[][] VALUESTROBE=new int[][]{
+    {1,2},
+    {3,5},
+    {6,9},
+    {1,1,2,2},
+    {4,4,6,6},
+    {8,8,9,9},
+    {1,1,1,2,2,2},
+    {5,5,5,8,8,8},
+    {1,2,3},
+    {6,8,10},
+    {2,2,3,3,3},
+    {6,6,3,3,3,9,9,9},
+  };
       
   Random random=new Random();
   

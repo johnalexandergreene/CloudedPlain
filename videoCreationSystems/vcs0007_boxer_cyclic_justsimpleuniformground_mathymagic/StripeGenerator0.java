@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.videoCreationSystems.vcs0005_boxer_noncyclic_nostrobe;
+package org.fleen.cloudedPlain.videoCreationSystems.vcs0007_boxer_cyclic_justsimpleuniformground_mathymagic;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,25 +37,45 @@ public class StripeGenerator0 implements StripeGenerator{
    * GENERATE
    * ################################
    */
-  
+
   static int[][] VALUESTROBE={
-    {1},
-    {2},
-    {3},
-    {4},
-    {5},
-    {6},
-    {7}};
+      {1,1,1,1,3,3,3,3,5,5,5,5},
+      {7,7,7,11,11,11,13,13,13,17,17,17},
+      {19,19,19,19,19,19,23,23,23,23,23,23},
+      
+      };
+  
+//  static int[][] VALUESTROBE={
+//    {1},
+//    {2},
+//    {3},
+//    {4},
+//    {5},
+//    {6},
+//    {7}};
+  
+//  static final int[][] VALUESTROBE=new int[][]{
+//    {1,2},
+//    {3,5},
+//    {6,9},
+//    {1,1,2,2},
+//    {4,4,6,6},
+//    {8,8,9,9},
+//    {1,1,1,2,2,2},
+//    {5,5,5,8,8,8},
+//    {1,2,3},
+//    {6,8,10},
+//    {2,2,3,3,3},
+//    {6,6,3,3,3,9,9,9},
+//  };
       
   Random random=new Random();
   
   public List<Stripe> generate(){
     List<Stripe> 
       stripes=new ArrayList<Stripe>(),
-      g=conditionallyCreateGround(),
-      w=conditionallyCreateWanderer();
+      g=conditionallyCreateGround();
     stripes.addAll(g);
-    stripes.addAll(w);
     return stripes;}
   
   /*
@@ -64,9 +84,7 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
-  static final int 
-    THICKNESS_GROUND_MIN=128,
-    THICKNESS_GROUND_MAX=512;
+  static final int THICKNESS=100;
   
   int nextstripetime=-1;
   
@@ -80,55 +98,8 @@ public class StripeGenerator0 implements StripeGenerator{
   List<Stripe> conditionallyCreateGround(){
     List<Stripe> a=new ArrayList<Stripe>();
     if(nextstripetime==-1||nextstripetime==stripesystem.time){
-      int thickness=(int)(random.nextDouble()*(THICKNESS_GROUND_MAX-THICKNESS_GROUND_MIN)+THICKNESS_GROUND_MIN);
-      nextstripetime=stripesystem.time+thickness;
-      a.addAll(createBox(thickness,1));}
-    return a;}
-  
-  /*
-   * ################################
-   * WANDERER
-   * ################################
-   */
-  
-  int priorwanderertime;
-  
-  static int 
-    STRIPECOUNT_LOW=8,
-    STRIPECOUNT_HIGH=18;
-  
-  static double 
-    PROBABILITY_AT_LOW_COUNT=0.8,
-    PROBABILITY_AT_MED_COUNT=0.008,
-    PROBABILITY_AT_HIGH_COUNT=0.0003;
-  
-  static final double 
-    THICKNESS_WANDERER_MAX=100,
-    THICKNESS_WANDERER_MIN=30;
-  
-  int[] SPEED={
-    2,
-    3,
-    4
-  };
-  
-  List<Stripe> conditionallyCreateWanderer(){
-    List<Stripe> a=new ArrayList<Stripe>();
-    double p,c=stripesystem.stripes.size();
-    if(c<=STRIPECOUNT_LOW){
-      p=PROBABILITY_AT_LOW_COUNT;
-    }else if(c>STRIPECOUNT_LOW&&c<=STRIPECOUNT_HIGH){
-      p=PROBABILITY_AT_MED_COUNT;
-    }else{
-      p=PROBABILITY_AT_HIGH_COUNT;}
-    //
-    if(random.nextDouble()<p&&(stripesystem.time-priorwanderertime)>THICKNESS_WANDERER_MAX*2){
-      priorwanderertime=stripesystem.time;
-      int
-        thickness=(int)(random.nextDouble()*(THICKNESS_WANDERER_MAX-THICKNESS_WANDERER_MIN)+THICKNESS_WANDERER_MIN),
-        speed=SPEED[random.nextInt(SPEED.length)];
-      a.addAll(createBox(thickness,speed));}
-    //
+      nextstripetime=stripesystem.time+THICKNESS;
+      a.addAll(createBox(THICKNESS,1));}
     return a;}
   
   /*
@@ -137,9 +108,14 @@ public class StripeGenerator0 implements StripeGenerator{
    * ################################
    */
   
+  static double MAGICFACTOR=33;
+  
   public List<Stripe> createBox(int thickness,int speed){
     List<Stripe> a=new ArrayList<Stripe>();
-    int[] valuestrobe=VALUESTROBE[random.nextInt(VALUESTROBE.length)];
+    //
+    double magic=Math.abs((Math.cos((double)stripesystem.time/6000.0)*MAGICFACTOR));
+    //
+    int[] valuestrobe=VALUESTROBE[((int)magic)%VALUESTROBE.length];
     a.add(createBoxStripe(0,0,valuestrobe,thickness,speed));
     a.add(createBoxStripe(0,1,valuestrobe,thickness,speed));
     a.add(createBoxStripe(1,0,valuestrobe,thickness,speed));
