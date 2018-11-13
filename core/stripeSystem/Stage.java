@@ -49,5 +49,22 @@ public class Stage implements SSRectangle{
   
   public int getArea(){
     return getHeight()*getWidth();}
+  
+  public double[] getCenter(){
+    double[] c={(getXMax()-getXMin())/2,(getYMax()-getYMin())/2};
+    return c;}
+  
+  /*
+   * ie, the distance from the center to a corner
+   */
+  private double halfdiagonal=-1;
+  
+  public double getHalfDiagonal(){
+    if(halfdiagonal==-1){
+      double 
+        w=getWidth(),
+        h=getHeight();
+      halfdiagonal=Math.sqrt((w*w)+(h*h))/2;}
+    return halfdiagonal;}
 
 }
