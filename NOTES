@@ -1,0 +1,7 @@
+###########################################
+COMPILE INTO VIDEO THEN ATTACH AUDIO
+
+ffmpeg -r 60 -f image2 -s 1280x720 -i %05d.png -vcodec libx264 -crf 25  -pix_fmt yuv420p -tune animation video.mkv
+
+ffmpeg -i video.mkv -i audio.wav -c copy audiovideo.mkv
+##############################################
