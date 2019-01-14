@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeProjector;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Box;
@@ -19,7 +19,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Box;
  * The wanderers wander over the ground
  * 
  */
-public class StripeGenerator0 implements StripeGenerator{
+public class StripeGenerator0 implements StripeProjector{
 
   /*
    * ################################

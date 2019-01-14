@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeProjector;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
@@ -12,7 +12,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
 /*
  * an orderly 4way system
  */
-public class StripeGenerator0 implements StripeGenerator{
+public class StripeGenerator0 implements StripeProjector{
 
   /*
    * ################################
@@ -59,7 +59,8 @@ public class StripeGenerator0 implements StripeGenerator{
   
   public List<Stripe> generate(){
     List<Stripe> a=new ArrayList<Stripe>();
-    a.addAll(conditionallyCreateGround());
+//    a.addAll(conditionallyCreateGround());
+    a.addAll(conditionallyCreateWanderingBox());
 //    a.addAll(conditionallyCreateWanderer());
     return a;}
   
@@ -155,6 +156,60 @@ public class StripeGenerator0 implements StripeGenerator{
     int[] valuestrobe=VALUESTROBE[random.nextInt(VALUESTROBE.length)];
     Stripe s=new Stripe_Sweeper(stripesystem,orientation,thickness,valuestrobe,heading,speed);
     return s;}
+  
+  /*
+   * ################################
+   * SEAMLESS BOX
+   * ################################
+   */
+  
+  static final double WANDERINGBOXPROBABILITY=0.001;
+  
+  private List<Stripe> conditionallyCreateWanderingBox(){
+    List<Stripe> a=new ArrayList<Stripe>();
+    if(random.nextDouble()<WANDERINGBOXPROBABILITY)
+      a.addAll(createWanderingBox());
+    return a;}
+  
+  private List<Stripe> createWanderingBox(){
+    List<Stripe> a=new ArrayList<Stripe>();
+    a.add(
+      new Stripe_Sweeper(
+        stripesystem,
+        Stripe.ORIENTATION_HORIZONTAL,
+        122,
+        VALUESTROBE[0],
+        Stripe_Sweeper.HEADING_POSITIVE,
+        1));
+    a.add(
+      new Stripe_Sweeper(
+        stripesystem,
+        Stripe.ORIENTATION_HORIZONTAL,
+        122,
+        VALUESTROBE[0],
+        Stripe_Sweeper.HEADING_NEGATIVE,
+        1));
+    a.add(
+      new Stripe_Sweeper(
+        stripesystem,
+        Stripe.ORIENTATION_VERTICAL,
+        122,
+        VALUESTROBE[0],
+        Stripe_Sweeper.HEADING_POSITIVE,
+        1));
+    a.add(
+      new Stripe_Sweeper(
+        stripesystem,
+        Stripe.ORIENTATION_VERTICAL,
+        122,
+        VALUESTROBE[0],
+        Stripe_Sweeper.HEADING_NEGATIVE,
+        1));
+    return a;
+  }
+  
+  
+  
   
   /*
    * ################################

@@ -9,7 +9,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
  * a stripe generator generates stripes for a clouded plain
  * it may employ other generators
  */
-public interface StripeGenerator{
+public interface StripeProjector{
   
   void setStripeSystem(StripeSystem cloudedplain);
   

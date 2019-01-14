@@ -8,7 +8,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Loiterer;
 
-public class Generator1 implements StripeGenerator{
+public class Generator1 implements StripeProjector{
 
   /*
    * ################################

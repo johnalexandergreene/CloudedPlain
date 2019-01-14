@@ -11,9 +11,8 @@ public class Stage implements SSRectangle{
    * ################################
    */
   
-  public Stage(int w,int h){
-    width=w;
-    height=h;}
+  public Stage(int span){
+    this.span=span;}
   
   /*
    * ################################
@@ -21,7 +20,7 @@ public class Stage implements SSRectangle{
    * ################################
    */
   
-  int width,height;
+  int span;
   
   public int getCoorX(){
     return 0;}
@@ -30,10 +29,10 @@ public class Stage implements SSRectangle{
     return 0;}
 
   public int getWidth(){
-    return width;}
+    return span;}
 
   public int getHeight(){
-    return height;}
+    return span;}
 
   public int getXMin(){
     return 0;}

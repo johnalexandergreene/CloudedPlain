@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeProjector;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
@@ -12,7 +12,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
 /*
  * an orderly 4way system
  */
-public class Generator5_soundtest implements StripeGenerator{
+public class Generator5_soundtest implements StripeProjector{
 
   /*
    * ################################

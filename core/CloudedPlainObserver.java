@@ -1,6 +1,6 @@
 package org.fleen.cloudedPlain.core;
 
-public interface ProgressListener{
+public interface CloudedPlainObserver{
   
   void notify(CloudedPlain cloudedplain);
 

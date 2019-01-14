@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeProjector;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 
 /*
@@ -32,8 +32,8 @@ public class StripeSystem{
    * ################################
    */
   
-  public StripeSystem(int w,int h,StripeGenerator g){
-    initStage(w,h);
+  public StripeSystem(int span,StripeProjector g){
+    initStage(span);
     generator=g;
     g.setStripeSystem(this);}
  
@@ -45,8 +45,8 @@ public class StripeSystem{
   
   public Stage stage;
   
-  public void initStage(int w,int h){
-    stage=new Stage(w,h);}
+  public void initStage(int span){
+    stage=new Stage(span);}
   
   /*
    * ################################
@@ -70,10 +70,10 @@ public class StripeSystem{
    * this is the plain's root stripe generator. The final authority on stripe generation.
    * the plain contains one generator, which may refer to other generators, and so on, treewise
    */
-  public StripeGenerator generator=null;
+  public StripeProjector generator=null;
 
   
-  public void setGenerator(StripeGenerator g){
+  public void setGenerator(StripeProjector g){
     generator=g;
     g.setStripeSystem(this);}
   

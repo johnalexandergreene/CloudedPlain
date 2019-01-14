@@ -10,7 +10,7 @@ import org.fleen.cloudedPlain.core.exportVideo.VideoExporter;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.renderAudio.AudioRenderer;
 import org.fleen.cloudedPlain.core.renderVideo.VideoRenderer;
-import org.fleen.cloudedPlain.core.stripeGenerator.StripeGenerator;
+import org.fleen.cloudedPlain.core.stripeGenerator.StripeProjector;
 import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 
 /*
@@ -32,13 +32,13 @@ public class CloudedPlain{
    */
   
   public CloudedPlain(
-    int width,int height,int duration,
-    StripeGenerator stripegenerator,
+    int span,int duration,
+    StripeProjector stripegenerator,
     String workingdirectory,
     VideoRenderer videorenderer,VideoExporter0 videoexporter,
     AudioRenderer audiorenderer,AudioExporter audioexporter,
-    ProgressListener progresslistener){
-    initStripeSystemAndGeometry(width,height,duration,stripegenerator);
+    CloudedPlainObserver progresslistener){
+    initStripeSystemAndGeometry(span,duration,stripegenerator);
     initWorkingDirectory(workingdirectory);
     this.videorenderer=videorenderer;
     this.videoexporter=videoexporter;
@@ -115,8 +115,8 @@ public class CloudedPlain{
   public StripeSystem stripesystem;
   public int duration;
   
-  void initStripeSystemAndGeometry(int w,int h,int d,StripeGenerator g){
-    stripesystem=new StripeSystem(w,h,g);
+  void initStripeSystemAndGeometry(int span,int d,StripeProjector g){
+    stripesystem=new StripeSystem(span,g);
     duration=d;}
   
   /*
@@ -195,7 +195,7 @@ public class CloudedPlain{
    * ################################
    */
   
-  ProgressListener progresslistener;
+  CloudedPlainObserver progresslistener;
   
   void notifyProgressListener(){
     if(progresslistener!=null)

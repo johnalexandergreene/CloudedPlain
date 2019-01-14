@@ -1,7 +1,7 @@
 package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0000_foo;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
-import org.fleen.cloudedPlain.core.ProgressListener;
+import org.fleen.cloudedPlain.core.CloudedPlainObserver;
 import org.fleen.cloudedPlain.core.exportAudio.AudioExporter0;
 import org.fleen.cloudedPlain.core.exportVideo.VideoExporter0;
 import org.fleen.cloudedPlain.core.stripeGenerator.Generator5_soundtest;
@@ -18,7 +18,7 @@ public class VCS{
   
   private static final String WORKINGDIR="/home/john/Desktop/cpexport"; 
   
-  private static ProgressListener listener=new ProgressListener(){
+  private static CloudedPlainObserver listener=new CloudedPlainObserver(){
     public void notify(CloudedPlain cloudedplain){
       ui.repaint();}};
   

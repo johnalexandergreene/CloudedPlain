@@ -11,7 +11,7 @@ import org.fleen.cloudedPlain.core.stripeSystem.Stripe_Sweeper;
 /*
  * an orderly 4way system
  */
-public class Generator5_soundtest2 implements StripeGenerator{
+public class Generator5_soundtest2 implements StripeProjector{
 
   /*
    * ################################
