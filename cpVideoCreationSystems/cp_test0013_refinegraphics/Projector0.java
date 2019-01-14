@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0012_addrandomswarmofperiodic;
+package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0013_refinegraphics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,7 +92,7 @@ public class Projector0 implements StripeProjector{
         killtime);}}
   
   private int getPeriodForSwarm(){
-    return random.nextInt(40)+30;}
+    return random.nextInt(180)+90;}
   
   private int getOffsetForSwarm(int period){
     return random.nextInt(period*2);}
@@ -100,13 +100,13 @@ public class Projector0 implements StripeProjector{
   private int getThicknessForSwarm(int period){
     return random.nextInt((int)(period*0.5))+(int)(period*0.2);}
   
-  int[] SWARMSPEED={1,1,2,2,3};
+  int[] SWARMSPEED={1,2,2,3};
   
   private int getSpeedForSwarm(){
     return SWARMSPEED[random.nextInt(SWARMSPEED.length)];}
   
   private int getKilltimeForSwarm(){
-    int lifespan=random.nextInt(200)+200;
+    int lifespan=random.nextInt(360)+60;
     int k=lifespan+stripesystem.time;
     return k;}
   
@@ -143,9 +143,8 @@ public class Projector0 implements StripeProjector{
   int[][] VALUESTROBE={
     {-1,-1,1,1},
     {1,1,2,2},
-    {1,1,1,2,2,2},
-    {1,1,1,-1,-1,-1},
-    {-1,-1,-1,1,1,1}};
+    {1,1,1,1,2,2,2,2},
+    {-1,-1,-1,-1,1,1,1,1}};
   
   int[] getRandomStrobe(){
     return VALUESTROBE[random.nextInt(VALUESTROBE.length)];}

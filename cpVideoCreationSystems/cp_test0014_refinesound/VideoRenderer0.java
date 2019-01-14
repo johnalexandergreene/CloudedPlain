@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0003_wanderer_justground_lushfatty;
+package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0014_refinesound;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -10,36 +10,34 @@ import org.fleen.cloudedPlain.core.stripeSystem.StripeSystem;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunk;
 import org.fleen.cloudedPlain.core.stripeSystem.chunks.Chunks;
 
-/*
- * test chunks
- */
 public class VideoRenderer0 implements VideoRenderer{
 
-//  //crass rainbow
-//  static final Color[] COLORS={
-//      new Color(255,0,0),
-//      new Color(255,128,0),
-//      new Color(128,255,0),
-//      new Color(0,255,0),
-//      new Color(0,255,128),
-//      new Color(0,128,255),
-//      new Color(0,0,255)};
-  
-  //crass rainbow
-  static final Color[] COLORS={
-    new Color(255,0,0),
-    new Color(255,128,0),
-    new Color(255,255,0),
-    new Color(128,255,0),
-    new Color(0,255,0),
-    new Color(0,255,128),
-    new Color(0,255,255),
-    new Color(0,128,255),
-    new Color(0,0,255),
-    new Color(128,0,255),
-    new Color(255,0,255),
-    new Color(255,0,128),
+  /*
+   * black,red,yellow,green,cyan,blue,magenta,white
+   */
+  public static final Color[] P_FOO=new Color[]{
+      new Color(0,0,0),
+      new Color(255,0,0),
+      new Color(255,255,0),
+      new Color(0,255,0),
+      new Color(0,255,255),
+      new Color(0,0,255),
+      new Color(255,0,255),
+      new Color(255,255,255)
     };
+  
+  /*
+   * red,yellow,magenta,white
+   */
+  public static final Color[] P_FOO2=new Color[]{
+      new Color(255,0,0),
+      new Color(255,255,0),
+      new Color(255,0,255),
+      new Color(255,255,255)
+    };
+  
+    
+  static final Color[] COLORS=P_FOO;
   
   public BufferedImage renderFrame(StripeSystem stripesystem){
     
@@ -56,14 +54,19 @@ public class VideoRenderer0 implements VideoRenderer{
     g.fillRect(0,0,w,h);
     Chunks chunks=stripesystem.getChunks();
     for(Chunk chunk:chunks){
-      g.setPaint(getColor(chunk));
+      g.setPaint(getColor(chunk,stripesystem));
       g.fillRect(chunk.getCoorX(),chunk.getCoorY(),chunk.getWidth(),chunk.getHeight());}
     return image;}
   
-  Color getColor(Chunk chunk){
+  Color getColor(Chunk chunk,StripeSystem stripesystem){
     int a=0;
     for(Stripe stripe:chunk.stripes)
       a+=stripe.getValue();
-    return COLORS[a%COLORS.length];}
+    int i=a%COLORS.length;
+    if(i<0)i+=COLORS.length;
+    Color c=COLORS[i];
+    return c;}
+  
+
 
 }
