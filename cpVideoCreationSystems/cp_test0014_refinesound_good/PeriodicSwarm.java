@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0014_refinesound;
+package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0014_refinesound_good;
 
 public class PeriodicSwarm{
   

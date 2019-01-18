@@ -186,8 +186,22 @@ public class CloudedPlain{
       int[] audio=new int[audioframes.size()*framelength];
       for(int i=0;i<audioframes.size();i++)
         System.arraycopy(audioframes.get(i),0,audio,i*framelength,framelength);
-      //export it
+      //post-process it and export it
+      smoothAudio(audio);
       audioexporter.exportAudio(audio,workingdirectory);}}
+  
+  void smoothAudio(int[] audio){
+    int p0,p1,n0,n1;
+    for(int i=0;i<audio.length;i++){
+      p0=i-1;
+      if(p0==-1)p0=audio.length-1;
+      p1=p0-1;
+      if(p1==-1)p1=audio.length-1;
+      n0=i+1;
+      if(n0==audio.length)n0=0;
+      n1=n0+1;
+      if(n1==audio.length)n1=0;
+      audio[i]=(audio[p0]+audio[p1]+audio[n0]+audio[n1]+audio[i])/5;}}
   
   /*
    * ################################

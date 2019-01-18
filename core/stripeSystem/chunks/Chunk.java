@@ -80,23 +80,14 @@ public class Chunk implements SSRectangle{
       d1=GD.getDistance_PointLine(px,py,x1,y1,x2,y2),
       d2=GD.getDistance_PointLine(px,py,x2,y2,x3,y3),
       d3=GD.getDistance_PointLine(px,py,x3,y3,x0,y0);
-    
-//    System.out.println("--------------------------");
-//    System.out.println("x="+x);
-//    System.out.println("y="+y);
-//    System.out.println("w="+w);
-//    System.out.println("h="+h);
-//    System.out.println("d0="+d0);
-//    System.out.println("d1="+d1);
-//    System.out.println("d2="+d2);
-//    System.out.println("d3="+d3);
-//    System.out.println("--------------------------");
-    
     double d=d0;
     if(d1<d)d=d1;
     if(d2<d)d=d2;
     if(d3<d)d=d3;
     return d;}
+  
+  public double getFatness(){
+    return Math.max(getWidth(),getHeight())*getArea();}
   
   /*
    * ################################
@@ -114,5 +105,11 @@ public class Chunk implements SSRectangle{
     stripes=new ArrayList<Stripe>(s0.size()+s1.size());
     stripes.addAll(s0);
     stripes.addAll(s1);}
+  
+  public int getSummedValueOfStripes(){
+    int a=0;
+    for(Stripe s:stripes)
+      a+=s.getValue();
+    return a;}
   
 }

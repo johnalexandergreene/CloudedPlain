@@ -46,7 +46,7 @@ public class AudioRenderer1 implements AudioRenderer{
     for(Chunk chunk:chunks)
       chunksounds.add(getSound(chunk,mra));
     //get all chunk inverse distances
-    double maxdistance=cloudedplain.stripesystem.stage.getHalfDiagonal();
+    double maxdistance=cloudedplain.stripesystem.stage.getMaxDistanceFromCenter();
     List<Double> chunkinvdis=new ArrayList<Double>(chunkcount);
     double invdis;
     for(Chunk chunk:chunks){

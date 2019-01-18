@@ -1,4 +1,4 @@
-package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0014_refinesound;
+package org.fleen.cloudedPlain.cpVideoCreationSystems.cp_test0014_refinesound_good;
 
 import org.fleen.cloudedPlain.core.CloudedPlain;
 import org.fleen.cloudedPlain.core.CloudedPlainObserver;

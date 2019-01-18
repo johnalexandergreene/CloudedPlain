@@ -58,12 +58,23 @@ public class Stage implements SSRectangle{
    */
   private double halfdiagonal=-1;
   
-  public double getHalfDiagonal(){
+  public double getMaxDistanceFromCenter(){
     if(halfdiagonal==-1){
       double 
         w=getWidth(),
         h=getHeight();
       halfdiagonal=Math.sqrt((w*w)+(h*h))/2;}
     return halfdiagonal;}
+  
+  //
+  
+  private double fatness=-1;
+  
+  public double getFatness(){
+    if(fatness==-1)
+      fatness=Math.max(getWidth(),getHeight())*getArea();
+    return fatness;}
+  
+  
 
 }
